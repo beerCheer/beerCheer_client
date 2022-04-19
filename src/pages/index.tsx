@@ -13,6 +13,8 @@ const Home: NextPage = () => {
   return (
     <Emotion>
       <h1 css={titleStyle}>red text</h1>
+
+      <p>패딩마진</p>
     </Emotion>
   );
 };
