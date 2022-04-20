@@ -1,48 +1,40 @@
 import React from 'react';
-import './button.css';
+
+import styled from '@emotion/styled';
 
 interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
   primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
   size?: 'small' | 'medium' | 'large';
-  /**
-   * Button contents
-   */
   label: string;
-  /**
-   * Optional click handler
-   */
   onClick?: () => void;
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
-  label,
-  ...props
-}: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+export const Button = ({ primary = false, size = 'medium', label, ...props }: ButtonProps) => {
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
+    <StyledButton type="button" size={size} primary={primary} {...props}>
       {label}
-    </button>
+    </StyledButton>
   );
 };
+
+interface ButtonStyleProps {
+  primary: boolean;
+  size: 'small' | 'medium' | 'large';
+}
+
+const StyledButton = styled.button<ButtonStyleProps>`
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: ${props => props.theme['font-light']};
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  color: ${props => (props.primary ? `white` : `#333`)};
+  background-color: ${props => (props.primary ? `#1ea7fd` : ` transparent`)};
+  padding: ${props => (props.size === 'small' ? `10px 16px` : props.size === 'medium' ? `11px 20px` : `12px 24px`)};
+  font-size: ${props => (props.size === 'small' ? `12px` : props.size === 'medium' ? `14px` : ` 16px`)};
+`;
