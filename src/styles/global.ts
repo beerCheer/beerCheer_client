@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 
-const reset = css`
+const global = css`
+  @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200;300;500;600;700&display=swap');
+
   /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -130,6 +132,23 @@ const reset = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Hahmlet', serif;
+    font-weight: 300;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
 `;
 
-export default reset;
+export default global;
