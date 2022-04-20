@@ -1,6 +1,19 @@
-const Search = () => {
+type SVGIconProps = {
+  width?: number;
+  height?: number;
+  onClick?: () => void;
+};
+
+const SearchIcon = ({ width, height, onClick }: SVGIconProps) => {
   return (
-    <svg width="37" height="35" viewBox="0 0 37 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width}
+      height={height}
+      onClick={onClick ? onClick : () => {}}
+      viewBox="0 0 37 35"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -11,4 +24,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchIcon;

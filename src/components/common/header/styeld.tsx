@@ -1,19 +1,23 @@
 import styled from '@emotion/styled';
-
+interface HeaderContentProps {
+  main?: string;
+}
 const mainColor = '#FF9900';
 
-export const Container = styled.div<{ shadow: string }>`
+export const HeaderContainer = styled.div`
+  height: 75px;
+`;
+
+export const HeaderContent = styled.div<HeaderContentProps>`
   display: flex;
-  position: sticky;
+  position: fixed;
+  max-width: 1200px;
+  width: 100%;
   height: 75px;
   align-items: center;
   justify-content: space-between;
-  ${props => (props.shadow ? 'box-shadow: 0px 2px 32px -5px #0000001A' : '')};
-`;
-
-export const Title = styled.div`
-  font-size: 32px;
-  color: ${mainColor};
+  box-shadow: ${props => (props.main ? '' : '0px 2px 32px -5px #0000001A')};
+  background-color: ${props => (props.main ? '' : 'white')};
 `;
 
 export const Text = styled.div`
@@ -23,5 +27,5 @@ export const Text = styled.div`
 
 export const SigninText = styled.div`
   font-size: 16px;
-  color: #ff9900;
+  color: ${mainColor};
 `;

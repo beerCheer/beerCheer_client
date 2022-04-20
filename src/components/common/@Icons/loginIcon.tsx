@@ -1,6 +1,19 @@
-const LoginIcon = () => {
+type SVGIconProps = {
+  width?: number;
+  height?: number;
+  onClick?: () => void;
+};
+
+const LoginIcon = ({ width, height, onClick }: SVGIconProps) => {
   return (
-    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width}
+      height={height}
+      onClick={onClick ? onClick : () => {}}
+      viewBox="0 0 52 52"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"

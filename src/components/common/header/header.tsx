@@ -1,28 +1,28 @@
 import { useRouter } from 'next/router';
 
-import { Container, Title, Text, SigninText } from './Styeld';
-import Logo from '../@Icons/Logo';
-import LoginIcon from '../@Icons/LoginIcon';
-import SearchBar from '../serachbar/Searchbar';
+import { HeaderContainer, HeaderContent, Text, SigninText } from './styeld';
+import LogoIcon from '../@Icons/logoIcon';
+import LoginIcon from '../@Icons/loginIcon';
+import SearchBar from '../serachbar/searchBar';
 
 interface HeaderProps {
   isLogin?: boolean;
   main?: string;
   search?: JSX.Element | boolean;
-  shadow?: boolean;
 }
 
-const Header = ({ isLogin, main, search, shadow }: HeaderProps) => {
-  const router = useRouter();
+const Header = ({ isLogin, main, search }: HeaderProps) => {
+  const { route } = useRouter();
 
   return (
-    <Container shadow={shadow ? 'shadow' : ''}>
-      <Logo />
-      <Text>전체맥주</Text>
-      <SearchBar></SearchBar>
-
-      {isLogin ? <LoginIcon /> : <SigninText>로그인 / 회원가입</SigninText>}
-    </Container>
+    <HeaderContainer>
+      <HeaderContent main={route === '/' ? 'main' : ''}>
+        <LogoIcon width={160} height={55} />
+        <Text>전체맥주</Text>
+        <SearchBar></SearchBar>
+        {isLogin ? <LoginIcon width={52} height={52} /> : <SigninText>로그인 / 회원가입</SigninText>}
+      </HeaderContent>
+    </HeaderContainer>
   );
 };
 

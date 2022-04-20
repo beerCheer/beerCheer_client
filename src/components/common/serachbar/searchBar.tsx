@@ -1,14 +1,12 @@
-import React from 'react';
-
-import Search from '../@Icons/Search';
-import { Container, Input } from './Styeld';
+import SearchIcon from '../@Icons/searchIcon';
+import { SearchBarContainer, Input } from './styeld';
 
 const SearchBar = () => {
   return (
-    <Container>
-      <Search />
+    <SearchBarContainer>
+      <SearchIcon width={37} height={35} />
       <Input placeholder="맥주 이름" />
-    </Container>
+    </SearchBarContainer>
   );
 };
 

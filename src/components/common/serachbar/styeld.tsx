@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 const mainColor = '#FF9900';
 
-export const Container = styled.div`
+export const SearchBarContainer = styled.div`
   display: flex;
   height: 45px;
   align-items: center;
