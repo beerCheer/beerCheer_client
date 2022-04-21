@@ -4,6 +4,7 @@ import { HeaderContainer, HeaderContent, Text, SigninText } from './styeld';
 import LogoIcon from '../@Icons/logoIcon';
 import LoginIcon from '../@Icons/loginIcon';
 import SearchBar from '../serachbar/searchBar';
+import Link from 'next/link';
 
 interface HeaderProps {
   isLogin?: boolean;
@@ -12,12 +13,12 @@ interface HeaderProps {
 }
 
 const Header = ({ isLogin, main, search }: HeaderProps) => {
-  const { route } = useRouter();
+  const router = useRouter();
 
   return (
-    <HeaderContainer main={route === '/' ? 'main' : ''}>
+    <HeaderContainer main={router.route === '/' ? 'main' : ''}>
       <HeaderContent>
-        <LogoIcon width={160} height={55} />
+        <LogoIcon width={160} height={55} onClick={() => router.push('/')} />
         <Text>전체맥주</Text>
         <SearchBar></SearchBar>
         {isLogin ? <LoginIcon width={52} height={52} /> : <SigninText>로그인 / 회원가입</SigninText>}

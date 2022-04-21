@@ -19,6 +19,7 @@ export const Input = styled.input`
   color: ${mainColor};
   width: 100%;
   border: none;
+  background: none;
 
   :focus {
     outline: none;
