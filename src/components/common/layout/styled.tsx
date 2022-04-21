@@ -31,4 +31,5 @@ export const BackGround = styled.div`
   width: 100%;
   height: 550px;
   background-size: 100% 100%;
+  position: relative;
 `;

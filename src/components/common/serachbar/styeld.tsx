@@ -16,7 +16,13 @@ export const SearchBarContainer = styled.div<SearchBarContainerProps>`
   width: 40%;
   padding: 5px 10px;
   border-radius: 10px;
-  visibility: ${props => (props.main ? 'hidden' : '')};
+  ${props =>
+    props.main &&
+    `position: absolute;
+  top: 40%;
+  left: 30%;
+  background-color: rgba(255, 255, 255, 0.8);
+ `}
 `;
 
 export const Input = styled.input`

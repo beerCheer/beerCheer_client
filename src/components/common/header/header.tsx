@@ -8,11 +8,10 @@ import Link from 'next/link';
 
 interface HeaderProps {
   isLogin?: boolean;
-  main?: string;
   search?: JSX.Element | boolean;
 }
 
-const Header = ({ isLogin, main, search }: HeaderProps) => {
+const Header = ({ isLogin, search }: HeaderProps) => {
   const router = useRouter();
 
   return (
@@ -20,7 +19,7 @@ const Header = ({ isLogin, main, search }: HeaderProps) => {
       <HeaderContent>
         <LogoIcon width={120} height={55} onClick={() => router.push('/')} />
         <Text>전체맥주</Text>
-        <SearchBar></SearchBar>
+        {router.route === '/' ? '' : <SearchBar></SearchBar>}
         {isLogin ? <LoginIcon width={52} height={52} /> : <SigninText>로그인 / 회원가입</SigninText>}
       </HeaderContent>
     </HeaderContainer>

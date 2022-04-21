@@ -12,7 +12,9 @@ interface DummyProps {
 const Home = () => {
   return (
     <HomeLayout>
-      <Beer></Beer>
+      {Data.map((item: DummyProps) => {
+        return <Beer key={item.id} id={item.id} name={item.name} socre={item.socre} imageUrl={item.imageUrl} />;
+      })}
     </HomeLayout>
   );
 };

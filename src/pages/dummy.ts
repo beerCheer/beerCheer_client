@@ -1,4 +1,11 @@
-const Data = [
+interface DummyProps {
+  id: number;
+  name: string;
+  socre: number;
+  imageUrl: string;
+}
+
+const Data: Array<DummyProps> = [
   {
     id: 0,
     name: 'cass',
@@ -83,7 +90,6 @@ const Data = [
     imageUrl:
       'https://images.unsplash.com/photo-1559180786-c6f26acc1111?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2080&q=80',
   },
-
 ];
 
-export default Data
+export default Data;

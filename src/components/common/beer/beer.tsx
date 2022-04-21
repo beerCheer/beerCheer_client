@@ -1,7 +1,6 @@
 import { BeerContainer, BeerImage, Icon, BeerName, BeerScore, BeerInfo } from './styled';
 
 import HeartIcon from '../@Icons/heartIcon';
-import Data from '../../../pages/dummy';
 
 const beer = '🍺';
 
@@ -12,18 +11,17 @@ interface BeerProps {
   imageUrl: string;
 }
 
-const Beer = (item: BeerProps) => {
-  console.log(item);
+const Beer = ({ id, name, socre, imageUrl }: BeerProps) => {
   return (
     <BeerContainer>
-      <BeerImage image={Data[0].imageUrl}>
+      <BeerImage image={imageUrl}>
         <Icon>
           <HeartIcon width={40} height={35} />
         </Icon>
       </BeerImage>
       <BeerInfo>
-        <BeerName>Cass</BeerName>
-        <BeerScore>{beer.repeat(Data[0].socre)}</BeerScore>
+        <BeerName>{name}</BeerName>
+        <BeerScore>{beer.repeat(socre)}</BeerScore>
       </BeerInfo>
     </BeerContainer>
   );
