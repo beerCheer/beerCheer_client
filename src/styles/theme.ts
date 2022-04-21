@@ -1,5 +1,4 @@
 export const size = {
-  large: '1024px',
   medium: '768px',
   small: '480px',
 };
@@ -25,7 +24,6 @@ export const font = {
 
 const theme = {
   mq: {
-    desktop: `@media only screen and (min-width: ${size.large})`,
     laptop: `@media only screen and (min-width: ${size.medium})`,
     tablet: `@media only screen and (min-width: ${size.small})`,
   },

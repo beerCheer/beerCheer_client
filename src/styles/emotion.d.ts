@@ -3,7 +3,6 @@ import '@emotion/react';
 declare module '@emotion/react' {
   export interface Theme {
     mq: {
-      desktop: string;
       laptop: string;
       tablet: string;
     };
