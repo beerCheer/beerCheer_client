@@ -10,7 +10,7 @@ const CloseIcon = ({ width = 24, height = 24, fill = '#000000', onClick }: SVGIc
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M6 6L18 18M6 18L18 6" stroke={fill} stroke-width="2.5" stroke-linecap="round" />
+      <path d="M6 6L18 18M6 18L18 6" stroke={fill} strokeWidth="2.5" strokeLinecap="round" />
     </svg>
   );
 };
