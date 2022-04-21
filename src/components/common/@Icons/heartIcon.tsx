@@ -10,7 +10,7 @@ const HeartIcon = ({ width = 24, height = 24, fill = '#F0E5CF', onClick }: SVGIc
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M8 9C8 10 12 14 12 14C12 14 16 10 16 9" stroke={fill} stroke-width="8.5" stroke-linecap="round" />
+      <path d="M8 9C8 10 12 14 12 14C12 14 16 10 16 9" stroke={fill} strokeWidth="8.5" strokeLinecap="round" />
     </svg>
   );
 };
