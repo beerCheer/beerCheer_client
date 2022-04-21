@@ -1,12 +1,12 @@
 import { FooterContainer, FooterContent, FooterTop, Text, FooterBottom, Creators, Creator } from './styled';
-import LogoImageIcon from '../@Icons/logoImageIcon';
+import SymbolIcon from '../@Icons/symbolIcon';
 
 const Footer = () => {
   return (
     <FooterContainer>
       <FooterContent>
         <FooterTop>
-          <LogoImageIcon width={25} height={25}></LogoImageIcon>
+          <SymbolIcon width={25} height={25}></SymbolIcon>
           <Text>beer, bewar</Text>
         </FooterTop>
         <FooterBottom>
