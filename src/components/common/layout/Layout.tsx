@@ -10,10 +10,10 @@ interface HomeLayoutProps {
 const HomeLayout = ({ children }: HomeLayoutProps) => {
   return (
     <HomeContainer>
+      <Header isLogin={false}></Header>
       <HomeWrapper>
-        <Header isLogin={false}></Header>
         <Content>
-          <div>contentttt</div>
+          <div>conteasdfntttt</div>
         </Content>
       </HomeWrapper>
       <Footer></Footer>

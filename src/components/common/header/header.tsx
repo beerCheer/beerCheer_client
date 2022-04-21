@@ -15,8 +15,8 @@ const Header = ({ isLogin, main, search }: HeaderProps) => {
   const { route } = useRouter();
 
   return (
-    <HeaderContainer>
-      <HeaderContent main={route === '/' ? 'main' : ''}>
+    <HeaderContainer main={route === '/' ? 'main' : ''}>
+      <HeaderContent>
         <LogoIcon width={160} height={55} />
         <Text>전체맥주</Text>
         <SearchBar></SearchBar>
