@@ -5,7 +5,7 @@ import SymbolIcon from './symbolIcon';
 
 export default {
   Component: SymbolIcon,
-  title: '로고심볼',
+  title: 'Commons/Icons/로고심볼',
 } as ComponentMeta<typeof SymbolIcon>;
 
 const Template: ComponentStory<typeof SymbolIcon> = args => <SymbolIcon {...args} />;

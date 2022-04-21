@@ -5,7 +5,7 @@ import CloseIcon from './closeIcon';
 
 export default {
   Component: CloseIcon,
-  title: '닫기 아이콘',
+  title: 'Commons/Icons/닫기 아이콘',
 } as ComponentMeta<typeof CloseIcon>;
 
 const Template: ComponentStory<typeof CloseIcon> = args => <CloseIcon {...args} />;

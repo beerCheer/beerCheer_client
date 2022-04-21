@@ -5,7 +5,7 @@ import NaverIcon from './naverIcon';
 
 export default {
   Component: NaverIcon,
-  title: '네이버 아이콘',
+  title: 'Commons/Icons/네이버 아이콘',
 } as ComponentMeta<typeof NaverIcon>;
 
 const Template: ComponentStory<typeof NaverIcon> = args => <NaverIcon {...args} />;

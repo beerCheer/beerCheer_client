@@ -4,7 +4,7 @@ import { useArgs } from '@storybook/client-api';
 
 export default {
   Component: Modal,
-  title: '모달',
+  title: 'Commons/모달',
 } as ComponentMeta<typeof Modal>;
 
 const Template: ComponentStory<typeof Modal> = ({ onClose, close, ...args }) => {

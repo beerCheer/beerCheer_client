@@ -5,7 +5,7 @@ import KakaoIcon from './kakaoIcon';
 
 export default {
   Component: KakaoIcon,
-  title: '카카오 아이콘',
+  title: 'Commons/Icons/카카오 아이콘',
 } as ComponentMeta<typeof KakaoIcon>;
 
 const Template: ComponentStory<typeof KakaoIcon> = args => <KakaoIcon {...args} />;
