@@ -2,7 +2,11 @@ import styled from '@emotion/styled';
 
 const mainColor = '#FF9900';
 
-export const SearchBarContainer = styled.div`
+interface SearchBarContainerProps {
+  main?: string;
+}
+
+export const SearchBarContainer = styled.div<SearchBarContainerProps>`
   display: flex;
   height: 45px;
   align-items: center;
@@ -12,10 +16,11 @@ export const SearchBarContainer = styled.div`
   width: 40%;
   padding: 5px 10px;
   border-radius: 10px;
+  visibility: ${props => (props.main ? 'hidden' : '')};
 `;
 
 export const Input = styled.input`
-  font-size: 24px;
+  font-size: 18px;
   color: ${mainColor};
   width: 100%;
   border: none;

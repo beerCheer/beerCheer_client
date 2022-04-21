@@ -26,8 +26,8 @@ export const Content = styled.div<HomecContentProps>`
 `;
 
 export const BackGround = styled.div`
-  background-image: url('321321.jpeg');
-  opacity: 0.7;
+  background-image: url('mainback.jpeg');
+  opacity: 0.8;
   width: 100%;
   height: 550px;
   background-size: 100% 100%;

@@ -26,8 +26,9 @@ export const HeaderContent = styled.div`
 `;
 
 export const Text = styled.div`
-  font-size: 24px;
+  font-size: 18px;
   color: #080575;
+  left: 300px;
 `;
 
 export const SigninText = styled.div`

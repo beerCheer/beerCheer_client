@@ -18,7 +18,7 @@ const Header = ({ isLogin, main, search }: HeaderProps) => {
   return (
     <HeaderContainer main={router.route === '/' ? 'main' : ''}>
       <HeaderContent>
-        <LogoIcon width={160} height={55} onClick={() => router.push('/')} />
+        <LogoIcon width={120} height={55} onClick={() => router.push('/')} />
         <Text>전체맥주</Text>
         <SearchBar></SearchBar>
         {isLogin ? <LoginIcon width={52} height={52} /> : <SigninText>로그인 / 회원가입</SigninText>}
