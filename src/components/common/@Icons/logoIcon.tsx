@@ -1,10 +1,6 @@
-type SVGIconProps = {
-  width?: number;
-  height?: number;
-  onClick?: () => void;
-};
+import { SVGIconProps } from '.';
 
-const LogoIcon = ({ width, height, onClick }: SVGIconProps) => {
+const LogoIcon = ({ width = 160, height = 55, onClick }: SVGIconProps) => {
   return (
     <svg
       width={width}

@@ -1,8 +1,4 @@
-type SVGIconProps = {
-  width?: number;
-  height?: number;
-  onClick?: () => void;
-};
+import { SVGIconProps } from '.';
 
 const LoginIcon = ({ width, height, onClick }: SVGIconProps) => {
   return (
