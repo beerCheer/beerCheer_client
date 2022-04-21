@@ -4,7 +4,7 @@ import LogoTextIcon from './logoTextIcon';
 
 export default {
   Component: LogoTextIcon,
-  title: '로고 텍스트',
+  title: 'Commons/Icons/로고텍스트',
 } as ComponentMeta<typeof LogoTextIcon>;
 
 const Template: ComponentStory<typeof LogoTextIcon> = args => <LogoTextIcon {...args} />;

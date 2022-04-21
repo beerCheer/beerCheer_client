@@ -4,7 +4,7 @@ import Button from '.';
 
 export default {
   Component: Button,
-  title: '버튼',
+  title: 'Commons/버튼',
   decorators: [story => <div style={{ width: '500px', backgroundColor: '#ececec', padding: '24px' }}>{story()}</div>],
 } as ComponentMeta<typeof Button>;
 

@@ -5,7 +5,7 @@ import HeartIcon from './heartIcon';
 
 export default {
   Component: HeartIcon,
-  title: '하트 아이콘',
+  title: 'Commons/Icons/하트 아이콘',
 } as ComponentMeta<typeof HeartIcon>;
 
 const Template: ComponentStory<typeof HeartIcon> = args => <HeartIcon {...args} />;
