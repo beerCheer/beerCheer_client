@@ -22,6 +22,8 @@ export const font = {
   },
 };
 
+const mainColor = '#FF9900';
+
 const theme = {
   mq: {
     laptop: `@media only screen and (min-width: ${size.medium})`,
