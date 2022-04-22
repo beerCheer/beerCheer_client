@@ -28,7 +28,7 @@ const Label = styled.label`
   display: block;
   font-weight: ${props => props.theme['font-semibold']};
   font-size: ${props => props.theme['font-sm']};
-  color: #241b55;
+  color: #294d81;
   margin: 0 0 8px 8px;
 `;
 
