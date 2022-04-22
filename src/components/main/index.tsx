@@ -2,6 +2,7 @@ import React from 'react';
 
 import HomeLayout from '../common/layout/layout';
 import Beer from '../common/beer/beer';
+import PreferenesModal from './preferenes-pop-up';
 
 import { MainContainer, MainContent, MainTab, Text } from './styled';
 
@@ -15,7 +16,6 @@ interface DummyProps {
 
 const Main = () => {
   const [activeTab, setActiveTab] = React.useState<string>('0');
-  const [isModal, setIsModal] = React.useState<boolean>(false);
   // const preferences: boolean = false; // User 선호맥주 고르기 여부
 
   const tabMenuHandle = (name: string): void => {
@@ -55,6 +55,7 @@ const Main = () => {
           })}
         </MainContent>
       </MainContainer>
+      <PreferenesModal />
     </HomeLayout>
   );
 };

@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { jsx, css, keyframes } from '@emotion/react';
 
 interface HeaderContainerProps {
   main?: string;
@@ -15,8 +14,7 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
   top: 0px;
   background-color: ${props => (props.main === 'main' ? 'transparent' : 'white')};
   box-shadow: ${props => (props.main === 'main' ? '' : '0px 2px 32px -5px #0000001A')};
-  z-index: 1;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 `;
 
 export const HeaderContent = styled.div`
@@ -45,25 +43,3 @@ export const HiddenSearchBar = styled.div`
   width: 40%;
   visibility: hidden;
 `;
-
-// const bounce = keyframes`
-//   from, 20%, 53%, 80%, to {
-//     transform: translate3d(0,0,0);
-//   }
-
-//   40%, 43% {
-//     transform: translate3d(0, -30px, 0);
-//   }
-
-//   70% {
-//     transform: translate3d(0, -15px, 0);
-//   }
-
-//   90% {
-//     transform: translate3d(0,-4px,0);
-//   }
-// `;
-
-//   css={css`
-//       animation: ${bounce} 1s ease infinite;
-//     `}

@@ -15,7 +15,9 @@ const Beer = ({ id, name, score, imageUrl }: BeerProps) => {
   return (
     <BeerContainer>
       <BeerImage src={imageUrl}></BeerImage>
-      <HeartIcon width={40} height={35} />
+      <Icon>
+        <HeartIcon width={40} height={35} />
+      </Icon>
       <BeerInfo>
         <BeerName>{name}</BeerName>
         <BeerScore>{beer.repeat(score)}</BeerScore>
