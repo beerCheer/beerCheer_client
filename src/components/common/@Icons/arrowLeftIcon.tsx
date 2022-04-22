@@ -10,7 +10,7 @@ const ArrowLeftIcon = ({ width = 24, height = 24, fill = '#000000', onClick }: S
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M15.5 4L5.5 12L15.5 20" stroke={fill} stroke-width="3" stroke-linecap="round" />
+      <path d="M15.5 4L5.5 12L15.5 20" stroke={fill} strokeWidth="3" strokeLinecap="round" />
     </svg>
   );
 };
