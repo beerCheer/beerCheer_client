@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { HeaderContainer, HeaderContent, Text, SigninText, HiddenSearchBar } from './styeld';
@@ -12,9 +13,21 @@ interface HeaderProps {
 
 const Header = ({ isLogin, search }: HeaderProps) => {
   const router = useRouter();
+  const [scroll, setScroll] = React.useState(true);
+
+  useEffect(() => {
+    document.addEventListener('scroll', () => {
+      let y = window.scrollY;
+      if (y >= 450) {
+        setScroll(prev => false);
+      } else {
+        setScroll(prev => true);
+      }
+    });
+  });
 
   return (
-    <HeaderContainer main={router.route === '/' ? 'main' : ''}>
+    <HeaderContainer main={router.route === '/' && scroll ? 'main' : 'aa'}>
       <HeaderContent>
         <LogoIcon width={120} height={55} onClick={() => router.push('/')} />
         <Text>전체맥주</Text>
