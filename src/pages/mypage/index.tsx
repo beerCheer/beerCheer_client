@@ -11,7 +11,7 @@ import {
   ProfileDescription,
   ProfileImage,
   Section,
-} from './styled';
+} from '../../styles/mypage';
 
 const background = '#F8F7F5';
 const tertiary = '#F0E5CF';
