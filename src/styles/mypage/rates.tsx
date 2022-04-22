@@ -8,7 +8,8 @@ const EmptyFallback = styled.div`
 const Section = styled.section`
   margin: auto;
   width: 100%;
-  padding-top: 64px;
+  padding: 64px 0;
+  max-width: 1200px;
 `;
 
 const Title = styled.h2`
@@ -24,8 +25,12 @@ const CardContainer = styled.section`
   grid-template-columns: 1fr 1fr;
 
   ${props => props.theme.mq.tablet} {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 24px;
+  }
+
+  ${props => props.theme.mq.laptop} {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 32px;
   }
 `;
 

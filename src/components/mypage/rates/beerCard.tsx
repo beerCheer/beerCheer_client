@@ -5,18 +5,19 @@ interface BeerCardProps {
   name: string;
   rate: number;
   id: string;
+  imageUrl: string;
 }
-const BeerCard = ({ name, rate, id }: BeerCardProps) => {
+const BeerCard = ({ name, imageUrl, rate, id }: BeerCardProps) => {
   return (
     <Link href={`/${id}`}>
       <Article>
         <ImageWrapper>
-          <Thumnail src="https://picsum.photos/800/600" alt="" />
+          <Thumnail src={imageUrl} alt={name} />
         </ImageWrapper>
         <Description>
           <Name>{name}</Name>
           <RateContainer>
-            <RateLabel>🍻</RateLabel>
+            <RateLabel>내 평가🍻</RateLabel>
             <Rate>{rate}</Rate>
           </RateContainer>
         </Description>

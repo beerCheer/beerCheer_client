@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-const ImageWrapper = styled.div`
-  width: 5;
+const ImageWrapper = styled.figure`
+  width: 100%;
   height: 0;
   padding-bottom: 100%;
   position: relative;
@@ -17,7 +17,7 @@ const Thumnail = styled.img`
 `;
 
 const RateLabel = styled.span`
-  font-size: ${props => props.theme['font-sm']};
+  font-size: ${props => props.theme['font-xs']};
   font-weight: ${props => props.theme['font-light']};
   margin-right: 4px;
 `;
@@ -44,11 +44,14 @@ const Description = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   padding: 4px 0;
+  width: 100%;
 `;
 
 const Article = styled.article`
   height: 100%;
+  min-width: 155px;
 `;
 
 export { Article, Description, Name, Rate, RateContainer, RateLabel, Thumnail, ImageWrapper };

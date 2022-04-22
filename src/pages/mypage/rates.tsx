@@ -5,16 +5,16 @@ import BeerCard from '../../components/mypage/rates/beerCard';
 import { CardContainer, EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 
 const dummyData = [
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
-  { name: 'beer', rate: 1 },
+  { name: '맛있는 beer', rate: 4, imageUrl: 'https://picsum.photos/440/500' },
+  { name: '정말 맛있는 맛있는 beer', rate: 5, imageUrl: 'https://picsum.photos/400/500' },
+  { name: '진짜 beer', rate: 3, imageUrl: 'https://picsum.photos/500/750' },
+  { name: '별로인 beer', rate: 2, imageUrl: 'https://picsum.photos/600/500' },
+  { name: '맛없는 beer', rate: 1, imageUrl: 'https://picsum.photos/700/500' },
+  { name: '그냥 beer', rate: 3, imageUrl: 'https://picsum.photos/500/550' },
+  { name: 'Cass', rate: 4, imageUrl: 'https://picsum.photos/500/700' },
+  { name: 'Terra', rate: 2, imageUrl: 'https://picsum.photos/700/400' },
+  { name: 'Asahi', rate: 1, imageUrl: 'https://picsum.photos/750/500' },
+  { name: 'Sapporo', rate: 5, imageUrl: 'https://picsum.photos/700/550' },
 ];
 
 const Rates = () => {
@@ -30,7 +30,7 @@ const Rates = () => {
       ) : (
         <CardContainer>
           {datas.map((data, i) => (
-            <BeerCard key={i} id={i + ''} name={data.name} rate={data.rate} />
+            <BeerCard key={i} id={i + ''} name={data.name} rate={data.rate} imageUrl={data.imageUrl} />
           ))}
         </CardContainer>
       )}
