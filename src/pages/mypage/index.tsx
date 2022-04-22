@@ -1,8 +1,17 @@
-import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
 import React from 'react';
+import { useRouter } from 'next/router';
+
 import Button from '../../components/common/button';
 import HomeLayout from '../../components/common/layout/layout';
+import {
+  ButtonContainer,
+  Email,
+  Nickname,
+  ProfileContainer,
+  ProfileDescription,
+  ProfileImage,
+  Section,
+} from './styled';
 
 const background = '#F8F7F5';
 const tertiary = '#F0E5CF';
@@ -76,51 +85,6 @@ const Mypage = () => {
     </Section>
   );
 };
-
-const Section = styled.section`
-  max-width: 480px;
-  margin: auto;
-  width: 100%;
-  padding-top: 64px;
-`;
-
-const ProfileImage = styled.img`
-  width: 120px;
-  height: 120px;
-  border-radius: 100px;
-  margin: 0 32px;
-`;
-
-const ProfileDescription = styled.div`
-  width: 100%;
-`;
-const Nickname = styled.p`
-  font-weight: ${props => props.theme['font-bold']};
-  font-size: ${props => props.theme['font-2xl']};
-  margin-bottom: 8px;
-`;
-
-const Email = styled.p`
-  font-size: ${props => props.theme['font-sm']};
-  margin-bottom: 16px;
-`;
-
-const ProfileContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ButtonContainer = styled.section`
-  padding: 24px 0;
-
-  & > * {
-    margin-bottom: 16px;
-  }
-
-  & > *:last-child {
-    margin-bottom: 0;
-  }
-`;
 
 export default Mypage;
 Mypage.getLayout = function getLayout(page: React.ReactElement) {
