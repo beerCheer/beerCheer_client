@@ -4,7 +4,7 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   value?: string;
   id: string;
-  handleOnChange: (newValue: string) => void;
+  handleOnChange?: (newValue: string) => void;
   errorMessage?: string;
   disabled?: boolean;
   placeholder?: string;
@@ -12,6 +12,8 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const TextInput = ({ label, value = '', handleOnChange, id, errorMessage, ...props }: TextInputProps) => {
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!handleOnChange) return undefined;
+
     const newValue = event.target.value;
     handleOnChange(newValue);
   };

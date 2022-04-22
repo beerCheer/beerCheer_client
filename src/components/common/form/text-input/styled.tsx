@@ -8,7 +8,6 @@ const Input = styled.input`
   border-radius: 8px;
   padding: 17px 11px;
   font-weight: 500;
-  max-width: 480px;
   width: 100%;
 
   &:placeholder {
@@ -19,6 +18,9 @@ const Input = styled.input`
   &:disabled {
     color: #bcae9e;
     background-color: #f1f0f0d7;
+  }
+  &:focus {
+    outline-color: #ff9900;
   }
 `;
 
