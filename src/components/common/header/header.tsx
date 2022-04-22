@@ -27,7 +27,7 @@ const Header = ({ isLogin, search }: HeaderProps) => {
   });
 
   return (
-    <HeaderContainer main={router.route === '/' && scroll ? 'main' : 'aa'}>
+    <HeaderContainer main={router.route === '/' && scroll ? 'main' : ''}>
       <HeaderContent>
         <LogoIcon width={120} height={55} onClick={() => router.push('/')} />
         <Text>전체맥주</Text>
