@@ -5,7 +5,7 @@ import LogoIcon from './logoIcon';
 
 export default {
   Component: LogoIcon,
-  title: '로고',
+  title: 'Commons/Icons/로고',
 } as ComponentMeta<typeof LogoIcon>;
 
 const Template: ComponentStory<typeof LogoIcon> = args => <LogoIcon {...args} />;

@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import HeartIcon from './heartIcon';
+import KakaoIcon from './kakaoIcon';
 
 export default {
-  Component: HeartIcon,
-  title: 'Commons/Icons/하트 아이콘',
-} as ComponentMeta<typeof HeartIcon>;
+  Component: KakaoIcon,
+  title: 'Commons/Icons/카카오 아이콘',
+} as ComponentMeta<typeof KakaoIcon>;
 
-const Template: ComponentStory<typeof HeartIcon> = args => <HeartIcon {...args} />;
+const Template: ComponentStory<typeof KakaoIcon> = args => <KakaoIcon {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -17,5 +17,5 @@ Default.args = {
   onClick: () => {
     alert('clicked');
   },
-  fill: '#F0E5CF',
+  fill: '#000000',
 };

@@ -5,7 +5,7 @@ import SearchIcon from './searchIcon';
 
 export default {
   Component: SearchIcon,
-  title: '검색 아이콘',
+  title: 'Commons/Icons/검색 아이콘',
 } as ComponentMeta<typeof SearchIcon>;
 
 const Template: ComponentStory<typeof SearchIcon> = args => <SearchIcon {...args} />;

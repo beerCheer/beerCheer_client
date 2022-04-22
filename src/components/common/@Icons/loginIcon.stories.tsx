@@ -4,7 +4,7 @@ import LoginIcon from './loginIcon';
 
 export default {
   Component: LoginIcon,
-  title: '로그인 아이콘',
+  title: 'Commons/Icons/로그인 아이콘',
 } as ComponentMeta<typeof LoginIcon>;
 
 const Template: ComponentStory<typeof LoginIcon> = args => <LoginIcon {...args} />;
