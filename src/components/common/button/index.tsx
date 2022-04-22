@@ -14,7 +14,7 @@ export const Button = ({
   primary = false,
   size = 'medium',
   color = '#fba42a',
-  block = true,
+  block = false,
   ...props
 }: ButtonProps) => {
   return (
