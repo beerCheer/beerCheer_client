@@ -7,7 +7,7 @@ const SearchBar = () => {
   const router = useRouter();
 
   return (
-    <SearchBarContainer main={router.route === '/' ? 'main' : ''}>
+    <SearchBarContainer main={router.route}>
       <SearchIcon width={37} height={35} />
       <Input placeholder="맥주 이름" />
     </SearchBarContainer>

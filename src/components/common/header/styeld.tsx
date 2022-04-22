@@ -18,7 +18,8 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
 
 export const HeaderContent = styled.div`
   display: flex;
-  max-width: 1200px;
+  max-width: 1320px;
+  padding: 0px 60px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -29,10 +30,15 @@ export const Text = styled.div`
   font-size: 18px;
   color: #080575;
   left: 300px;
-  flex: 0.6;
 `;
 
 export const SigninText = styled.div`
   font-size: 16px;
   color: ${mainColor};
+`;
+
+export const HiddenSearchBar = styled.div`
+  height: 45px;
+  width: 40%;
+  visibility: hidden;
 `;
