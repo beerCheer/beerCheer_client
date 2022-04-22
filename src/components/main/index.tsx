@@ -4,7 +4,7 @@ import HomeLayout from '../common/layout/layout';
 import Beer from '../common/beer/beer';
 import PreferenesModal from './preferenes-pop-up';
 
-import { MainContainer, MainContent, MainTab, Text } from './styled';
+import { MainContainer, MainContent, MainTab, Text, TabButton } from './styled';
 
 import Data from './dummy';
 interface DummyProps {
@@ -29,25 +29,25 @@ const Main = () => {
     <HomeLayout>
       <MainContainer>
         <MainTab>
-          <Text
+          <TabButton
             activeTab={activeTab}
             id="0"
             onClick={() => {
               tabMenuHandle('0');
             }}
           >
-            인기 맥주 TOP 12
-          </Text>
+            <Text>인기 맥주 TOP 12</Text>
+          </TabButton>
           <Text> &nbsp;/&nbsp; </Text>
-          <Text
+          <TabButton
             activeTab={activeTab}
             id="1"
             onClick={() => {
               tabMenuHandle('1');
             }}
           >
-            추천 맥주 리스트
-          </Text>
+            <Text>추천 맥주 리스트</Text>
+          </TabButton>
         </MainTab>
         <MainContent>
           {Data.map((item: DummyProps) => {

@@ -18,14 +18,20 @@ export const MainContent = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   z-index: -1;
 `;
-
-export const MainTab = styled.div`
+export const MainTab = styled.nav`
   display: flex;
   padding: 30px 0px;
 `;
 
-export const Text = styled.div<activeTabProps>`
+export const TabButton = styled.button<activeTabProps>`
   font-size: 18px;
+  background: none;
+  outline: none;
+  border: none;
   color: ${props => (props.activeTab === props.id ? 'black' : '#CBCBCB')};
   cursor: pointer;
+`;
+
+export const Text = styled.span`
+  font-size: 18px;
 `;

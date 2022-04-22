@@ -34,6 +34,5 @@ export const ButtonContainer = styled.button`
 
 export const Icon = styled.div`
   position: absolute;
-  top: -50px;
-  left: 40px;
+  transform: translateY(-50px);
 `;

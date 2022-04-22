@@ -21,7 +21,7 @@ const PreferenesModal = () => {
             좋아하는 맥주 <br />
             고르러가기
             <Icon>
-              <OneBeerIcon css={{ position: 'absolute' }} />
+              <OneBeerIcon />
             </Icon>
           </ButtonContainer>
           <ButtonContainer>

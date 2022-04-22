@@ -12,26 +12,31 @@ interface HeaderProps {
 }
 
 const Header = ({ isLogin, search }: HeaderProps) => {
-  const router = useRouter();
+  const { pathname, push } = useRouter();
   const [scroll, setScroll] = React.useState(true);
 
+  console.log(pathname);
+
   useEffect(() => {
-    document.addEventListener('scroll', () => {
+    const onScroll = () => {
       let y = window.scrollY;
       if (y >= 450) {
         setScroll(prev => false);
       } else {
         setScroll(prev => true);
       }
-    });
-  });
+    };
+    document.addEventListener('scroll', onScroll);
+
+    return () => document.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <HeaderContainer main={router.route === '/' && scroll ? 'main' : ''}>
+    <HeaderContainer main={pathname === '/' && scroll ? true : false}>
       <HeaderContent>
-        <LogoIcon width={120} height={55} onClick={() => router.push('/')} />
+        <LogoIcon width={120} height={55} onClick={() => push('/mypage')} />
         <Text>전체맥주</Text>
-        {router.route === '/' ? <HiddenSearchBar /> : <SearchBar />}
+        {pathname === '/' ? <HiddenSearchBar /> : <SearchBar />}
         {isLogin ? <LoginIcon width={52} height={52} /> : <SigninText>로그인 / 회원가입</SigninText>}
       </HeaderContent>
     </HeaderContainer>

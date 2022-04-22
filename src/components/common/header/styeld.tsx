@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 interface HeaderContainerProps {
-  main?: string;
+  main?: boolean;
 }
 const mainColor = '#FF9900';
 
@@ -12,8 +12,8 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
   position: fixed;
   width: 100%;
   top: 0px;
-  background-color: ${props => (props.main === 'main' ? 'transparent' : 'white')};
-  box-shadow: ${props => (props.main === 'main' ? '' : '0px 2px 32px -5px #0000001A')};
+  background-color: ${props => (props.main ? 'transparent' : 'white')};
+  box-shadow: ${props => (props.main ? 'none' : '0px 2px 32px -5px #0000001A')};
   transition: all 0.2s;
 `;
 

@@ -11,11 +11,11 @@ interface HomeLayoutProps {
 }
 
 const HomeLayout = ({ children }: HomeLayoutProps) => {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <HomeContainer>
-      {router.route === '/' ? (
+      {pathname === '/' ? (
         <BackGround>
           <SearchBar />
         </BackGround>
@@ -24,7 +24,7 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
       )}
       <Header isLogin={false}></Header>
       <HomeWrapper>
-        <Content padding={router.route === '/' ? 'main' : ''}>{children}</Content>
+        <Content padding={pathname === '/' ? 'main' : ''}>{children}</Content>
       </HomeWrapper>
       <Footer></Footer>
     </HomeContainer>
