@@ -13,7 +13,6 @@ export const HomeContainer = styled.div`
 
 export const HomeWrapper = styled.div`
   max-width: 1200px;
-  width: 1200px;
   display: flex;
   flex-direction: column;
   height: 100%;

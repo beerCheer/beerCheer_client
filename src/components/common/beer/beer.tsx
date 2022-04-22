@@ -7,21 +7,18 @@ const beer = '🍺';
 interface BeerProps {
   id: number;
   name: string;
-  socre: number;
+  score: number;
   imageUrl: string;
 }
 
-const Beer = ({ id, name, socre, imageUrl }: BeerProps) => {
+const Beer = ({ id, name, score, imageUrl }: BeerProps) => {
   return (
     <BeerContainer>
-      <BeerImage image={imageUrl}>
-        <Icon>
-          <HeartIcon width={40} height={35} />
-        </Icon>
-      </BeerImage>
+      <BeerImage src={imageUrl}></BeerImage>
+      <HeartIcon width={40} height={35} />
       <BeerInfo>
         <BeerName>{name}</BeerName>
-        <BeerScore>{beer.repeat(socre)}</BeerScore>
+        <BeerScore>{beer.repeat(score)}</BeerScore>
       </BeerInfo>
     </BeerContainer>
   );

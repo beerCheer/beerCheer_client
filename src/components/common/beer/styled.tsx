@@ -1,33 +1,26 @@
 import styled from '@emotion/styled';
 
-interface ImageProps {
-  image?: string;
-}
-
 export const BeerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 274px;
-  height: 274px;
+  max-width: 274px;
+  width: 100%;
+  height: 100%;
+  position: relative;
 `;
 
-export const BeerImage = styled.div<ImageProps>`
-  position: relative;
-  width: 274px;
-  height: 240px;
-  background-image: url(${props => props.image || ''});
-  background-size: cover;
+export const BeerImage = styled.img`
+  max-width: 274px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const Icon = styled.button`
   position: absolute;
   top: 5px;
   right: 5px;
-  background-color: transparent !important;
-  background-image: none !important;
-  border-color: transparent;
+  background: none;
   border: none;
-  color: #ffffff;
   cursor: pointer;
 `;
 
@@ -38,6 +31,7 @@ export const BeerInfo = styled.div`
   align-items: center;
   width: 100%;
 `;
+
 export const BeerName = styled.div``;
 
 export const BeerScore = styled.div``;

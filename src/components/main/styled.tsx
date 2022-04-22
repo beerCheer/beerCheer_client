@@ -5,24 +5,21 @@ interface activeTabProps {
   id?: string;
 }
 
-const high = '550px';
-
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px 0px 100px 0px;
+  padding: 30px 16px 100px 16px;
   width: 100%;
 `;
 
 export const MainContent = styled.div`
   display: grid;
-  grid-template-columns: 274px 274px 274px 274px;
   grid-gap: 70px 34px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
 export const MainTab = styled.div`
   display: flex;
-  font-size: 20px;
   padding: 30px 0px;
 `;
 
