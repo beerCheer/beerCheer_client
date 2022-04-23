@@ -1,6 +1,6 @@
 export const size = {
-  medium: '768px',
-  small: '480px',
+  large: '768px',
+  medium: '480px',
 };
 
 export const font = {
@@ -22,12 +22,11 @@ export const font = {
   },
 };
 
-const mainColor = '#FF9900';
-
 const theme = {
+  mainColor: '#FF9900',
   mq: {
-    laptop: `@media only screen and (min-width: ${size.medium})`,
-    tablet: `@media only screen and (min-width: ${size.small})`,
+    tablet: `@media only screen and (max-width: ${size.large})`,
+    phone: `@media only screen and (max-width: ${size.medium})`,
   },
   'font-3xl': font.size['xl-3'],
   'font-2xl': font.size['xl-2'],
@@ -35,7 +34,7 @@ const theme = {
   'font-lg': font.size.lg,
   'font-md': font.size.md,
   'font-sm': font.size.sm,
-  'font-xs': font.size.sm,
+  'font-xs': font.size.xs,
   'font-light': font.weight.light,
   'font-regular': font.weight.regular,
   'font-medium': font.weight.medium,
