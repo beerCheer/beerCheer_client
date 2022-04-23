@@ -4,27 +4,16 @@ interface HomecContentProps {
   padding?: string;
 }
 
-export const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-x: hidden;
-`;
-
-export const HomeWrapper = styled.div`
+export const Content = styled.section<HomecContentProps>`
   max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-export const Content = styled.div<HomecContentProps>`
-  min-height: 100vh;
+  margin: auto;
+  min-height: calc(100vh - 225px);
   width: 100%;
+  height: 100%;
   padding-top: ${props => (props.padding ? '' : '75px')};
 `;
 
-export const BackGround = styled.div`
+export const Background = styled.div`
   background-image: url('mainback.jpeg');
   opacity: 0.8;
   width: 100%;
