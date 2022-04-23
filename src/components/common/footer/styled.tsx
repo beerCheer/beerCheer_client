@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const FooterContainer = styled.div`
+export const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   width: 100vw;
@@ -40,7 +40,7 @@ export const Creator = styled.a`
   height: 18px;
 `;
 
-export const Text = styled.div`
+export const Text = styled.span`
   color: #ffffff;
   font-size: 14px;
 `;
