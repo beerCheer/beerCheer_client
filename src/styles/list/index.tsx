@@ -26,6 +26,6 @@ export const ListContent = styled.div`
   }
 `;
 
-export const ListTitle = styled.div`
+export const ListTitle = styled.h1`
   font-size: ${props => props.theme['font-xl']};
 `;
