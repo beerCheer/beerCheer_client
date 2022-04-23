@@ -13,13 +13,13 @@ export const HomeContainer = styled.div`
 
 export const HomeWrapper = styled.div`
   max-width: 1200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 
 export const Content = styled.div<HomecContentProps>`
-  min-height: 100vh;
   width: 100%;
   padding-top: ${props => (props.padding ? '' : '75px')};
 `;
