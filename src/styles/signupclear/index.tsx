@@ -46,10 +46,9 @@ export const RecommendText = styled.span`
   }
 `;
 
-export const SignupBeerIcon = styled.div`
+export const SignupBeerImage = styled.img`
   display: flex;
   width: 100%;
-  background: url('/signupBeerIcon.svg');
   height: 400px;
 
   background-size: 100% 100%;

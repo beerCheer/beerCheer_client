@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeLayout from '../components/common/layout/layout';
 
-import { SingupClearContainer, SignupBeerIcon, Text, RecommendButton, RecommendText } from '../styles/signupclear';
+import { SingupClearContainer, SignupBeerImage, Text, RecommendButton, RecommendText } from '../styles/signupclear';
 
 const Signupclear = () => {
   return (
@@ -11,7 +11,7 @@ const Signupclear = () => {
         <RecommendButton primary size="small">
           <RecommendText>맥주추천 받으러 가기</RecommendText>
         </RecommendButton>
-        <SignupBeerIcon />
+        <SignupBeerImage src={'/signupBeerIcon.svg'} />
       </SingupClearContainer>
     </HomeLayout>
   );
