@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledButton } from './styled';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   primary?: boolean;
   size?: 'small' | 'medium' | 'large';
   block?: boolean;
@@ -14,7 +14,7 @@ export const Button = ({
   primary = false,
   size = 'medium',
   color = '#fba42a',
-  block = true,
+  block = false,
   ...props
 }: ButtonProps) => {
   return (
