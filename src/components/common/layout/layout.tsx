@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import { HomeContainer, Content, HomeWrapper, Background } from './styled';
+import { Content, Background } from './styled';
 import SearchBar from '../searchbar/searchBar';
 
 interface HomeLayoutProps {
