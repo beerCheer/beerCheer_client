@@ -5,11 +5,12 @@ interface HeaderContainerProps {
 }
 const mainColor = '#FF9900';
 
-export const HeaderContainer = styled.div<HeaderContainerProps>`
+export const HeaderContainer = styled.header<HeaderContainerProps>`
   height: 75px;
   display: flex;
   justify-content: center;
   position: fixed;
+  z-index: 10;
   width: 100%;
   top: 0px;
   background-color: ${props => (props.main ? 'transparent' : 'white')};

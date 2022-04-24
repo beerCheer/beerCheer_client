@@ -15,8 +15,6 @@ const Header = ({ isLogin, search }: HeaderProps) => {
   const { pathname, push } = useRouter();
   const [scroll, setScroll] = React.useState(true);
 
-  console.log(pathname);
-
   useEffect(() => {
     const onScroll = () => {
       let y = window.scrollY;

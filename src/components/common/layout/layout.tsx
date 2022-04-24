@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import { HomeContainer, Content, HomeWrapper, BackGround } from './styled';
+import { Content, Background } from './styled';
 import SearchBar from '../searchbar/searchBar';
 
 interface HomeLayoutProps {
@@ -14,20 +14,18 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
   const { pathname } = useRouter();
 
   return (
-    <HomeContainer>
+    <>
       {pathname === '/' ? (
-        <BackGround>
+        <Background>
           <SearchBar />
-        </BackGround>
+        </Background>
       ) : (
         ''
       )}
       <Header isLogin={false}></Header>
-      <HomeWrapper>
-        <Content padding={pathname === '/' ? 'main' : ''}>{children}</Content>
-      </HomeWrapper>
-      <Footer></Footer>
-    </HomeContainer>
+      <Content padding={pathname === '/' ? 'main' : ''}>{children}</Content>
+      <Footer />
+    </>
   );
 };
 

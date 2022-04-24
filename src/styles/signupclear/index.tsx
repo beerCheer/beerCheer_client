@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import Button from '../../components/common/button';
 
-export const SingupClearContainer = styled.div`
+export const SignupClearContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
