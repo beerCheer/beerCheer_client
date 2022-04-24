@@ -22,15 +22,15 @@ const Title = styled.h2`
 const CardContainer = styled.section`
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 
   ${props => props.theme.mq.tablet} {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 24px;
   }
 
-  ${props => props.theme.mq.laptop} {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+  ${props => props.theme.mq.phone} {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 

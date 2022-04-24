@@ -14,15 +14,15 @@ export const ListContent = styled.div`
   display: grid;
   z-index: -1;
   font-size: ${props => props.theme['font-lg']};
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 24px;
 
   ${props => props.theme.mq.tablet} {
     grid-template-columns: 1fr 1fr;
   }
 
-  ${props => props.theme.mq.laptop} {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+  ${props => props.theme.mq.phone} {
+    grid-template-columns: 1fr;
   }
 `;
 
