@@ -32,7 +32,7 @@ const Header = ({ isLogin, search }: HeaderProps) => {
   return (
     <HeaderContainer main={pathname === '/' && scroll ? true : false}>
       <HeaderContent>
-        <LogoIcon width={120} height={55} onClick={() => push('/mypage')} />
+        <LogoIcon width={120} height={55} onClick={() => push('/')} />
         <Text>전체맥주</Text>
         {pathname === '/' ? <HiddenSearchBar /> : <SearchBar />}
         {isLogin ? <LoginIcon width={52} height={52} /> : <SigninText>로그인 / 회원가입</SigninText>}

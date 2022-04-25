@@ -1,15 +1,22 @@
 import styled from '@emotion/styled';
 
-export const BeerContainer = styled.div`
+interface BeerContainerProps {
+  id?: string;
+  seleteBeer?: boolean;
+  pathname?: string;
+}
+
+export const BeerContainer = styled.div<BeerContainerProps>`
   display: flex;
   flex-direction: column;
   max-width: 274px;
   width: 100%;
   height: 100%;
   position: relative;
+  opacity: ${props => (props.pathname !== '/preferences' ? 1 : props.seleteBeer ? 1 : 0.5)};
 `;
 
-export const BeerImage = styled.img`
+export const Thumnail = styled.img`
   max-width: 274px;
   width: 100%;
   height: 100%;
@@ -24,7 +31,7 @@ export const Icon = styled.button`
   cursor: pointer;
 `;
 
-export const BeerInfo = styled.div`
+export const Description = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-between;
@@ -32,6 +39,6 @@ export const BeerInfo = styled.div`
   width: 100%;
 `;
 
-export const BeerName = styled.div``;
+export const BeerName = styled.p``;
 
 export const BeerScore = styled.div``;
