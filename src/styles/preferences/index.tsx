@@ -20,11 +20,11 @@ const Title = styled.header`
   }
 `;
 
-const CardContainer = styled.article`
+const CardContainer = styled.article<{ recommend?: boolean }>`
   display: grid;
   grid-gap: 24px;
   width: 100%;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: ${props => (props.recommend ? `1fr 1fr` : `1fr 1fr 1fr`)};
   justify-items: center;
 
   ${props => props.theme.mq.tablet} {
@@ -42,4 +42,17 @@ const CompletedButton = styled(Button)`
 
 const ButtonText = styled.span``;
 
-export { Section, CompletedButton, Title, CardContainer, ButtonText };
+const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9e9ec7;
+  height: 100vh;
+`;
+
+const Loading = styled.img`
+  width: 60%;
+  margin: 0 auto;
+`;
+
+export { Section, CompletedButton, Title, CardContainer, ButtonText, LoadingContainer, Loading };
