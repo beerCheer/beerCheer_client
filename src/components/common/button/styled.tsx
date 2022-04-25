@@ -30,6 +30,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
   :disabled {
     background-color: ${props => (props.disabled ? `#878787` : props.theme['mainColor'])};
     opacity: ${props => (props.disabled ? `0.3` : `1`)};
+    cursor: not-allowed;
   }
 `;
 
