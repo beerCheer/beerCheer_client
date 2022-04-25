@@ -4,8 +4,8 @@ declare module '@emotion/react' {
   export interface Theme {
     mainColor: string;
     mq: {
-      laptop: string;
       tablet: string;
+      phone: string;
     };
     'font-3xl': string;
     'font-2xl': string;
