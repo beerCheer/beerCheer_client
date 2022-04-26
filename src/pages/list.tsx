@@ -7,7 +7,7 @@ import Beer from '../components/common/beer/beer';
 import { ListContanier, ListContent, ListTitle } from '../styles/list';
 import { useAllBeers } from '../api/hook/beers';
 import { LIST_PER_PAGE } from '../constants';
-import { IBeers } from '../api/types/beers';
+import { IBeer } from '../api/types/beers';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
 export interface DummyProps {
@@ -45,7 +45,7 @@ const List = () => {
     <ListContanier>
       <ListTitle>{search ? `"${search}"에 대한 검색 결과` : '전체 맥주'}</ListTitle>
       <ListContent>
-        {beerList?.map((item: IBeers) => {
+        {beerList?.map((item: IBeer) => {
           return (
             <React.Fragment key={item.id}>
               <Beer id={item.id} name={item.name} score={item.avg} imageUrl={item.image_url} />

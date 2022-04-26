@@ -1,9 +1,6 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { useBeerComments } from '../../api/hook/beers';
-import { IBeers } from '../../api/types/beers';
+import { useBeer, useBeerComments } from '../../api/hook/beers';
 import HomeLayout from '../../components/common/layout/layout';
 import DetailComments from '../../components/detail/comments';
 import { COMMENTS_PER_PAGE } from '../../constants';
@@ -27,31 +24,26 @@ const Detail = () => {
   const { id } = router.query;
   const { data: commentsData } = useBeerComments({ page, per_page: COMMENTS_PER_PAGE, beerId: Number(id) });
   const comments = commentsData?.rows ?? [];
-  const beer = {
-    name: 'Buzz',
-    description: 'A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.',
-    avg: 2.7,
-    image_url: 'https://images.punkapi.com/v2/keg.png',
-  };
+  const { data: beer } = useBeer({ beerId: Number(id) });
 
   return (
     <Section>
       <BeerContainer>
         <ImageConatiner>
           <ImageWrapper>
-            <BeerThumnail src={beer.image_url} alt="" />
+            <BeerThumnail src={beer?.image_url} alt="" />
           </ImageWrapper>
         </ImageConatiner>
         <BeerInfoContainer>
           <BeerInfoHeader>
-            <BeerName>{beer.name}</BeerName>
+            <BeerName>{beer?.name}</BeerName>
             <div>
-              <BeerRate>{BEER_EMOJI.repeat(beer.avg)} </BeerRate>
-              <BeerRate>{beer.avg}</BeerRate>
+              <BeerRate>{BEER_EMOJI.repeat(beer?.avg ?? 0)} </BeerRate>
+              <BeerRate>{beer?.avg}</BeerRate>
             </div>
           </BeerInfoHeader>
           <DescriptionTitle>설명</DescriptionTitle>
-          <p>{beer.description}</p>
+          <p>{beer?.description}</p>
         </BeerInfoContainer>
       </BeerContainer>
       <DetailComments datas={comments} />

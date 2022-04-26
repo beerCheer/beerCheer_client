@@ -1,5 +1,5 @@
-import { IRequestAllBeers, IRequestBeerComments } from './../types/beers/index';
-import { getAllBeers, getBeerComments } from './../fetcher/beers';
+import { IRequestAllBeers, IRequestBeer, IRequestBeerComments } from './../types/beers/index';
+import { getAllBeers, getBeer, getBeerComments } from './../fetcher/beers';
 import { useQuery, useInfiniteQuery } from 'react-query';
 
 const QUERY_KEY = {
@@ -24,4 +24,10 @@ export const useBeerComments = ({ page, per_page, beerId }: IRequestBeerComments
     () => getBeerComments({ page, per_page, beerId }),
     { enabled: !!beerId }
   );
+};
+
+export const useBeer = ({ id, beerId }: IRequestBeer) => {
+  return useQuery([QUERY_KEY.BEERS, id, beerId], () => getBeer({ id, beerId }), {
+    enabled: !!beerId,
+  });
 };

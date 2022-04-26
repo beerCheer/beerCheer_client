@@ -24,7 +24,7 @@ export interface IRequestAllBeers {
   isPreferenceOrRateChecked: boolean;
 }
 
-export interface IBeers {
+export interface IBeer {
   id: number;
   name: string;
   tagline: string;
@@ -80,4 +80,10 @@ export interface IBeers {
   brewers_tips: string;
   contributed_by: string;
   avg: number;
+  isLiked: boolean;
+}
+
+export interface IRequestBeer {
+  id?: number;
+  beerId: number;
 }
