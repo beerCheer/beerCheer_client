@@ -7,6 +7,12 @@ export interface IComment {
   User: IUser;
 }
 
+export interface IRequestBeerComments {
+  beerId: number;
+  page: number;
+  per_page: number;
+}
+
 export interface IResponseBeerComments {
   count: number;
   rows: IComment[];
