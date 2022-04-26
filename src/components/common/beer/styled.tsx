@@ -1,16 +1,15 @@
 import styled from '@emotion/styled';
 
-export const BeerContainer = styled.div`
+export const BeerContainer = styled.li`
   display: flex;
   flex-direction: column;
-  max-width: 274px;
   width: 100%;
   height: 100%;
   position: relative;
+  cursor: pointer;
 `;
 
 export const BeerImage = styled.img`
-  max-width: 274px;
   width: 100%;
   height: 100%;
 `;
@@ -32,6 +31,11 @@ export const BeerInfo = styled.div`
   width: 100%;
 `;
 
-export const BeerName = styled.div``;
+export const BeerName = styled.span`
+  padding: 8px 0;
+  font-weight: ${props => props.theme['font-medium']};
+`;
 
-export const BeerScore = styled.div``;
+export const BeerScore = styled.span`
+  flex-shrink: 0;
+`;

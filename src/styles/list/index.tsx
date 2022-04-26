@@ -1,21 +1,21 @@
 import styled from '@emotion/styled';
 
 export const ListContanier = styled.div`
-  display: flex;
-  flex-direction: column;
   padding: 30px 16px 100px 16px;
   width: 100%;
   height: 100%;
-  justify-content: space-between;
-  gap: 30px 0px;
+
+  & > * {
+    margin-bottom: 32px;
+  }
 `;
 
-export const ListContent = styled.div`
+export const ListContent = styled.ul`
   display: grid;
-  z-index: -1;
+  margin: auto;
   font-size: ${props => props.theme['font-lg']};
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 24px;
+  grid-gap: 32px;
 
   ${props => props.theme.mq.tablet} {
     grid-template-columns: 1fr 1fr;
@@ -27,5 +27,6 @@ export const ListContent = styled.div`
 `;
 
 export const ListTitle = styled.h1`
-  font-size: ${props => props.theme['font-xl']};
+  font-size: ${props => props.theme['font-2xl']};
+  font-weight: ${props => props.theme['font-bold']};
 `;

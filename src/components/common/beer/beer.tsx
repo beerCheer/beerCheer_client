@@ -1,6 +1,8 @@
 import { BeerContainer, BeerImage, Icon, BeerName, BeerScore, BeerInfo } from './styled';
 
 import HeartIcon from '../@Icons/heartIcon';
+import Link from 'next/link';
+import { BeerThumnail, ImageWrapper } from '../../../styles/detail';
 
 const beer = '🍺';
 
@@ -13,16 +15,21 @@ interface BeerProps {
 
 const Beer = ({ id, name, score, imageUrl }: BeerProps) => {
   return (
-    <BeerContainer>
-      <BeerImage src={imageUrl}></BeerImage>
-      <Icon>
-        <HeartIcon width={40} height={35} />
-      </Icon>
-      <BeerInfo>
-        <BeerName>{name}</BeerName>
-        <BeerScore>{beer.repeat(score)}</BeerScore>
-      </BeerInfo>
-    </BeerContainer>
+    <Link href={`/${id}`}>
+      <BeerContainer>
+        <ImageWrapper>
+          <BeerThumnail src={imageUrl} />
+        </ImageWrapper>
+
+        <Icon>
+          <HeartIcon width={40} height={35} />
+        </Icon>
+        <BeerInfo>
+          <BeerName>{name}</BeerName>
+          <BeerScore>{beer.repeat(score)}</BeerScore>
+        </BeerInfo>
+      </BeerContainer>
+    </Link>
   );
 };
 
