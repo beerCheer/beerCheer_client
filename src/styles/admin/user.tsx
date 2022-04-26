@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 
-const AdminContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px 0px;
   padding: 16px;
-  width: 100%;
 `;
 
 const UnderLine = styled.div`
@@ -18,37 +17,32 @@ const Title = styled.header`
 
 const Section = styled.section`
   display: flex;
-  gap: 64px;
-`;
-
-const Article = styled.article`
-  display: flex;
-  width: 100%;
-  gap: 24px;
-  flex-direction: column;
   background-color: #f3f3f3;
-  padding: 20px;
   min-height: calc(100vh - 225px);
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px 0px;
 `;
 
-const ArticleTitle = styled.h1`
+const SectionTitle = styled.h1`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
 `;
 
-const ArticleContent = styled.div`
+const SectionContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px 0px;
+  gap: 12px 0px;
+  padding: 0px 10px;
 `;
 
 const ContentBox = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const Text = styled.div``;
 
-export { AdminContainer, Title, UnderLine, Section, Article, ArticleContent, ArticleTitle, ContentBox, Text };
+export { Container, Title, UnderLine, Section, SectionTitle, SectionContent, Text, ContentBox };

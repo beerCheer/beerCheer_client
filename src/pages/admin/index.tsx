@@ -10,7 +10,7 @@ import {
   Article,
   ArticleContent,
   ArticleTitle,
-  FlexBox,
+  ContentBox,
   Text,
 } from '../../styles/admin';
 import AdminDuumy from './dummy';
@@ -29,17 +29,17 @@ const Admin = () => {
             <ArrowRightIcon onClick={() => router.push('/admin/user')} />
           </ArticleTitle>
           <ArticleContent>
-            <FlexBox>
+            <ContentBox>
               <Text>닉네임</Text>
               <Text>가입일자</Text>
-            </FlexBox>
+            </ContentBox>
             <UnderLine />
             {AdminDuumy.map(el => {
               return (
-                <FlexBox key={el.id}>
+                <ContentBox key={el.id}>
                   <Text>{el.name}</Text>
                   <Text>{el.signUpdate}</Text>
-                </FlexBox>
+                </ContentBox>
               );
             })}
           </ArticleContent>
@@ -50,18 +50,18 @@ const Admin = () => {
             <ArrowRightIcon onClick={() => router.push('/admin/comments')} />
           </ArticleTitle>
           <ArticleContent>
-            <FlexBox>
+            <ContentBox>
               <Text>닉네임</Text>
               <Text>등록일자</Text>
-            </FlexBox>
+            </ContentBox>
             <UnderLine />
 
             {AdminDuumy.map(el => {
               return (
-                <FlexBox key={el.id}>
+                <ContentBox key={el.id}>
                   <Text>{el.name}</Text>
                   <Text>{el.signUpdate}</Text>
-                </FlexBox>
+                </ContentBox>
               );
             })}
           </ArticleContent>
