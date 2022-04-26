@@ -1,15 +1,20 @@
 import { IRequestAllBeers, IRequestBeerComments } from './../types/beers/index';
 import { getAllBeers, getBeerComments } from './../fetcher/beers';
-import { useQuery } from 'react-query';
+import { useQuery, useInfiniteQuery } from 'react-query';
 
 const QUERY_KEY = {
   BEERS: 'BEERS',
   COMMENTS: 'COMMENTS',
 };
 
-export const useAllBeers = ({ page, per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
-  return useQuery([QUERY_KEY.BEERS, page, per_page, isPreferenceOrRateChecked], () =>
-    getAllBeers({ page, per_page, isPreferenceOrRateChecked })
+export const useAllBeers = ({ page = 1, per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
+  // back api 수정 필요
+  return useInfiniteQuery(
+    [QUERY_KEY.BEERS, page, per_page, isPreferenceOrRateChecked],
+    ({ pageParam }) => getAllBeers({ page: pageParam, per_page, isPreferenceOrRateChecked }),
+    {
+      getNextPageParam: () => {},
+    }
   );
 };
 
