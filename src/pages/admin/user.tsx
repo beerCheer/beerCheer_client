@@ -21,7 +21,7 @@ const Admin = () => {
       <Section>
         <SectionTitle>
           <Text>닉네임</Text>
-          <Text css={{ paddingLeft: '10px' }}>가입일자</Text>
+          <Text>가입일자</Text>
           <Text>유저탈퇴</Text>
         </SectionTitle>
         <UnderLine />
