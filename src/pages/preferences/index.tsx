@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { selectedBeersState, isLoadingState, recommendBeerState } from '../../states';
 
 import HomeLayout from '../../components/common/layout/layout';
@@ -12,6 +12,7 @@ import {
   ButtonText,
   LoadingContainer,
   Loading,
+  BeerWrapper,
 } from '../../styles/preferences';
 import Beer from '../../components/common/beer/beer';
 import Data from '../../components/main/dummy';
@@ -19,10 +20,9 @@ import { DummyProps } from '../../components/main/dummy';
 
 const Preferences = () => {
   const router = useRouter();
+  const [selectedBeers, setSelectedBeers] = useRecoilState(selectedBeersState);
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
   const setRecommenBeer = useSetRecoilState(recommendBeerState);
-
-  const selectedBeers = useRecoilValue(selectedBeersState);
 
   const getPreferenceBeer = () => {
     //TODO : 선호하는 맥주 리스트 받아오기
@@ -33,7 +33,20 @@ const Preferences = () => {
       setIsLoading(false);
     }, 3000);
 
-    router.push('/preferences/beers');
+    router.push('/mypage/recommend');
+  };
+
+  const handleSelectedBeer = (id: string) => {
+    const selected: boolean = selectedBeers.includes(id);
+
+    if (selected) {
+      const unCheck = selectedBeers.filter(el => el !== id);
+      setSelectedBeers(() => unCheck);
+    } else {
+      if (selectedBeers.length < 3) {
+        setSelectedBeers(prev => [...prev, id]);
+      }
+    }
   };
 
   if (isLoading)
@@ -51,7 +64,15 @@ const Preferences = () => {
       </CompletedButton>
       <CardContainer>
         {Data.map((item: DummyProps) => {
-          return <Beer key={item.id} id={item.id} name={item.name} score={item.score} imageUrl={item.imageUrl} />;
+          return (
+            <BeerWrapper
+              key={item.id}
+              selected={selectedBeers.includes(String(item.id))}
+              onClick={() => handleSelectedBeer(String(item.id))}
+            >
+              <Beer id={item.id} name={item.name} score={item.score} imageUrl={item.imageUrl} />
+            </BeerWrapper>
+          );
         })}
       </CardContainer>
     </Section>

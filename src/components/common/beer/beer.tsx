@@ -15,28 +15,8 @@ interface BeerProps {
 }
 
 const Beer = ({ id, name, score, imageUrl }: BeerProps) => {
-  const { pathname } = useRouter();
-  const [selectedBeers, setSelectedBeers] = useRecoilState(selectedBeersState);
-
-  const handleSelectBeers = (id: string) => {
-    const selected: boolean = selectedBeers.includes(id);
-
-    if (selected) {
-      const unCheck = selectedBeers.filter(el => el !== id);
-      setSelectedBeers(() => unCheck);
-    } else {
-      if (selectedBeers.length < 3) {
-        setSelectedBeers(prev => [...prev, id]);
-      }
-    }
-  };
-
   return (
-    <BeerContainer
-      pathname={pathname}
-      seleteBeer={selectedBeers.includes(String(id))}
-      onClick={() => handleSelectBeers(String(id))}
-    >
+    <BeerContainer>
       <Thumnail src={imageUrl}></Thumnail>
       <Icon>
         <HeartIcon width={40} height={35} />

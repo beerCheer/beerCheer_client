@@ -27,8 +27,8 @@ const StyledButton = styled.button<ButtonStyleProps>`
     filter: brightness(0.95);
   }
 
-  :disabled {
-    background-color: ${props => (props.disabled ? `#878787` : props.theme['mainColor'])};
+  &:disabled {
+    background-color: ${props => props.disabled && `#878787`};
     opacity: ${props => (props.disabled ? `0.3` : `1`)};
     cursor: not-allowed;
   }

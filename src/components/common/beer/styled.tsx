@@ -1,19 +1,12 @@
 import styled from '@emotion/styled';
 
-interface BeerContainerProps {
-  id?: string;
-  seleteBeer?: boolean;
-  pathname?: string;
-}
-
-export const BeerContainer = styled.div<BeerContainerProps>`
+export const BeerContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 274px;
   width: 100%;
   height: 100%;
   position: relative;
-  opacity: ${props => (props.pathname !== '/preferences' ? 1 : props.seleteBeer ? 1 : 0.5)};
 `;
 
 export const Thumnail = styled.img`

@@ -9,6 +9,10 @@ const Section = styled.section`
   margin: auto;
 `;
 
+const BeerWrapper = styled.div<{ selected?: boolean }>`
+  opacity: ${props => (props.selected ? 1 : 0.5)};
+`;
+
 const Title = styled.header`
   font-size: ${props => props.theme['font-2xl']};
   font-weight: ${props => props.theme['font-bold']};
@@ -47,12 +51,13 @@ const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #9e9ec7;
-  height: 100vh;
+  height: calc(100vh - 300px);
 `;
 
 const Loading = styled.img`
-  width: 60%;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
-export { Section, CompletedButton, Title, CardContainer, ButtonText, LoadingContainer, Loading };
+export { Section, CompletedButton, Title, CardContainer, ButtonText, LoadingContainer, Loading, BeerWrapper };
