@@ -1,9 +1,10 @@
-import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IComment } from '../../../api/types/beers';
+import { EmptyFallback } from '../../../styles/mypage/rates';
 import { dateFormat } from '../../../utils/dateFormat';
+import EmptyIcon from '../../common/@Icons/emptyIcon';
 import Button from '../../common/button';
-import { BoardHeader, CommentColumn, Contents, DateColumn, NameColumn, Row } from '../../mypage/comments/styled';
+import { CommentColumn, Contents, DateColumn, NameColumn, Row } from '../../mypage/comments/styled';
 import { CommentInput, Header, InputWrapper, Title } from './styled';
 
 const DetailComments = ({ datas }: { datas: any }) => {
@@ -35,6 +36,13 @@ const DetailComments = ({ datas }: { datas: any }) => {
             <DateColumn>{dateFormat(data.createdAt)}</DateColumn>
           </Row>
         ))}
+
+        {datas.length === 0 && (
+          <EmptyFallback>
+            <EmptyIcon width={150} height={150} />
+            <p>아직 한줄평이 없어요!</p>
+          </EmptyFallback>
+        )}
       </Contents>
     </div>
   );

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 const Title = styled.h3`
   font-weight: ${props => props.theme['font-bold']};
-  font-size: ${props => props.theme['font-2xl']}; ;
+  font-size: ${props => props.theme['font-2xl']};
 `;
 
 const Header = styled.header`
