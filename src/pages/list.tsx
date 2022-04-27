@@ -48,7 +48,12 @@ const List = () => {
         {beerList?.map((item: IBeer) => {
           return (
             <React.Fragment key={item.id}>
-              <Beer id={item.id} name={item.name} score={item.avg} imageUrl={item.image_url} />
+              <Beer
+                onClick={() => router.push(`/${item.id}`)}
+                name={item.name}
+                score={item.avg}
+                imageUrl={item.image_url}
+              />
             </React.Fragment>
           );
         })}
