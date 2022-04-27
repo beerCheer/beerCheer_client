@@ -10,18 +10,20 @@ interface BeerCardProps {
 const BeerCard = ({ name, imageUrl, rate, id }: BeerCardProps) => {
   return (
     <Link href={`/${id}`}>
-      <Article>
-        <ImageWrapper>
-          <Thumnail src={imageUrl} alt={name} />
-        </ImageWrapper>
-        <Description>
-          <Name>{name}</Name>
-          <RateContainer>
-            <RateLabel>내 평가🍻</RateLabel>
-            <Rate>{rate}</Rate>
-          </RateContainer>
-        </Description>
-      </Article>
+      <a>
+        <Article>
+          <ImageWrapper>
+            <Thumnail src={imageUrl} alt={name} />
+          </ImageWrapper>
+          <Description>
+            <Name>{name}</Name>
+            <RateContainer>
+              <RateLabel>내 평가🍻</RateLabel>
+              <Rate>{rate}</Rate>
+            </RateContainer>
+          </Description>
+        </Article>
+      </a>
     </Link>
   );
 };

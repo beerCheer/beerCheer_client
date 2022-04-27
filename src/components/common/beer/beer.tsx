@@ -1,23 +1,22 @@
-import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
-import { selectedBeersState } from '../../../states';
-
 import HeartIcon from '../@Icons/heartIcon';
-import { BeerContainer, Thumnail, Icon, BeerName, BeerScore, Description } from './styled';
+import { BeerThumnail, ImageWrapper } from '../../../styles/detail';
+import { BeerContainer, Icon, BeerName, BeerScore, Description } from './styled';
 
 const beer = '🍺';
 
 interface BeerProps {
-  id: number;
   name: string;
   score: number;
   imageUrl: string;
+  onClick?: () => void;
 }
 
-const Beer = ({ id, name, score, imageUrl }: BeerProps) => {
+const Beer = ({ onClick, name, score, imageUrl }: BeerProps) => {
   return (
-    <BeerContainer>
-      <Thumnail src={imageUrl}></Thumnail>
+    <BeerContainer onClick={onClick}>
+      <ImageWrapper>
+        <BeerThumnail src={imageUrl} />
+      </ImageWrapper>
       <Icon>
         <HeartIcon width={40} height={35} />
       </Icon>
