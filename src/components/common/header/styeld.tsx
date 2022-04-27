@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Button from '../button';
 
 interface HeaderContainerProps {
   main?: boolean;
@@ -30,13 +31,12 @@ export const HeaderContent = styled.div`
 
 export const Text = styled.div`
   font-size: 18px;
-  color: #080575;
-  left: 300px;
+  color: ${props => props.theme.color.secondary};
+  cursor: pointer;
 `;
 
-export const SigninText = styled.div`
-  font-size: 16px;
-  color: ${mainColor};
+export const SigninButton = styled(Button)`
+  color: ${props => props.theme.color.primary};
 `;
 
 export const HiddenSearchBar = styled.div`

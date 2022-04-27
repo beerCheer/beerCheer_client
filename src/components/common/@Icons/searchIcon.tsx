@@ -1,6 +1,6 @@
 import { SVGIconProps } from '.';
 
-const SearchIcon = ({ width, height, fill = '#eeccee', onClick }: SVGIconProps) => {
+const SearchIcon = ({ width, height, fill = '#FF9900', onClick }: SVGIconProps) => {
   return (
     <svg
       width={width}

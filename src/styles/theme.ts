@@ -1,9 +1,11 @@
-export const size = {
+import { Theme } from '@emotion/react';
+
+const size = {
   large: '768px',
   medium: '480px',
 };
 
-export const font = {
+const font = {
   size: {
     'xl-3': '32px',
     'xl-2': '24px',
@@ -22,8 +24,22 @@ export const font = {
   },
 };
 
-const theme = {
-  mainColor: '#FF9900',
+const color = {
+  primary: '#FF9900',
+  secondary: '#294D81',
+  tertiary: '#F0E5CF',
+  option: '#C8C6C6',
+  'bg-color': '#F8F7F5',
+};
+
+const theme: Theme = {
+  color: {
+    primary: color.primary,
+    secondary: color.secondary,
+    tertiary: color.tertiary,
+    option: color.option,
+    'bg-color': color['bg-color'],
+  },
   mq: {
     tablet: `@media only screen and (max-width: ${size.large})`,
     phone: `@media only screen and (max-width: ${size.medium})`,

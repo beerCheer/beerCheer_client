@@ -15,14 +15,12 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
 
   return (
     <>
-      {pathname === '/' ? (
+      {pathname === '/' && (
         <Background>
           <SearchBar />
         </Background>
-      ) : (
-        ''
       )}
-      <Header isLogin={false}></Header>
+      <Header />
       <Content padding={pathname === '/' ? 'main' : ''}>{children}</Content>
       <Footer />
     </>

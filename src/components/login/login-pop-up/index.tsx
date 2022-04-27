@@ -14,11 +14,11 @@ const LoginPopUp = ({ onClose, isOpen }: LoginPopUpProps) => {
         <ModalDescription>로그인하면 나의 취향에 맞는 맥주를 추천받을 수 있어요!</ModalDescription>
 
         <ButtonContainer>
-          <Button primary color="#FEE500">
+          <Button primary color="#FEE500" block>
             <KakaoIcon fill="#000" />
             <ButtonText>카카오로 로그인하기</ButtonText>
           </Button>
-          <Button primary color="#03c75a">
+          <Button primary color="#03c75a" block>
             <NaverIcon fill="#fff" /> <ButtonText>네이버로 로그인하기</ButtonText>
           </Button>
         </ButtonContainer>
