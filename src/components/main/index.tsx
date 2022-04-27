@@ -51,7 +51,7 @@ const Main = () => {
         </MainTab>
         <MainContent>
           {Data.map((item: DummyProps) => {
-            return <Beer key={item.id} id={item.id} name={item.name} score={item.score} imageUrl={item.imageUrl} />;
+            return <Beer key={item.id} name={item.name} score={item.score} imageUrl={item.imageUrl} />;
           })}
         </MainContent>
       </MainContainer>
