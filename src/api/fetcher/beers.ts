@@ -37,3 +37,9 @@ export const getBeer = async ({ id, beerId }: IRequestBeer) => {
   });
   return data;
 };
+
+export const getRatesBeer = async () => {
+  const { data } = await API.get<IBeer[]>(`/beers/rates`);
+
+  return data;
+};

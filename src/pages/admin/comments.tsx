@@ -10,7 +10,7 @@ import {
   Text,
   ContentBox,
 } from '../../styles/admin/user';
-import { AdminDummy } from '../../api/dummy';
+import { AdminDummy } from './dummy';
 import GarbageIcon from '../../components/common/@Icons/garbageIcon';
 
 const Comments = () => {

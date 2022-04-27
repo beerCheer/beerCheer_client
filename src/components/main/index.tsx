@@ -1,21 +1,25 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import HomeLayout from '../common/layout/layout';
 import Beer from '../common/beer/beer';
 import PreferenesModal from './preferenes-pop-up';
-
 import { MainContainer, MainContent, MainTab, Text, TabButton } from './styled';
 
-import Data, { DummyProps } from './dummy';
+import { useRatesBeer } from '../../api/hook/beers';
+import { IBeer } from '../../api/types/beers';
 
 const Main = () => {
-  const [activeTab, setActiveTab] = React.useState<string>('0');
+  const router = useRouter();
 
-  const tabMenuHandle = (name: string): void => {
+  const [activeTab, setActiveTab] = React.useState<string>('0');
+  const { data: ratesData } = useRatesBeer();
+
+  const tabMenuHandle = (tabNum: string): void => {
     // if(name === "preferences" && !performance){
     // TODO : 모달 띄워주기
     // }
-    setActiveTab((prev: string) => name);
+    setActiveTab(() => tabNum);
   };
 
   return (
@@ -43,8 +47,16 @@ const Main = () => {
           </TabButton>
         </MainTab>
         <MainContent>
-          {Data.map((item: DummyProps) => {
-            return <Beer key={item.id} name={item.name} score={item.score} imageUrl={item.imageUrl} />;
+          {ratesData?.map((item: IBeer) => {
+            return (
+              <Beer
+                onClick={() => router.push(`/${item.id}`)}
+                key={item.id}
+                name={item?.name}
+                rate={item?.avg}
+                imageUrl={item?.image_url}
+              />
+            );
           })}
         </MainContent>
       </MainContainer>

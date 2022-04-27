@@ -6,12 +6,12 @@ const beer = '🍺';
 
 interface BeerProps {
   name: string;
-  score: number;
+  rate: number;
   imageUrl: string;
   onClick?: () => void;
 }
 
-const Beer = ({ onClick, name, score, imageUrl }: BeerProps) => {
+const Beer = ({ onClick, name, rate, imageUrl }: BeerProps) => {
   return (
     <BeerContainer onClick={onClick}>
       <ImageWrapper>
@@ -22,7 +22,7 @@ const Beer = ({ onClick, name, score, imageUrl }: BeerProps) => {
       </Icon>
       <Description>
         <BeerName>{name}</BeerName>
-        <BeerScore>{beer.repeat(score)}</BeerScore>
+        <BeerScore>{beer.repeat(rate)}</BeerScore>
       </Description>
     </BeerContainer>
   );

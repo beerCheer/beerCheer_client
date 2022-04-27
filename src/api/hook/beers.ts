@@ -1,5 +1,5 @@
 import { IRequestAllBeers, IRequestBeer, IRequestBeerComments } from './../types/beers/index';
-import { getAllBeers, getBeer, getBeerComments } from './../fetcher/beers';
+import { getAllBeers, getBeer, getBeerComments, getRatesBeer } from './../fetcher/beers';
 import { useQuery, useInfiniteQuery } from 'react-query';
 
 const QUERY_KEY = {
@@ -30,4 +30,8 @@ export const useBeer = ({ id, beerId }: IRequestBeer) => {
   return useQuery([QUERY_KEY.BEERS, id, beerId], () => getBeer({ id, beerId }), {
     enabled: !!beerId,
   });
+};
+
+export const useRatesBeer = () => {
+  return useQuery([QUERY_KEY.BEERS], () => getRatesBeer());
 };

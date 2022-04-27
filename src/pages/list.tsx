@@ -14,11 +14,7 @@ const List = () => {
   const router = useRouter();
   const { search } = router.query;
   const [page, setPage] = useState(1);
-  const {
-    data: beersData,
-    fetchNextPage,
-    isLoading,
-  } = useAllBeers({
+  const { data: beersData, fetchNextPage, isLoading } = useAllBeers({
     page,
     per_page: LIST_PER_PAGE,
     isPreferenceOrRateChecked: true,
@@ -43,7 +39,7 @@ const List = () => {
               <Beer
                 onClick={() => router.push(`/${item.id}`)}
                 name={item.name}
-                score={item.avg}
+                rate={item.avg}
                 imageUrl={item.image_url}
               />
             </React.Fragment>

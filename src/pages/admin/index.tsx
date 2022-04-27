@@ -13,7 +13,7 @@ import {
   ContentBox,
   Text,
 } from '../../styles/admin';
-import { AdminDummy } from '../../api/dummy';
+import { AdminDummy } from './dummy';
 
 const Admin = () => {
   const router = useRouter();
