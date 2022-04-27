@@ -28,8 +28,10 @@ const CardContainer = styled.article<{ recommend?: boolean }>`
   display: grid;
   grid-gap: 24px;
   width: 100%;
-  grid-template-columns: ${props => (props.recommend ? `1fr 1fr` : `1fr 1fr 1fr`)};
-  justify-items: center;
+
+  grid-template-columns: ${props => (props.recommend ? `332px 332px ` : `1fr 1fr 1fr`)};
+  justify-content: space-around;
+  padding: 0px 24px;
 
   ${props => props.theme.mq.tablet} {
     grid-template-columns: 1fr 1fr;
