@@ -15,13 +15,14 @@ const Header = () => {
   const [scroll, setScroll] = React.useState(true);
   const [loginPopupOpen, setLoginPopupOpen] = useRecoilState(loginPopupState);
   const isLogin = false;
+
   useEffect(() => {
     const onScroll = () => {
       let y = window.scrollY;
       if (y >= 450) {
-        setScroll(prev => false);
+        setScroll(false);
       } else {
-        setScroll(prev => true);
+        setScroll(true);
       }
     };
     document.addEventListener('scroll', onScroll);
