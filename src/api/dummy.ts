@@ -4,7 +4,7 @@ interface DummyProps {
   signUpdate: string;
 }
 
-const AdminDuumy: Array<DummyProps> = [
+export const AdminDummy: Array<DummyProps> = [
   {
     id: 0,
     name: 'cass',
@@ -26,5 +26,3 @@ const AdminDuumy: Array<DummyProps> = [
     signUpdate: '2022-04-18',
   },
 ];
-
-export default AdminDuumy;

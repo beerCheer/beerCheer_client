@@ -13,7 +13,7 @@ import {
   ContentBox,
   Text,
 } from '../../styles/admin';
-import AdminDuumy from './dummy';
+import { AdminDummy } from '../../api/dummy';
 
 const Admin = () => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const Admin = () => {
               <Text>가입일자</Text>
             </ContentBox>
             <UnderLine />
-            {AdminDuumy.map(el => {
+            {AdminDummy.map(el => {
               return (
                 <ContentBox key={el.id}>
                   <Text>{el.name}</Text>
@@ -56,7 +56,7 @@ const Admin = () => {
             </ContentBox>
             <UnderLine />
 
-            {AdminDuumy.map(el => {
+            {AdminDummy.map(el => {
               return (
                 <ContentBox key={el.id}>
                   <Text>{el.name}</Text>

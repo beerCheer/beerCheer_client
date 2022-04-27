@@ -10,7 +10,7 @@ import {
   Text,
   ContentBox,
 } from '../../styles/admin/user';
-import AdminDuumy from './dummy';
+import { AdminDummy } from '../../api/dummy';
 import GarbageIcon from '../../components/common/@Icons/garbageIcon';
 
 const Admin = () => {
@@ -26,7 +26,7 @@ const Admin = () => {
         </SectionTitle>
         <UnderLine />
         <SectionContent>
-          {AdminDuumy.map(el => {
+          {AdminDummy.map(el => {
             return (
               <ContentBox key={el.id}>
                 <Text>{el.name}</Text>
