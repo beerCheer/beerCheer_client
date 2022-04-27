@@ -5,6 +5,7 @@ import theme from '../styles/theme';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -24,7 +25,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <Global styles={global} /> {getLayout(<Component {...pageProps} />)}{' '}
+        <RecoilRoot>
+          <Global styles={global} /> {getLayout(<Component {...pageProps} />)}
+        </RecoilRoot>
       </ThemeProvider>
     </QueryClientProvider>
   );

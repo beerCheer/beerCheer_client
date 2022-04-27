@@ -1,7 +1,6 @@
-import { BeerContainer, BeerImage, Icon, BeerName, BeerScore, BeerInfo } from './styled';
-
 import HeartIcon from '../@Icons/heartIcon';
 import { BeerThumnail, ImageWrapper } from '../../../styles/detail';
+import { BeerContainer, Icon, BeerName, BeerScore, Description } from './styled';
 
 const beer = '🍺';
 
@@ -21,10 +20,10 @@ const Beer = ({ onClick, name, score, imageUrl }: BeerProps) => {
       <Icon>
         <HeartIcon width={40} height={35} />
       </Icon>
-      <BeerInfo>
+      <Description>
         <BeerName>{name}</BeerName>
         <BeerScore>{beer.repeat(score)}</BeerScore>
-      </BeerInfo>
+      </Description>
     </BeerContainer>
   );
 };

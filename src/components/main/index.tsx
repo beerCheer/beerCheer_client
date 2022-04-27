@@ -6,17 +6,10 @@ import PreferenesModal from './preferenes-pop-up';
 
 import { MainContainer, MainContent, MainTab, Text, TabButton } from './styled';
 
-import Data from './dummy';
-interface DummyProps {
-  id: number;
-  name: string;
-  score: number;
-  imageUrl: string;
-}
+import Data, { DummyProps } from './dummy';
 
 const Main = () => {
   const [activeTab, setActiveTab] = React.useState<string>('0');
-  // const preferences: boolean = false; // User 선호맥주 고르기 여부
 
   const tabMenuHandle = (name: string): void => {
     // if(name === "preferences" && !performance){

@@ -1,4 +1,4 @@
-interface DummyProps {
+export interface DummyProps {
   id: number;
   name: string;
   score: number;

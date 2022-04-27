@@ -3,19 +3,11 @@ import { useRouter } from 'next/router';
 import flatten from 'lodash/flatten';
 import HomeLayout from '../components/common/layout/layout';
 import Beer from '../components/common/beer/beer';
-
 import { ListContanier, ListContent, ListTitle } from '../styles/list';
 import { useAllBeers } from '../api/hook/beers';
 import { LIST_PER_PAGE } from '../constants';
 import { IBeer } from '../api/types/beers';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
-
-export interface DummyProps {
-  id: number;
-  name: string;
-  score: number;
-  imageUrl: string;
-}
 
 const List = () => {
   const { ref, visible } = useIntersectionObserver();

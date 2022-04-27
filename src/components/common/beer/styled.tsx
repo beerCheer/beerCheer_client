@@ -23,7 +23,7 @@ export const Icon = styled.button`
   cursor: pointer;
 `;
 
-export const BeerInfo = styled.div`
+export const Description = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-between;
