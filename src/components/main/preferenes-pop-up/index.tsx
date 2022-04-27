@@ -4,8 +4,10 @@ import Modal from '../../common/modal';
 import OneBeerIcon from '../../common/@Icons/onebeerIcon';
 import TwoBeerIcon from '../../common/@Icons/twobeerIcon';
 import { ModalContent, Title, ButtonBox, ButtonContainer, Icon } from './styled';
+import { useRouter } from 'next/router';
 
 const PreferenesModal = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = React.useState<boolean>(true);
 
   const onClose = () => {
@@ -17,7 +19,7 @@ const PreferenesModal = () => {
       <ModalContent>
         <Title>아직 좋아하는 맥주를 고르지 않았어요 !</Title>
         <ButtonBox>
-          <ButtonContainer>
+          <ButtonContainer onClick={() => router.push('/preferences')}>
             좋아하는 맥주 <br />
             고르러가기
             <Icon>

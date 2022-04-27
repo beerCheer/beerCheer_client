@@ -9,7 +9,7 @@ export const BeerContainer = styled.div`
   position: relative;
 `;
 
-export const BeerImage = styled.img`
+export const Thumnail = styled.img`
   max-width: 274px;
   width: 100%;
   height: 100%;
@@ -24,7 +24,7 @@ export const Icon = styled.button`
   cursor: pointer;
 `;
 
-export const BeerInfo = styled.div`
+export const Description = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-between;
@@ -32,6 +32,6 @@ export const BeerInfo = styled.div`
   width: 100%;
 `;
 
-export const BeerName = styled.div``;
+export const BeerName = styled.p``;
 
 export const BeerScore = styled.div``;

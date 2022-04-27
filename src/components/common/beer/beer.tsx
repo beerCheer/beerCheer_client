@@ -1,6 +1,9 @@
-import { BeerContainer, BeerImage, Icon, BeerName, BeerScore, BeerInfo } from './styled';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { selectedBeersState } from '../../../states';
 
 import HeartIcon from '../@Icons/heartIcon';
+import { BeerContainer, Thumnail, Icon, BeerName, BeerScore, Description } from './styled';
 
 const beer = '🍺';
 
@@ -14,14 +17,14 @@ interface BeerProps {
 const Beer = ({ id, name, score, imageUrl }: BeerProps) => {
   return (
     <BeerContainer>
-      <BeerImage src={imageUrl}></BeerImage>
+      <Thumnail src={imageUrl}></Thumnail>
       <Icon>
         <HeartIcon width={40} height={35} />
       </Icon>
-      <BeerInfo>
+      <Description>
         <BeerName>{name}</BeerName>
         <BeerScore>{beer.repeat(score)}</BeerScore>
-      </BeerInfo>
+      </Description>
     </BeerContainer>
   );
 };

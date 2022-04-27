@@ -23,7 +23,7 @@ const Mypage = () => {
         <ProfileImage src="https://picsum.photos/200" alt="" />
         <ProfileDescription>
           <Nickname>닉네임우하하</Nickname>
-          <Email>useremail@email.com</Email>
+          <Email>mail@email.com</Email>
           <Button
             primary
             size="small"

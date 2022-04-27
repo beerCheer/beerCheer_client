@@ -3,17 +3,8 @@ import { useRouter } from 'next/router';
 
 import HomeLayout from '../components/common/layout/layout';
 import Beer from '../components/common/beer/beer';
-
-import Data from '../components/main/dummy';
-
+import Data, { DummyProps } from '../components/main/dummy';
 import { ListContanier, ListContent, ListTitle } from '../styles/list';
-
-export interface DummyProps {
-  id: number;
-  name: string;
-  score: number;
-  imageUrl: string;
-}
 
 const List = () => {
   const router = useRouter();

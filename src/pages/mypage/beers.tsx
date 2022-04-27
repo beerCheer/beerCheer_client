@@ -4,7 +4,7 @@ import HomeLayout from '../../components/common/layout/layout';
 import Data from '../../components/main/dummy';
 import { ListContent } from '../../styles/list';
 import { Section, Title } from '../../styles/mypage/rates';
-import { DummyProps } from '../list';
+import { DummyProps } from '../../components/main/dummy';
 
 const Beers = () => {
   return (

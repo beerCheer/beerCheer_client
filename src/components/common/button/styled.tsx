@@ -6,6 +6,7 @@ interface ButtonStyleProps {
   size: 'small' | 'medium' | 'large';
   color: string;
   block: boolean;
+  disabled: boolean;
 }
 
 const StyledButton = styled.button<ButtonStyleProps>`
@@ -24,6 +25,12 @@ const StyledButton = styled.button<ButtonStyleProps>`
 
   &:hover {
     filter: brightness(0.95);
+  }
+
+  &:disabled {
+    background-color: ${props => props.disabled && `#878787`};
+    opacity: ${props => (props.disabled ? `0.3` : `1`)};
+    cursor: not-allowed;
   }
 `;
 
