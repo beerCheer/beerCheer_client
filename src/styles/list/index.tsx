@@ -30,3 +30,22 @@ export const ListTitle = styled.h1`
   font-size: ${props => props.theme['font-2xl']};
   font-weight: ${props => props.theme['font-bold']};
 `;
+
+export const EmptyContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: calc(100vh - 300px);
+
+  & > div {
+    font-size: ${props => props.theme['font-2xl']};
+    color: #de4343;
+  }
+`;
+
+export const EmptyListImage = styled.img`
+  width: 70%;
+  height: 70%;
+`;

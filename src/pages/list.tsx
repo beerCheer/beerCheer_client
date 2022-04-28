@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import flatten from 'lodash/flatten';
 import HomeLayout from '../components/common/layout/layout';
 import Beer from '../components/common/beer/beer';
-import { ListContanier, ListContent, ListTitle } from '../styles/list';
+import { ListContanier, ListContent, ListTitle, EmptyContent, EmptyListImage } from '../styles/list';
 import { useAllBeers, useSearchBeer } from '../api/hook/beers';
 import { LIST_PER_PAGE } from '../constants';
 import { IBeer } from '../api/types/beers';
@@ -34,6 +34,13 @@ const List = () => {
   return (
     <ListContanier>
       <ListTitle>{search ? `"${search}"에 대한 검색 결과` : '전체 맥주'}</ListTitle>
+      {search && searchList?.length === 0 && (
+        <EmptyContent>
+          <div>검색결과가 없어요</div>
+          <EmptyListImage src="/emptyList.svg" alt="검색결과가 없습니다" />
+        </EmptyContent>
+      )}
+
       <ListContent>
         {search
           ? searchList?.map((item: IBeer) => {

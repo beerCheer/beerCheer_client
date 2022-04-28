@@ -70,7 +70,7 @@ const Preferences = () => {
               selected={selectedBeers.includes(String(item.id))}
               onClick={() => handleSelectedBeer(String(item.id))}
             >
-              <Beer name={item.name} score={item.score} imageUrl={item.imageUrl} />
+              <Beer name={item.name} rate={item.score} imageUrl={item.imageUrl} />
             </BeerWrapper>
           );
         })}
