@@ -4,7 +4,7 @@ export interface IComment {
   id: number;
   content: string;
   createdAt: string;
-  User: IUser;
+  'User.nickname': string;
 }
 
 export interface IRequestBeerComments {

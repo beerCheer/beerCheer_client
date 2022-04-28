@@ -31,7 +31,7 @@ const DetailComments = ({ datas }: { datas: any }) => {
       <Contents>
         {datas.map((data: IComment) => (
           <Row key={data.id}>
-            <NameColumn>{data.User.nickname}</NameColumn>
+            <NameColumn>{data['User.nickname']}</NameColumn>
             <CommentColumn>{data.content}</CommentColumn>
             <DateColumn>{dateFormat(data.createdAt)}</DateColumn>
           </Row>
