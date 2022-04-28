@@ -24,26 +24,29 @@ const Detail = () => {
   const { id } = router.query;
   const { data: commentsData } = useBeerComments({ page, per_page: COMMENTS_PER_PAGE, beerId: Number(id) });
   const comments = commentsData?.rows ?? [];
-  const { data: beer } = useBeer({ beerId: Number(id) });
+  const { data: beerData } = useBeer({ beerId: Number(id) });
+  const beer = beerData?.beer;
+  const rate = beerData?.rate;
 
+  if (!beer) return null;
   return (
     <Section>
       <BeerContainer>
         <ImageConatiner>
           <ImageWrapper>
-            <BeerThumnail src={beer?.image_url} alt="" />
+            <BeerThumnail src={beer.image_url} alt="" />
           </ImageWrapper>
         </ImageConatiner>
         <BeerInfoContainer>
           <BeerInfoHeader>
-            <BeerName>{beer?.name}</BeerName>
+            <BeerName>{beer.name}</BeerName>
             <div>
-              <BeerRate>{BEER_EMOJI.repeat(beer?.avg ?? 0)} </BeerRate>
-              <BeerRate>{beer?.avg}</BeerRate>
+              <BeerRate>{BEER_EMOJI.repeat(Number(rate) ?? 0)} </BeerRate>
+              <BeerRate>{beer.avg}</BeerRate>
             </div>
           </BeerInfoHeader>
           <DescriptionTitle>설명</DescriptionTitle>
-          <p>{beer?.description}</p>
+          <p>{beer.description}</p>
         </BeerInfoContainer>
       </BeerContainer>
       <DetailComments datas={comments} />

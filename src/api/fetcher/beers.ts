@@ -5,6 +5,7 @@ import {
   IRequestBeerComments,
   IResponseBeerComments,
   IRequestBeer,
+  IResponseBeer,
 } from './../types/beers/index';
 
 export const getAllBeers = async ({ per_page, page = 1, isPreferenceOrRateChecked }: IRequestAllBeers) => {
@@ -30,7 +31,7 @@ export const getBeerComments = async ({ beerId, page, per_page }: IRequestBeerCo
 };
 
 export const getBeer = async ({ id, beerId }: IRequestBeer) => {
-  const { data } = await API.get<IBeer>(`/beers/${beerId}`, {
+  const { data } = await API.get<IResponseBeer>(`/beers/${beerId}`, {
     params: {
       id,
     },

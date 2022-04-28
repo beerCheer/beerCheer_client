@@ -87,3 +87,8 @@ export interface IRequestBeer {
   id?: number;
   beerId: number;
 }
+
+export interface IResponseBeer {
+  beer: IBeer;
+  rate: string;
+}
