@@ -5,3 +5,9 @@ export interface IUser {
   isPreferenceOrRateChecked: boolean;
   created_at: string;
 }
+
+export interface IRequestLoginNaver {
+  code: string;
+  state: string;
+  redirectUri: string;
+}
