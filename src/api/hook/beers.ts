@@ -18,12 +18,15 @@ export const useAllBeers = ({ page = 1, per_page, isPreferenceOrRateChecked }: I
   );
 };
 
-export const useBeerComments = ({ page = 1, per_page, beerId }: IRequestBeerComments) => {
+export const useBeerComments = ({ beerId, per_page }: IRequestBeerComments) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, page, per_page, beerId],
-    () => getBeerComments({ page, per_page, beerId }),
+    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, beerId],
+    ({ pageParam }) => getBeerComments({ beerId, page: pageParam, per_page }),
     {
-      getNextPageParam: lastPage => lastPage.page + 1,
+      getNextPageParam: lastPage => {
+        const nextPage = lastPage.page + 1;
+        return nextPage > lastPage.totalPages ? undefined : nextPage;
+      },
       enabled: !!beerId,
     }
   );

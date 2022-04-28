@@ -1,11 +1,10 @@
 import { flatten } from 'lodash';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useBeer, useBeerComments } from '../../api/hook/beers';
 import HomeLayout from '../../components/common/layout/layout';
 import DetailComments from '../../components/detail/comments';
-import { COMMENTS_PER_PAGE } from '../../constants';
-import useIntersectionObserver from '../../hooks/useIntersectionObserver';
+import { useInView } from 'react-intersection-observer';
 import {
   BeerContainer,
   BeerInfoContainer,
@@ -21,23 +20,20 @@ import {
 
 const BEER_EMOJI = '🍺';
 const Detail = () => {
-  const [page, setPage] = useState(1);
   const router = useRouter();
   const { id } = router.query;
-  const { data: commentsData, isLoading, fetchNextPage } = useBeerComments({ page, per_page: 10, beerId: Number(id) });
+  const { data: commentsData, isLoading, fetchNextPage, hasNextPage } = useBeerComments({ beerId: Number(id) });
   const comments = useMemo(() => flatten(commentsData?.pages?.map(page => page.rows) ?? []), [commentsData]);
   const { data: beerData } = useBeer({ beerId: Number(id) });
   const beer = beerData?.beer;
   const rate = beerData?.rate;
-  const { ref, visible } = useIntersectionObserver();
+  const [ref, inView] = useInView();
 
   useEffect(() => {
-    console.log(visible);
-    if (visible && !isLoading) {
+    if (inView && !isLoading && hasNextPage) {
       fetchNextPage();
-      console.log('v');
     }
-  }, [visible]);
+  }, [inView, isLoading]);
 
   if (!beer) return null;
   return (
@@ -61,7 +57,7 @@ const Detail = () => {
         </BeerInfoContainer>
       </BeerContainer>
       <DetailComments datas={comments} />
-      <div ref={ref}>ff</div>
+      <div ref={ref} />
     </Section>
   );
 };

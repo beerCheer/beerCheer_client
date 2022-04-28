@@ -9,8 +9,8 @@ export interface IComment {
 
 export interface IRequestBeerComments {
   beerId: number;
-  page: number;
-  per_page: number;
+  page?: number;
+  per_page?: number;
 }
 
 export interface IResponseBeerComments {

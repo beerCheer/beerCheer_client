@@ -1,3 +1,4 @@
+import { COMMENTS_PER_PAGE } from '../../constants';
 import { API, IPagination } from './../index';
 import {
   IRequestAllBeers,
@@ -20,7 +21,7 @@ export const getAllBeers = async ({ per_page, page = 1, isPreferenceOrRateChecke
   return data;
 };
 
-export const getBeerComments = async ({ beerId, page, per_page }: IRequestBeerComments) => {
+export const getBeerComments = async ({ beerId, page = 1, per_page = COMMENTS_PER_PAGE }: IRequestBeerComments) => {
   const { data } = await API.get<IPagination<IResponseBeerComments>>(`/beers/${beerId}/comments`, {
     params: {
       page,
