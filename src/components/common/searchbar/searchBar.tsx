@@ -8,7 +8,7 @@ const SearchBar = () => {
 
   return (
     <SearchBarContainer main={pathname}>
-      <SearchIcon width={37} height={35} />
+      <SearchIcon width={24} height={24} />
       <Input placeholder="맥주 이름" />
     </SearchBarContainer>
   );

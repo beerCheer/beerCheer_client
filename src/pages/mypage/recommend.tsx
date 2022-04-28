@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { recommendBeerState } from '../../states';
+import { recommendBeerState } from '../../recoils/states';
 import HomeLayout from '../../components/common/layout/layout';
 import Beer from '../../components/common/beer/beer';
 import { Title, Section, CardContainer } from '../../styles/preferences';

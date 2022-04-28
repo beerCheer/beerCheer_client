@@ -39,7 +39,7 @@ const CardContainer = styled.article<{ recommend?: boolean }>`
 const CompletedButton = styled(Button)`
   font-weight: ${props => props.theme['font-semibold']};
   color: white;
-  background-color: ${props => props.theme['mainColor']};
+  background-color: ${props => props.theme.color.primary};
   margin-bottom: 18px;
   float: right;
 `;
