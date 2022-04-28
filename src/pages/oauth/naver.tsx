@@ -1,11 +1,22 @@
-import { GetServerSideProps } from 'next';
-import React from 'react';
-import { loginNaver } from '../../api/fetcher/user';
-import { IRequestLoginNaver } from '../../api/types/users';
-import { SITE_URL } from '../../constants';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useRouter } from 'next/router';
 
-const OauthNaver = () => {
-  return <div>OauthNaver</div>;
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { loginNaver } from '../../api/fetcher/user';
+import { SITE_URL } from '../../constants';
+import { loginState, userInfoState } from '../../recoils/login';
+
+const OauthNaver = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const setUserInfoState = useSetRecoilState(userInfoState);
+  const setLoignState = useSetRecoilState(loginState);
+  const router = useRouter();
+  useEffect(() => {
+    setUserInfoState(user);
+    setLoignState(true);
+    router.replace('/');
+  }, []);
+  return <div />;
 };
 
 export default OauthNaver;
@@ -22,7 +33,12 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
   try {
     const res = await loginNaver(data);
-    console.log(res);
+
+    return {
+      props: {
+        user: res,
+      },
+    };
   } catch (e) {
     console.log(e);
   }

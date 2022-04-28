@@ -5,8 +5,8 @@ import { HeaderContainer, HeaderContent, Text, SigninButton, HiddenSearchBar } f
 import LogoIcon from '../@Icons/logoIcon';
 import LoginIcon from '../@Icons/loginIcon';
 import SearchBar from '../searchbar/searchBar';
-import { useRecoilState } from 'recoil';
-import { loginPopupState } from '../../../recoils/login';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { loginPopupState, loginState } from '../../../recoils/login';
 import LoginPopUp from '../../login/login-pop-up';
 import Button from '../button';
 
@@ -14,7 +14,7 @@ const Header = () => {
   const { pathname, push } = useRouter();
   const [scroll, setScroll] = React.useState(true);
   const [loginPopupOpen, setLoginPopupOpen] = useRecoilState(loginPopupState);
-  const isLogin = false;
+  const isLogin = useRecoilValue(loginState);
 
   useEffect(() => {
     const onScroll = () => {
@@ -37,7 +37,11 @@ const Header = () => {
         <Text onClick={() => push('/list')}>전체맥주</Text>
         {pathname === '/' ? <HiddenSearchBar /> : <SearchBar />}
         {isLogin ? (
-          <Button>
+          <Button
+            onClick={() => {
+              push('/mypage');
+            }}
+          >
             <LoginIcon width={52} height={52} />
           </Button>
         ) : (
