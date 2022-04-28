@@ -16,9 +16,7 @@ const Main = () => {
   const { data: ratesData } = useRatesBeer();
 
   const tabMenuHandle = (tabNum: string): void => {
-    // if(name === "preferences" && !performance){
-    // TODO : 모달 띄워주기
-    // }
+    // TODO : 유저 선호맥주 선택 여부 모달 띄워주기
     setActiveTab(() => tabNum);
   };
 

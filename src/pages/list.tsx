@@ -4,7 +4,7 @@ import flatten from 'lodash/flatten';
 import HomeLayout from '../components/common/layout/layout';
 import Beer from '../components/common/beer/beer';
 import { ListContanier, ListContent, ListTitle } from '../styles/list';
-import { useAllBeers } from '../api/hook/beers';
+import { useAllBeers, useSearchBeer } from '../api/hook/beers';
 import { LIST_PER_PAGE } from '../constants';
 import { IBeer } from '../api/types/beers';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
@@ -20,6 +20,8 @@ const List = () => {
     isPreferenceOrRateChecked: true,
   });
 
+  const { data: searchList } = useSearchBeer({ name: `${search}` });
+
   const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page) ?? []), [beersData]);
 
   useEffect(() => {
@@ -33,18 +35,31 @@ const List = () => {
     <ListContanier>
       <ListTitle>{search ? `"${search}"에 대한 검색 결과` : '전체 맥주'}</ListTitle>
       <ListContent>
-        {beerList?.map((item: IBeer) => {
-          return (
-            <React.Fragment key={item.id}>
-              <Beer
-                onClick={() => router.push(`/${item.id}`)}
-                name={item.name}
-                rate={item.avg}
-                imageUrl={item.image_url}
-              />
-            </React.Fragment>
-          );
-        })}
+        {search
+          ? searchList?.map((item: IBeer) => {
+              return (
+                <React.Fragment key={item.id}>
+                  <Beer
+                    onClick={() => router.push(`/${item.id}`)}
+                    name={item.name}
+                    rate={item.avg}
+                    imageUrl={item.image_url}
+                  />
+                </React.Fragment>
+              );
+            })
+          : beerList?.map((item: IBeer) => {
+              return (
+                <React.Fragment key={item.id}>
+                  <Beer
+                    onClick={() => router.push(`/${item.id}`)}
+                    name={item.name}
+                    rate={item.avg}
+                    imageUrl={item.image_url}
+                  />
+                </React.Fragment>
+              );
+            })}
 
         <div ref={ref} />
       </ListContent>
