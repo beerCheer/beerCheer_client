@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { IComment } from '../../../api/types/beers';
+import { loginPopupState, loginState } from '../../../recoils/login';
 import { EmptyFallback } from '../../../styles/mypage/rates';
 import { dateFormat } from '../../../utils/dateFormat';
 import EmptyIcon from '../../common/@Icons/emptyIcon';
@@ -9,13 +11,17 @@ import { CommentInput, Header, InputWrapper, Title } from './styled';
 
 const DetailComments = ({ datas }: { datas: any }) => {
   const [inputOpen, setInputOpen] = useState(false);
+  const isLogin = useRecoilValue(loginState);
+  const setLoginPopupState = useSetRecoilState(loginPopupState);
+
   return (
     <div>
       <Header>
         <Title>한줄평</Title>
         <Button
           onClick={() => {
-            setInputOpen(_prev => !_prev);
+            if (isLogin) setInputOpen(_prev => !_prev);
+            else setLoginPopupState(true);
           }}
         >
           작성하기
@@ -31,7 +37,7 @@ const DetailComments = ({ datas }: { datas: any }) => {
       <Contents>
         {datas.map((data: IComment) => (
           <Row key={data.id}>
-            <NameColumn>{data.User.nickname}</NameColumn>
+            <NameColumn>{data['User.nickname']}</NameColumn>
             <CommentColumn>{data.content}</CommentColumn>
             <DateColumn>{dateFormat(data.createdAt)}</DateColumn>
           </Row>

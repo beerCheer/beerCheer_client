@@ -1,15 +1,21 @@
-import { API } from './../index';
+import { COMMENTS_PER_PAGE, LIST_PER_PAGE } from '../../constants';
+import { API, IPagination } from './../index';
 import {
   IRequestAllBeers,
   IBeer,
   IRequestBeerComments,
   IResponseBeerComments,
   IRequestBeer,
+  IResponseBeer,
   IRequestSearchBeer,
 } from './../types/beers/index';
 
-export const getAllBeers = async ({ per_page, page = 1, isPreferenceOrRateChecked }: IRequestAllBeers) => {
-  const { data } = await API.get<IBeer[]>(`/beers`, {
+export const getAllBeers = async ({
+  per_page = LIST_PER_PAGE,
+  page = 1,
+  isPreferenceOrRateChecked,
+}: IRequestAllBeers) => {
+  const { data } = await API.get<IPagination<IBeer[]>>(`/beers`, {
     params: {
       page,
       per_page,
@@ -20,8 +26,8 @@ export const getAllBeers = async ({ per_page, page = 1, isPreferenceOrRateChecke
   return data;
 };
 
-export const getBeerComments = async ({ beerId, page, per_page }: IRequestBeerComments) => {
-  const { data } = await API.get<IResponseBeerComments>(`/beers/${beerId}/comments`, {
+export const getBeerComments = async ({ beerId, page = 1, per_page = COMMENTS_PER_PAGE }: IRequestBeerComments) => {
+  const { data } = await API.get<IPagination<IResponseBeerComments>>(`/beers/${beerId}/comments`, {
     params: {
       page,
       per_page,
@@ -31,7 +37,7 @@ export const getBeerComments = async ({ beerId, page, per_page }: IRequestBeerCo
 };
 
 export const getBeer = async ({ id, beerId }: IRequestBeer) => {
-  const { data } = await API.get<IBeer>(`/beers/${beerId}`, {
+  const { data } = await API.get<IResponseBeer>(`/beers/${beerId}`, {
     params: {
       id,
     },

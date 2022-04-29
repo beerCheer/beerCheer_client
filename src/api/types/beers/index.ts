@@ -4,13 +4,13 @@ export interface IComment {
   id: number;
   content: string;
   createdAt: string;
-  User: IUser;
+  'User.nickname': string;
 }
 
 export interface IRequestBeerComments {
   beerId: number;
-  page: number;
-  per_page: number;
+  page?: number;
+  per_page?: number;
 }
 
 export interface IResponseBeerComments {
@@ -19,8 +19,8 @@ export interface IResponseBeerComments {
 }
 
 export interface IRequestAllBeers {
-  page: number;
-  per_page: number;
+  page?: number;
+  per_page?: number;
   isPreferenceOrRateChecked: boolean;
 }
 
@@ -86,6 +86,11 @@ export interface IBeer {
 export interface IRequestBeer {
   id?: number;
   beerId: number;
+}
+
+export interface IResponseBeer {
+  beer: IBeer;
+  rate: string;
 }
 
 export interface IRequestSearchBeer {

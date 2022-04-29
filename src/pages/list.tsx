@@ -7,29 +7,31 @@ import { ListContanier, ListContent, ListTitle, EmptyContent, EmptyListImage } f
 import { useAllBeers, useSearchBeer } from '../api/hook/beers';
 import { LIST_PER_PAGE } from '../constants';
 import { IBeer } from '../api/types/beers';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import { useInView } from 'react-intersection-observer';
 
 const List = () => {
-  const { ref, visible } = useIntersectionObserver();
   const router = useRouter();
   const { search } = router.query;
-  const [page, setPage] = useState(1);
-  const { data: beersData, fetchNextPage, isLoading } = useAllBeers({
-    page,
-    per_page: LIST_PER_PAGE,
+
+  const [ref, inView] = useInView();
+  const {
+    data: beersData,
+    fetchNextPage,
+    isFetched,
+    hasNextPage,
+  } = useAllBeers({
     isPreferenceOrRateChecked: true,
   });
   const { data: searchList } = useSearchBeer({ name: `${search}` });
 
-  const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page) ?? []), [beersData]);
+  const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page.result) ?? []), [beersData]);
   const beers = useMemo(() => (search ? searchList : beerList), [beerList, searchList, search]);
 
   useEffect(() => {
-    if (visible && !isLoading) {
-      console.log('v');
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [visible]);
+  }, [inView, hasNextPage]);
 
   return (
     <ListContanier>
@@ -53,7 +55,7 @@ const List = () => {
           </React.Fragment>
         ))}
 
-        <div ref={ref} />
+        {isFetched && <div ref={ref} />}
       </ListContent>
     </ListContanier>
   );

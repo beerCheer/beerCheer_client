@@ -8,22 +8,30 @@ const QUERY_KEY = {
   RATES: 'RATES',
 };
 
-export const useAllBeers = ({ page = 1, per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
-  // back api 수정 필요
+export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, page, per_page, isPreferenceOrRateChecked],
+    [QUERY_KEY.BEERS, per_page, isPreferenceOrRateChecked],
     ({ pageParam }) => getAllBeers({ page: pageParam, per_page, isPreferenceOrRateChecked }),
     {
-      getNextPageParam: () => {},
+      getNextPageParam: lastPage => {
+        const nextPage = lastPage.page + 1;
+        return nextPage > lastPage.totalPages ? undefined : nextPage;
+      },
     }
   );
 };
 
-export const useBeerComments = ({ page, per_page, beerId }: IRequestBeerComments) => {
-  return useQuery(
-    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, page, per_page, beerId],
-    () => getBeerComments({ page, per_page, beerId }),
-    { enabled: !!beerId }
+export const useBeerComments = ({ beerId, per_page }: IRequestBeerComments) => {
+  return useInfiniteQuery(
+    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, beerId, per_page],
+    ({ pageParam }) => getBeerComments({ beerId, page: pageParam, per_page }),
+    {
+      getNextPageParam: lastPage => {
+        const nextPage = lastPage.page + 1;
+        return nextPage > lastPage.totalPages ? undefined : nextPage;
+      },
+      enabled: !!beerId,
+    }
   );
 };
 
