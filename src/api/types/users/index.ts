@@ -6,8 +6,8 @@ export interface IUser {
   created_at: string;
 }
 
-export interface IRequestLoginNaver {
+export interface IRequestLogin {
   code: string;
-  state: string;
+  state?: string;
   redirectUri: string;
 }
