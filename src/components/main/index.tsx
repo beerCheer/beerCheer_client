@@ -22,17 +22,15 @@ const Main = () => {
     setActiveTab(tabName);
   };
 
-  console.log(ratesData);
-
   return (
     <HomeLayout>
       <MainContainer>
         <MainTab>
           <TabButton
             activeTab={activeTab}
-            tabName="RATES"
+            tabName={homeTabs.RATES}
             onClick={() => {
-              tabMenuHandle('RATES');
+              tabMenuHandle(homeTabs.RATES);
             }}
           >
             <Text>인기 맥주 TOP 12</Text>
@@ -40,9 +38,9 @@ const Main = () => {
           <Text> &nbsp;/&nbsp; </Text>
           <TabButton
             activeTab={activeTab}
-            tabName="PREFERENCE"
+            tabName={homeTabs.PREFERENCE}
             onClick={() => {
-              tabMenuHandle('PREFERENCE');
+              tabMenuHandle(homeTabs.PREFERENCE);
             }}
           >
             <Text>추천 맥주 리스트</Text>

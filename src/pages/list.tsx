@@ -24,8 +24,6 @@ const List = () => {
   const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page) ?? []), [beersData]);
   const beers = useMemo(() => (search ? searchList : beerList), [beerList, searchList, search]);
 
-  console.log(beers);
-
   useEffect(() => {
     if (visible && !isLoading) {
       console.log('v');
