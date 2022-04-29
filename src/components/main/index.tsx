@@ -11,14 +11,18 @@ import { IBeer } from '../../api/types/beers';
 
 const Main = () => {
   const router = useRouter();
+  const homeTabs = { RATES: 'RATES', PREFERENCE: 'PREFERENCE' };
+  Object.freeze(homeTabs);
 
-  const [activeTab, setActiveTab] = React.useState<string>('0');
+  const [activeTab, setActiveTab] = React.useState<string>(homeTabs.RATES);
   const { data: ratesData } = useRatesBeer();
 
-  const tabMenuHandle = (tabNum: string): void => {
+  const tabMenuHandle = (tabName: string): void => {
     // TODO : 유저 선호맥주 선택 여부 모달 띄워주기
-    setActiveTab(() => tabNum);
+    setActiveTab(tabName);
   };
+
+  console.log(ratesData);
 
   return (
     <HomeLayout>
@@ -26,9 +30,9 @@ const Main = () => {
         <MainTab>
           <TabButton
             activeTab={activeTab}
-            id="0"
+            tabName="RATES"
             onClick={() => {
-              tabMenuHandle('0');
+              tabMenuHandle('RATES');
             }}
           >
             <Text>인기 맥주 TOP 12</Text>
@@ -36,9 +40,9 @@ const Main = () => {
           <Text> &nbsp;/&nbsp; </Text>
           <TabButton
             activeTab={activeTab}
-            id="1"
+            tabName="PREFERENCE"
             onClick={() => {
-              tabMenuHandle('1');
+              tabMenuHandle('PREFERENCE');
             }}
           >
             <Text>추천 맥주 리스트</Text>

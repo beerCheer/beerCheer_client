@@ -19,10 +19,12 @@ const List = () => {
     per_page: LIST_PER_PAGE,
     isPreferenceOrRateChecked: true,
   });
-
   const { data: searchList } = useSearchBeer({ name: `${search}` });
 
   const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page) ?? []), [beersData]);
+  const beers = useMemo(() => (search ? searchList : beerList), [beerList, searchList, search]);
+
+  console.log(beers);
 
   useEffect(() => {
     if (visible && !isLoading) {
@@ -42,31 +44,16 @@ const List = () => {
       )}
 
       <ListContent>
-        {search
-          ? searchList?.map((item: IBeer) => {
-              return (
-                <React.Fragment key={item.id}>
-                  <Beer
-                    onClick={() => router.push(`/${item.id}`)}
-                    name={item.name}
-                    rate={item.avg}
-                    imageUrl={item.image_url}
-                  />
-                </React.Fragment>
-              );
-            })
-          : beerList?.map((item: IBeer) => {
-              return (
-                <React.Fragment key={item.id}>
-                  <Beer
-                    onClick={() => router.push(`/${item.id}`)}
-                    name={item.name}
-                    rate={item.avg}
-                    imageUrl={item.image_url}
-                  />
-                </React.Fragment>
-              );
-            })}
+        {beers?.map((item: IBeer) => (
+          <React.Fragment key={item.id}>
+            <Beer
+              onClick={() => router.push(`/${item.id}`)}
+              name={item.name}
+              rate={item.avg}
+              imageUrl={item.image_url}
+            />
+          </React.Fragment>
+        ))}
 
         <div ref={ref} />
       </ListContent>

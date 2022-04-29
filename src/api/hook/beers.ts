@@ -5,6 +5,7 @@ import { useQuery, useInfiniteQuery } from 'react-query';
 const QUERY_KEY = {
   BEERS: 'BEERS',
   COMMENTS: 'COMMENTS',
+  RATES: 'RATES',
 };
 
 export const useAllBeers = ({ page = 1, per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
@@ -33,7 +34,7 @@ export const useBeer = ({ id, beerId }: IRequestBeer) => {
 };
 
 export const useRatesBeer = () => {
-  return useQuery([QUERY_KEY.BEERS], () => getRatesBeer());
+  return useQuery([QUERY_KEY.BEERS, QUERY_KEY.RATES], () => getRatesBeer());
 };
 
 export const useSearchBeer = ({ name }: IRequestSearchBeer) => {
