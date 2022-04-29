@@ -6,6 +6,7 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -24,6 +25,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <ThemeProvider theme={theme}>
         <RecoilRoot>
           <Global styles={global} /> {getLayout(<Component {...pageProps} />)}

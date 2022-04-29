@@ -12,17 +12,34 @@ import {
   ProfileImage,
   Section,
 } from '../../styles/mypage';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userIdState } from '../../recoils/atoms/users';
-import { useUser } from '../../api/hook/users';
+import { USER_QUERY_KEY, useUser } from '../../api/hook/users';
+import theme from '../../styles/theme';
+import { useQueryClient } from 'react-query';
+import { logout } from '../../api/fetcher/users';
 
-const background = '#F8F7F5';
-const tertiary = '#F0E5CF';
 const Mypage = () => {
+  const queryClient = useQueryClient();
   const userId = useRecoilValue(userIdState);
+  const resetUserId = useResetRecoilState(userIdState);
   const { data } = useUser(userId as number);
   const router = useRouter();
 
+  const handleLogout = async () => {
+    async function logoutUser() {
+      try {
+        await logout();
+        resetUserId();
+        queryClient.removeQueries(USER_QUERY_KEY.USERS);
+      } catch (error) {
+        alert('로그아웃에 실패했습니다. 다시 시도해 주세요.');
+      }
+      router.replace('/');
+    }
+
+    logoutUser();
+  };
   return (
     <Section>
       <ProfileContainer>
@@ -33,12 +50,15 @@ const Mypage = () => {
           <Button
             primary
             size="small"
-            color={tertiary}
+            color={theme.color.tertiary}
             onClick={() => {
               router.push('/mypage/profile');
             }}
           >
             프로필 수정
+          </Button>
+          <Button primary size="small" color={theme.color.tertiary} onClick={handleLogout}>
+            로그아웃
           </Button>
         </ProfileDescription>
       </ProfileContainer>
@@ -46,7 +66,7 @@ const Mypage = () => {
         <Button
           primary
           block
-          color={background}
+          color={theme.color['bg-color']}
           size="large"
           onClick={() => {
             router.push('/mypage/beers');
@@ -57,7 +77,7 @@ const Mypage = () => {
         <Button
           primary
           block
-          color={background}
+          color={theme.color['bg-color']}
           size="large"
           onClick={() => {
             router.push('/mypage/comments');
@@ -68,7 +88,7 @@ const Mypage = () => {
         <Button
           primary
           block
-          color={background}
+          color={theme.color['bg-color']}
           size="large"
           onClick={() => {
             router.push('/mypage/rates');
@@ -79,7 +99,7 @@ const Mypage = () => {
         <Button
           primary
           block
-          color={background}
+          color={theme.color['bg-color']}
           size="large"
           onClick={() => {
             router.push('/mypage/recommend');

@@ -10,7 +10,7 @@ const QUERY_KEY = {
 
 export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, per_page, isPreferenceOrRateChecked],
+    [QUERY_KEY.BEERS, { per_page, isPreferenceOrRateChecked }],
     ({ pageParam }) => getAllBeers({ page: pageParam, per_page, isPreferenceOrRateChecked }),
     {
       getNextPageParam: lastPage => {
@@ -23,7 +23,7 @@ export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAll
 
 export const useBeerComments = ({ beerId, per_page }: IRequestBeerComments) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, beerId, per_page],
+    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, { beerId, per_page }],
     ({ pageParam }) => getBeerComments({ beerId, page: pageParam, per_page }),
     {
       getNextPageParam: lastPage => {
@@ -36,7 +36,7 @@ export const useBeerComments = ({ beerId, per_page }: IRequestBeerComments) => {
 };
 
 export const useBeer = ({ id, beerId }: IRequestBeer) => {
-  return useQuery([QUERY_KEY.BEERS, id, beerId], () => getBeer({ id, beerId }), {
+  return useQuery([QUERY_KEY.BEERS, { id, beerId }], () => getBeer({ id, beerId }), {
     enabled: !!beerId,
   });
 };
@@ -46,5 +46,5 @@ export const useRatesBeer = () => {
 };
 
 export const useSearchBeer = ({ name }: IRequestSearchBeer) => {
-  return useQuery([QUERY_KEY.BEERS, name], () => getSearchBeer({ name }));
+  return useQuery([QUERY_KEY.BEERS, { name }], () => getSearchBeer({ name }));
 };
