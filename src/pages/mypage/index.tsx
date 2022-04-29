@@ -12,18 +12,24 @@ import {
   ProfileImage,
   Section,
 } from '../../styles/mypage';
+import { useRecoilValue } from 'recoil';
+import { userIdState } from '../../recoils/atoms/users';
+import { useUser } from '../../api/hook/users';
 
 const background = '#F8F7F5';
 const tertiary = '#F0E5CF';
 const Mypage = () => {
+  const userId = useRecoilValue(userIdState);
+  if (!userId) return null;
+  const { data } = useUser(userId);
   const router = useRouter();
   return (
     <Section>
       <ProfileContainer>
         <ProfileImage src="https://picsum.photos/200" alt="" />
         <ProfileDescription>
-          <Nickname>닉네임우하하</Nickname>
-          <Email>mail@email.com</Email>
+          <Nickname>{data?.nickname}</Nickname>
+          <Email>{data?.email}</Email>
           <Button
             primary
             size="small"
