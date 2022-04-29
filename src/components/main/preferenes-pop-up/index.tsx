@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 const PreferenesModal = () => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = React.useState<boolean>(true);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   const onClose = () => {
     setIsOpen(prev => !prev);

@@ -87,3 +87,8 @@ export interface IRequestBeer {
   id?: number;
   beerId: number;
 }
+
+export interface IRequestSearchBeer {
+  id?: number;
+  name: string;
+}

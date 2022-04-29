@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 interface activeTabProps {
   activeTab?: string;
-  id?: string;
+  tabName?: string;
 }
 
 export const MainContainer = styled.div`
@@ -28,7 +28,7 @@ export const TabButton = styled.button<activeTabProps>`
   background: none;
   outline: none;
   border: none;
-  color: ${props => (props.activeTab === props.id ? 'black' : '#CBCBCB')};
+  color: ${props => (props.activeTab === props.tabName ? 'black' : '#CBCBCB')};
   cursor: pointer;
 `;
 

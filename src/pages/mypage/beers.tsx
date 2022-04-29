@@ -12,7 +12,7 @@ const Beers = () => {
       <Title>나의 맥주 창고</Title>
       <ListContent>
         {Data.map((item: DummyProps) => {
-          return <Beer key={item.id} name={item.name} score={item.score} imageUrl={item.imageUrl} />;
+          return <Beer key={item.id} name={item.name} rate={item.score} imageUrl={item.imageUrl} />;
         })}
       </ListContent>
     </Section>
