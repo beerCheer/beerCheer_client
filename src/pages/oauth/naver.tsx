@@ -3,17 +3,22 @@ import { useRouter } from 'next/router';
 
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { loginNaver } from '../../api/fetcher/user';
+import { loginNaver } from '../../api/fetcher/users';
 import { SITE_URL } from '../../constants';
-import { loginState, userInfoState } from '../../recoils/login';
+import { userIdState } from '../../recoils/atoms/users';
 
-const OauthNaver = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const setUserInfoState = useSetRecoilState(userInfoState);
-  const setLoignState = useSetRecoilState(loginState);
+const OauthNaver = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const setuserIdState = useSetRecoilState(userIdState);
   const router = useRouter();
+
   useEffect(() => {
-    setUserInfoState(user);
-    setLoignState(true);
+    async function loginWithNaver() {
+      const user = await loginNaver(data);
+      setuserIdState(user.id);
+    }
+
+    loginWithNaver();
+
     router.replace('/');
   }, []);
   return <div />;
@@ -31,22 +36,9 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     state: state as string,
   };
 
-  try {
-    const res = await loginNaver(data);
-
-    return {
-      props: {
-        user: res,
-      },
-    };
-  } catch (e) {
-    console.log(e);
-  }
-
   return {
-    redirect: {
-      destination: '/',
-      permanent: false,
+    props: {
+      data,
     },
   };
 };

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { IComment } from '../../../api/types/beers';
-import { loginPopupState, loginState } from '../../../recoils/login';
+import { loginPopupState } from '../../../recoils/atoms/users';
+import { loginState } from '../../../recoils/selector/users';
 import { EmptyFallback } from '../../../styles/mypage/rates';
 import { dateFormat } from '../../../utils/dateFormat';
 import EmptyIcon from '../../common/@Icons/emptyIcon';
@@ -20,7 +21,7 @@ const DetailComments = ({ datas }: { datas: any }) => {
         <Title>한줄평</Title>
         <Button
           onClick={() => {
-            if (isLogin) setInputOpen(_prev => !_prev);
+            if (!!isLogin) setInputOpen(_prev => !_prev);
             else setLoginPopupState(true);
           }}
         >
