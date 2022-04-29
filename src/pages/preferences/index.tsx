@@ -21,7 +21,7 @@ import { flatten } from 'lodash';
 
 const Preferences = () => {
   const router = useRouter();
-  const [selectedBeers, setSelectedBeers] = useState<string[]>([]);
+  const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([]);
 
   const getPreferenceBeer = () => {
     //TODO : 선호하는 맥주 리스트 받아오기
@@ -32,15 +32,15 @@ const Preferences = () => {
   const { data: beersData, isLoading } = usePreferenceBeers({ isPreferenceOrRateChecked: false });
   const beerList = beersData ?? [];
 
-  const handleSelectedBeer = (id: string) => {
-    const selected: boolean = selectedBeers.includes(id);
+  const handleSelectedBeer = (beer: IBeer) => {
+    const selected: boolean = selectedBeers.some(selected => selected.id === beer.id);
 
     if (selected) {
-      const unCheck = selectedBeers.filter(el => el !== id);
+      const unCheck = selectedBeers.filter(selected => beer.id !== selected.id);
       setSelectedBeers(() => unCheck);
     } else {
       if (selectedBeers.length < 3) {
-        setSelectedBeers(prev => [...prev, id]);
+        setSelectedBeers(prev => [...prev, beer]);
       }
     }
   };
@@ -63,8 +63,8 @@ const Preferences = () => {
           return (
             <BeerWrapper
               key={item.id}
-              selected={selectedBeers.includes(String(item.id))}
-              onClick={() => handleSelectedBeer(String(item.id))}
+              selected={selectedBeers.some(selected => selected.id === item.id)}
+              onClick={() => handleSelectedBeer(item)}
             >
               <Beer name={item.name} rate={item.avg} imageUrl={item.image_url} />
             </BeerWrapper>
