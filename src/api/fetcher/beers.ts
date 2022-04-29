@@ -4,10 +4,11 @@ import {
   IRequestAllBeers,
   IBeer,
   IRequestBeerComments,
-  IResponseBeerComments,
   IRequestBeer,
   IResponseBeer,
   IRequestSearchBeer,
+  IRequestCreateComment,
+  IComment,
 } from './../types/beers/index';
 
 export const getAllBeers = async ({
@@ -27,7 +28,7 @@ export const getAllBeers = async ({
 };
 
 export const getBeerComments = async ({ beerId, page = 1, per_page = COMMENTS_PER_PAGE }: IRequestBeerComments) => {
-  const { data } = await API.get<IPagination<IResponseBeerComments>>(`/beers/${beerId}/comments`, {
+  const { data } = await API.get<IPagination<IComment[]>>(`/beers/${beerId}/comments`, {
     params: {
       page,
       per_page,
@@ -57,4 +58,8 @@ export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
     },
   });
   return data;
+};
+
+export const createComment = async ({ beerId, content }: IRequestCreateComment) => {
+  await API.post(`/beers/${beerId}/comments`, { content });
 };
