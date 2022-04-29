@@ -10,12 +10,12 @@ import {
   IRequestSearchBeer,
 } from './../types/beers/index';
 
-export const getAllBeers = async ({
+export const getAllBeers = async <T>({
   per_page = LIST_PER_PAGE,
   page = 1,
   isPreferenceOrRateChecked,
 }: IRequestAllBeers) => {
-  const { data } = await API.get<IPagination<IBeer[]>>(`/beers`, {
+  const { data } = await API.get<T>(`/beers`, {
     params: {
       page,
       per_page,

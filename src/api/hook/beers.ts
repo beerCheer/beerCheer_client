@@ -1,4 +1,12 @@
-import { IRequestAllBeers, IRequestBeer, IRequestBeerComments, IRequestSearchBeer } from './../types/beers/index';
+import { flatten } from 'lodash';
+import { IPagination } from './../index';
+import {
+  IBeer,
+  IRequestAllBeers,
+  IRequestBeer,
+  IRequestBeerComments,
+  IRequestSearchBeer,
+} from './../types/beers/index';
 import { getAllBeers, getBeer, getBeerComments, getRatesBeer, getSearchBeer } from './../fetcher/beers';
 import { useQuery, useInfiniteQuery } from 'react-query';
 
@@ -6,18 +14,25 @@ const QUERY_KEY = {
   BEERS: 'BEERS',
   COMMENTS: 'COMMENTS',
   RATES: 'RATES',
+  PREFERENCE: 'PREFERENCEs',
 };
 
 export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
   return useInfiniteQuery(
     [QUERY_KEY.BEERS, { per_page, isPreferenceOrRateChecked }],
-    ({ pageParam }) => getAllBeers({ page: pageParam, per_page, isPreferenceOrRateChecked }),
+    ({ pageParam }) => getAllBeers<IPagination<IBeer[]>>({ page: pageParam, per_page, isPreferenceOrRateChecked }),
     {
       getNextPageParam: lastPage => {
         const nextPage = lastPage.page + 1;
         return nextPage > lastPage.totalPages ? undefined : nextPage;
       },
     }
+  );
+};
+
+export const usePreferenceBeers = ({ isPreferenceOrRateChecked }: IRequestAllBeers) => {
+  return useQuery([QUERY_KEY.BEERS, { isPreferenceOrRateChecked }, QUERY_KEY.COMMENTS], () =>
+    getAllBeers<IBeer[]>({ isPreferenceOrRateChecked })
   );
 };
 
