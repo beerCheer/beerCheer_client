@@ -1,18 +1,15 @@
 import React from 'react';
 
-import Modal from '../../common/modal';
+import Modal, { ModalProps } from '../../common/modal';
 import OneBeerIcon from '../../common/@Icons/onebeerIcon';
 import TwoBeerIcon from '../../common/@Icons/twobeerIcon';
 import { ModalContent, Title, ButtonBox, ButtonContainer, Icon } from './styled';
 import { useRouter } from 'next/router';
 
-const PreferenesModal = () => {
-  const router = useRouter();
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+type PreferenesModalProps = Omit<ModalProps, 'children'>;
 
-  const onClose = () => {
-    setIsOpen(prev => !prev);
-  };
+const PreferenesModal = ({ isOpen, onClose }: PreferenesModalProps) => {
+  const router = useRouter();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
