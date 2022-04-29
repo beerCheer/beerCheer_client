@@ -13,3 +13,7 @@ export const getUserInfo = async (id: number) => {
 
   return data;
 };
+
+export const logout = async () => {
+  await API.post('/users/logout');
+};
