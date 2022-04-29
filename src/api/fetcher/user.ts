@@ -7,3 +7,8 @@ export const loginNaver = async (requestDataLoginNaver: IRequestLoginNaver) => {
 
   return data;
 };
+
+export const getUserInfo = async () => {
+  const { data } = await API.get('/user');
+  return data;
+};

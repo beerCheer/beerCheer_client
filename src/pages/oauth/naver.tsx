@@ -5,15 +5,14 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginNaver } from '../../api/fetcher/user';
 import { SITE_URL } from '../../constants';
-import { loginState, userInfoState } from '../../recoils/login';
+import { userIdState } from '../../recoils/atoms/users';
 
 const OauthNaver = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const setUserInfoState = useSetRecoilState(userInfoState);
-  const setLoignState = useSetRecoilState(loginState);
+  const setuserIdState = useSetRecoilState(userIdState);
   const router = useRouter();
   useEffect(() => {
-    setUserInfoState(user);
-    setLoignState(true);
+    setuserIdState(user.id);
+
     router.replace('/');
   }, []);
   return <div />;

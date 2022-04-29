@@ -6,9 +6,10 @@ import LogoIcon from '../@Icons/logoIcon';
 import LoginIcon from '../@Icons/loginIcon';
 import SearchBar from '../searchbar/searchBar';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { loginPopupState, loginState } from '../../../recoils/login';
+import { loginPopupState } from '../../../recoils/atoms/users';
 import LoginPopUp from '../../login/login-pop-up';
 import Button from '../button';
+import { loginState } from '../../../recoils/selector/users';
 
 const Header = () => {
   const { pathname, push } = useRouter();

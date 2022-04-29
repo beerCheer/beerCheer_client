@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { NAVER_CLIENT_ID, NAVER_REDIRECT_URL } from '../../../constants';
-import { loginPopupState } from '../../../recoils/login';
+import { loginPopupState } from '../../../recoils/atoms/users';
 import AnimatedLogoIcon from '../../common/@Icons/animated-logo/animatedLogoIcon';
 import KakaoIcon from '../../common/@Icons/kakaoIcon';
 import NaverIcon from '../../common/@Icons/naverIcon';
