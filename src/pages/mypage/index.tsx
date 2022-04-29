@@ -20,9 +20,9 @@ const background = '#F8F7F5';
 const tertiary = '#F0E5CF';
 const Mypage = () => {
   const userId = useRecoilValue(userIdState);
-  if (!userId) return null;
-  const { data } = useUser(userId);
+  const { data } = useUser(userId as number);
   const router = useRouter();
+
   return (
     <Section>
       <ProfileContainer>
