@@ -23,7 +23,7 @@ const Detail = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data: commentsData, isLoading, fetchNextPage, hasNextPage } = useBeerComments({ beerId: Number(id) });
-  const comments = useMemo(() => flatten(commentsData?.pages?.map(page => page.rows) ?? []), [commentsData]);
+  const comments = useMemo(() => flatten(commentsData?.pages?.map(page => page.result) ?? []), [commentsData]);
   const { data: beerData } = useBeer({ beerId: Number(id) });
   const beer = beerData?.beer;
   const rate = beerData?.rate;

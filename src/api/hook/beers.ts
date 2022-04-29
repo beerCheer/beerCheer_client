@@ -13,7 +13,10 @@ export const useAllBeers = ({ page = 1, per_page, isPreferenceOrRateChecked }: I
     [QUERY_KEY.BEERS, page, per_page, isPreferenceOrRateChecked],
     ({ pageParam }) => getAllBeers({ page: pageParam, per_page, isPreferenceOrRateChecked }),
     {
-      getNextPageParam: () => {},
+      getNextPageParam: lastPage => {
+        const nextPage = lastPage.page + 1;
+        return nextPage > lastPage.totalPages ? undefined : nextPage;
+      },
     }
   );
 };

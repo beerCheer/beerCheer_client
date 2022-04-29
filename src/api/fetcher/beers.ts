@@ -10,7 +10,7 @@ import {
 } from './../types/beers/index';
 
 export const getAllBeers = async ({ per_page, page = 1, isPreferenceOrRateChecked }: IRequestAllBeers) => {
-  const { data } = await API.get<IBeer[]>(`/beers`, {
+  const { data } = await API.get<IPagination<IBeer[]>>(`/beers`, {
     params: {
       page,
       per_page,

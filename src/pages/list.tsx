@@ -24,7 +24,7 @@ const List = () => {
     isPreferenceOrRateChecked: true,
   });
 
-  const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page) ?? []), [beersData]);
+  const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page.result) ?? []), [beersData]);
 
   useEffect(() => {
     if (visible && !isLoading) {
