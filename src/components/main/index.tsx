@@ -22,14 +22,21 @@ const Main = () => {
   const setLoginPopup = useSetRecoilState(loginPopupState);
   const userId = useRecoilValue(userIdState);
   const { data: user } = useUser(userId as number);
-
-  const tabMenuHandle = (tabName: string): void => {
+  const onClickRecommendList = (tabName: string): void => {
     if (!userId) {
       setLoginPopup(true);
     } else if (user && user.isPreferenceOrRateChecked) {
       setActiveTab(tabName);
     } else {
       setPreferencePopupOpen(true);
+    }
+  };
+
+  const handleOnClickTabMenu = (tabName: string) => {
+    if (tabName === homeTabs.PREFERENCE) {
+      onClickRecommendList(tabName);
+    } else {
+      setActiveTab(tabName);
     }
   };
 
@@ -43,7 +50,7 @@ const Main = () => {
             activeTab={activeTab}
             tabName={homeTabs.RATES}
             onClick={() => {
-              tabMenuHandle(homeTabs.RATES);
+              handleOnClickTabMenu(homeTabs.RATES);
             }}
           >
             <Text>인기 맥주 TOP 12</Text>
@@ -53,7 +60,7 @@ const Main = () => {
             activeTab={activeTab}
             tabName={homeTabs.PREFERENCE}
             onClick={() => {
-              tabMenuHandle(homeTabs.PREFERENCE);
+              handleOnClickTabMenu(homeTabs.PREFERENCE);
             }}
           >
             <Text>추천 맥주 리스트</Text>

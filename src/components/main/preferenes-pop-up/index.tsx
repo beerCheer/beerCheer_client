@@ -23,7 +23,7 @@ const PreferenesModal = ({ isOpen, onClose }: PreferenesModalProps) => {
               <OneBeerIcon />
             </Icon>
           </ButtonContainer>
-          <ButtonContainer>
+          <ButtonContainer onClick={() => router.push('/list')}>
             맥주 전체리스트 <br />
             보러가기
             <Icon>
