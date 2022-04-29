@@ -19,8 +19,8 @@ export interface IResponseBeerComments {
 }
 
 export interface IRequestAllBeers {
-  page: number;
-  per_page: number;
+  page?: number;
+  per_page?: number;
   isPreferenceOrRateChecked: boolean;
 }
 
@@ -91,4 +91,9 @@ export interface IRequestBeer {
 export interface IResponseBeer {
   beer: IBeer;
   rate: string;
+}
+
+export interface IRequestSearchBeer {
+  id?: number;
+  name: string;
 }

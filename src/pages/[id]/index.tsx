@@ -22,7 +22,7 @@ const BEER_EMOJI = '🍺';
 const Detail = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { data: commentsData, isLoading, fetchNextPage, hasNextPage } = useBeerComments({ beerId: Number(id) });
+  const { data: commentsData, isFetched, fetchNextPage, hasNextPage } = useBeerComments({ beerId: Number(id) });
   const comments = useMemo(() => flatten(commentsData?.pages?.map(page => page.result) ?? []), [commentsData]);
   const { data: beerData } = useBeer({ beerId: Number(id) });
   const beer = beerData?.beer;
@@ -30,10 +30,10 @@ const Detail = () => {
   const [ref, inView] = useInView();
 
   useEffect(() => {
-    if (inView && !isLoading && hasNextPage) {
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, isLoading]);
+  }, [inView, hasNextPage]);
 
   if (!beer) return null;
   return (
@@ -57,7 +57,7 @@ const Detail = () => {
         </BeerInfoContainer>
       </BeerContainer>
       <DetailComments datas={comments} />
-      <div ref={ref} />
+      {isFetched && <div ref={ref} />}
     </Section>
   );
 };

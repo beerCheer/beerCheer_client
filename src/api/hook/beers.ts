@@ -1,16 +1,16 @@
-import { IRequestAllBeers, IRequestBeer, IRequestBeerComments } from './../types/beers/index';
-import { getAllBeers, getBeer, getBeerComments } from './../fetcher/beers';
+import { IRequestAllBeers, IRequestBeer, IRequestBeerComments, IRequestSearchBeer } from './../types/beers/index';
+import { getAllBeers, getBeer, getBeerComments, getRatesBeer, getSearchBeer } from './../fetcher/beers';
 import { useQuery, useInfiniteQuery } from 'react-query';
 
 const QUERY_KEY = {
   BEERS: 'BEERS',
   COMMENTS: 'COMMENTS',
+  RATES: 'RATES',
 };
 
-export const useAllBeers = ({ page = 1, per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
-  // back api 수정 필요
+export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, page, per_page, isPreferenceOrRateChecked],
+    [QUERY_KEY.BEERS, per_page, isPreferenceOrRateChecked],
     ({ pageParam }) => getAllBeers({ page: pageParam, per_page, isPreferenceOrRateChecked }),
     {
       getNextPageParam: lastPage => {
@@ -23,7 +23,7 @@ export const useAllBeers = ({ page = 1, per_page, isPreferenceOrRateChecked }: I
 
 export const useBeerComments = ({ beerId, per_page }: IRequestBeerComments) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, beerId],
+    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, beerId, per_page],
     ({ pageParam }) => getBeerComments({ beerId, page: pageParam, per_page }),
     {
       getNextPageParam: lastPage => {
@@ -39,4 +39,12 @@ export const useBeer = ({ id, beerId }: IRequestBeer) => {
   return useQuery([QUERY_KEY.BEERS, id, beerId], () => getBeer({ id, beerId }), {
     enabled: !!beerId,
   });
+};
+
+export const useRatesBeer = () => {
+  return useQuery([QUERY_KEY.BEERS, QUERY_KEY.RATES], () => getRatesBeer());
+};
+
+export const useSearchBeer = ({ name }: IRequestSearchBeer) => {
+  return useQuery([QUERY_KEY.BEERS, name], () => getSearchBeer({ name }));
 };
