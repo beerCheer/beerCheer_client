@@ -7,22 +7,21 @@ import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/
 import { userIdState, userNicknameState } from '../../recoils/atoms/users';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { handleNicknameSubmit, nicknameCheck } from '../../api/fetcher/users';
+import NicknamePopup from '../../components/mypage/mypage-pop-up';
 
 const Profile = () => {
   const userId = useRecoilValue(userIdState);
   const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
   const { data } = useUser(userId as number);
-  const [nickname, setNickname] = useState<string | undefined>(userNickname);
-  const [error, setError] = useState(false);
-
-  const changeNickname = (e: string): void => {
-    setNickname(() => e);
-  };
+  const [nickname, setNickname] = useState<string>(userNickname);
+  const [error, setError] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleInfoSubmit = () => {
     handleNicknameSubmit(nickname);
     setUserNickname(nickname);
-    setError(true);
+    setError(() => true);
+    setIsOpen(() => true);
   };
 
   useEffect(() => {
@@ -34,7 +33,6 @@ const Profile = () => {
   return (
     <Section>
       <Title>프로필 수정</Title>
-
       <section>
         <StyledForm
           onSubmit={e => {
@@ -46,7 +44,7 @@ const Profile = () => {
             id="nickname"
             value={nickname}
             label="별명"
-            handleOnChange={changeNickname}
+            handleOnChange={(value: string) => setNickname(() => value)}
             errorMessage={error && '이미 등록된 별명입니다'}
           />
           <ResignButtonContainer>
@@ -65,6 +63,7 @@ const Profile = () => {
           </Button>
         </StyledForm>
       </section>
+      <NicknamePopup onClose={() => setIsOpen(false)} isOpen={isOpen} />
     </Section>
   );
 };
