@@ -13,3 +13,9 @@ export const userIdState = atom<number | null>({
   default: null,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const userNicknameState = atom<string | undefined>({
+  key: 'userNicknameState',
+  default: undefined,
+  effects_UNSTABLE: [persistAtom],
+});

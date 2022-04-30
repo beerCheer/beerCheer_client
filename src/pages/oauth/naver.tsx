@@ -5,16 +5,19 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginNaver } from '../../api/fetcher/users';
 import { SITE_URL } from '../../constants';
-import { userIdState } from '../../recoils/atoms/users';
+import { userIdState, userNicknameState } from '../../recoils/atoms/users';
 
 const OauthNaver = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const setuserIdState = useSetRecoilState(userIdState);
+  const setuserNicknameState = useSetRecoilState(userNicknameState);
+
   const router = useRouter();
 
   useEffect(() => {
     async function loginWithNaver() {
       const user = await loginNaver(data);
       setuserIdState(user.id);
+      setuserNicknameState(user.nickname);
     }
 
     loginWithNaver();

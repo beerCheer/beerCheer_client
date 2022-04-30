@@ -40,6 +40,7 @@ const Mypage = () => {
 
     logoutUser();
   };
+
   return (
     <Section>
       <ProfileContainer>

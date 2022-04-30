@@ -11,3 +11,7 @@ export interface IRequestLogin {
   state?: string;
   redirectUri: string;
 }
+
+// export interface IRequestNickName {
+//   nickname: string;
+// }

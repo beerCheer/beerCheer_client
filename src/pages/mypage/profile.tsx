@@ -1,15 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useUser } from '../../api/hook/users';
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
 import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
+import { userIdState, userNicknameState } from '../../recoils/atoms/users';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { handleNicknameSubmit, nicknameCheck } from '../../api/fetcher/users';
 
 const Profile = () => {
-  const [user, setUser] = useState({
-    id: '1',
-    email: 'user@email.com',
-    nickname: '기존닉네임',
-  });
+  const userId = useRecoilValue(userIdState);
+  const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
+  const { data } = useUser(userId as number);
+  const [nickname, setNickname] = useState<string | undefined>(userNickname);
+  const [error, setError] = useState(false);
+
+  const changeNickname = (e: string): void => {
+    setNickname(() => e);
+  };
+
+  const handleInfoSubmit = () => {
+    handleNicknameSubmit(nickname);
+    setUserNickname(nickname);
+    setError(true);
+  };
+
+  useEffect(() => {
+    nicknameCheck(nickname as string).then(res => {
+      res.message === '사용중인 닉네임' ? setError(true) : setError(false);
+    });
+  }, [nickname]);
 
   return (
     <Section>
@@ -19,16 +39,15 @@ const Profile = () => {
         <StyledForm
           onSubmit={e => {
             e.preventDefault();
-            alert('닉네임변경');
           }}
         >
-          <TextInput id="email" value={user?.email} label="이메일" disabled />
+          <TextInput id="email" value={data?.email} label="이메일" disabled />
           <TextInput
             id="nickname"
-            value={user?.nickname}
+            value={nickname}
             label="별명"
-            handleOnChange={() => {}}
-            errorMessage={'이미 등록된 별명입니다'}
+            handleOnChange={changeNickname}
+            errorMessage={error && '이미 등록된 별명입니다'}
           />
           <ResignButtonContainer>
             <Button
@@ -41,7 +60,7 @@ const Profile = () => {
             </Button>
           </ResignButtonContainer>
 
-          <Button type="submit" primary block size="large">
+          <Button type="submit" primary block size="large" disabled={error} onClick={handleInfoSubmit}>
             저장하기
           </Button>
         </StyledForm>

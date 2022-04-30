@@ -18,8 +18,18 @@ export const loginKakao = async (requestDataLoginKakao: IRequestLogin) => {
   const { data } = await API.post<IUser>(`/kakao`, requestDataLoginKakao);
 
   return data;
-}
+};
 
 export const logout = async () => {
   await API.post('/users/logout');
+};
+
+export const nicknameCheck = async (nickname: string) => {
+  const { data } = await API.post('/users/userInfo', { nickname });
+
+  return data;
+};
+
+export const handleNicknameSubmit = async (nickname: string | undefined) => {
+  await API.patch('/users/userInfo', { nickname });
 };
