@@ -15,13 +15,13 @@ const Profile = () => {
   const { data } = useUser(userId as number);
   const [nickname, setNickname] = useState<string>(userNickname);
   const [error, setError] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [nicknamePopupOpen, setNicknamePopupOpen] = useState<boolean>(false);
 
   const handleInfoSubmit = () => {
     handleNicknameSubmit(nickname);
     setUserNickname(nickname);
     setError(() => true);
-    setIsOpen(() => true);
+    setNicknamePopupOpen(() => true);
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Profile = () => {
           </Button>
         </StyledForm>
       </section>
-      <NicknamePopup onClose={() => setIsOpen(false)} isOpen={isOpen} />
+      <NicknamePopup onClose={() => setNicknamePopupOpen(false)} isOpen={nicknamePopupOpen} />
     </Section>
   );
 };
