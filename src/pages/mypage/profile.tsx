@@ -1,15 +1,38 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useQueryClient } from 'react-query';
+import { useResetRecoilState } from 'recoil';
+import { withdraw } from '../../api/fetcher/users';
+import { USER_QUERY_KEY } from '../../api/hook/users';
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
+import {
+  userIdState,
+  // userNicknameState  /* 머지 완료시 에러 사라짐 */
+} from '../../recoils/atoms/users';
 import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
 
 const Profile = () => {
-  const [user, setUser] = useState({
-    id: '1',
-    email: 'user@email.com',
-    nickname: '기존닉네임',
-  });
+  const queryClient = useQueryClient();
+  const resetUserId = useResetRecoilState(userIdState);
+  // const resetUserNickname = useResetRecoilState(userNicknameState); /* 머지 완료시 에러 사라짐 */
+  const router = useRouter();
+
+  const handleWithdraw = async () => {
+    async function withdrawUser() {
+      try {
+        await withdraw();
+        resetUserId();
+        // resetUserNickname(); /* 머지 완료시 에러 사라짐 */
+        queryClient.removeQueries(USER_QUERY_KEY.USERS);
+      } catch (error) {
+        console.log(error); // TODO : error페이지 이동
+      }
+      router.replace('/');
+    }
+
+    withdrawUser();
+  };
 
   return (
     <Section>
@@ -22,21 +45,10 @@ const Profile = () => {
             alert('닉네임변경');
           }}
         >
-          <TextInput id="email" value={user?.email} label="이메일" disabled />
-          <TextInput
-            id="nickname"
-            value={user?.nickname}
-            label="별명"
-            handleOnChange={() => {}}
-            errorMessage={'이미 등록된 별명입니다'}
-          />
+          <TextInput id="email" label="이메일" disabled />
+          <TextInput id="nickname" label="별명" handleOnChange={() => {}} errorMessage={'이미 등록된 별명입니다'} />
           <ResignButtonContainer>
-            <Button
-              size="small"
-              onClick={() => {
-                alert('회원탈퇴');
-              }}
-            >
+            <Button size="small" onClick={handleWithdraw}>
               회원탈퇴
             </Button>
           </ResignButtonContainer>
