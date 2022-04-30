@@ -1,8 +1,9 @@
+import { IComment, IComments } from '../../../api/types/mypage';
 import { dateFormat } from '../../../utils/dateFormat';
 
 import { BoardHeader, CommentColumn, DateColumn, NameColumn, Row, Contents } from './styled';
 
-const Board = ({ datas }: { datas: any[] }) => {
+const Board = ({ datas }: { datas: IComment[] }) => {
   return (
     <div>
       <BoardHeader>
@@ -12,11 +13,11 @@ const Board = ({ datas }: { datas: any[] }) => {
       </BoardHeader>
 
       <Contents>
-        {datas.map((data: any) => (
-          <Row key={data.id}>
-            <NameColumn>{data.name}</NameColumn>
-            <CommentColumn>{data.comment}</CommentColumn>
-            <DateColumn>{dateFormat(data.createAt)}</DateColumn>
+        {datas?.map((data: IComment, idx /* TODO: idx 바꾸기 */) => (
+          <Row key={idx}>
+            <NameColumn>{data.beerName}</NameColumn>
+            <CommentColumn>{data.content}</CommentColumn>
+            <DateColumn>{dateFormat(data.createdAt)}</DateColumn>
           </Row>
         ))}
       </Contents>
