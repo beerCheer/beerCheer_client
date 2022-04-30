@@ -11,11 +11,6 @@ export const selectedBeersState = atom<string[]>({
   default: [],
 });
 
-export const isLoadingState = atom<boolean>({
-  key: 'isLoadingState',
-  default: false,
-});
-
 export const recommendBeerState = atom<DummyProps[]>({
   key: 'recommendBeerState',
   default: [],

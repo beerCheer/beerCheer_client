@@ -1,8 +1,8 @@
 import { IUser } from '../types/users/index';
 import { API } from '..';
-import { IRequestLoginNaver } from '../types/users';
+import { IRequestLogin } from '../types/users';
 
-export const loginNaver = async (requestDataLoginNaver: IRequestLoginNaver) => {
+export const loginNaver = async (requestDataLoginNaver: IRequestLogin) => {
   const { data } = await API.post<IUser>(`/naver`, requestDataLoginNaver);
 
   return data;
@@ -13,6 +13,12 @@ export const getUserInfo = async (id: number) => {
 
   return data;
 };
+
+export const loginKakao = async (requestDataLoginKakao: IRequestLogin) => {
+  const { data } = await API.post<IUser>(`/kakao`, requestDataLoginKakao);
+
+  return data;
+}
 
 export const logout = async () => {
   await API.post('/users/logout');

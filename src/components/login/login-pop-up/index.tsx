@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
-import { NAVER_CLIENT_ID, NAVER_REDIRECT_URL } from '../../../constants';
+import { KAKAO_REDIRECT_URL, KAKAO_REST_KEY, NAVER_CLIENT_ID, NAVER_REDIRECT_URL } from '../../../constants';
 import { loginPopupState } from '../../../recoils/atoms/users';
 import AnimatedLogoIcon from '../../common/@Icons/animated-logo/animatedLogoIcon';
 import KakaoIcon from '../../common/@Icons/kakaoIcon';
@@ -23,6 +23,13 @@ const LoginPopUp = ({ onClose, isOpen }: LoginPopUpProps) => {
     );
   };
 
+  const handleKakaoLogin = () => {
+    setLoginPopupOpen(false);
+    router.push(
+      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_KEY}&redirect_uri=${KAKAO_REDIRECT_URL}&response_type=code`
+    );
+  };
+
   return (
     <Modal onClose={onClose} isOpen={isOpen} close={true}>
       <ModalContent>
@@ -30,7 +37,7 @@ const LoginPopUp = ({ onClose, isOpen }: LoginPopUpProps) => {
         <ModalDescription>로그인하면 나의 취향에 맞는 맥주를 추천받을 수 있어요!</ModalDescription>
 
         <ButtonContainer>
-          <Button primary color="#FEE500" block>
+          <Button primary color="#FEE500" block onClick={handleKakaoLogin}>
             <KakaoIcon fill="#000" />
             <ButtonText>카카오로 로그인하기</ButtonText>
           </Button>
