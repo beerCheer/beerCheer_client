@@ -30,6 +30,6 @@ export const nicknameCheck = async (nickname: string) => {
   return data;
 };
 
-export const handleNicknameSubmit = async (nickname: string) => {
+export const patchUserInfo = async (nickname: string) => {
   await API.patch('/users/userInfo', { nickname });
 };

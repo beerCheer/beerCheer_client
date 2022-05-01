@@ -1,34 +1,53 @@
-import { useEffect, useState } from 'react';
-import { useUser } from '../../api/hook/users';
+import { useState } from 'react';
+import { useUserQuery } from '../../api/hook/users';
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
 import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
-import { userIdState, userNicknameState } from '../../recoils/atoms/users';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { handleNicknameSubmit, nicknameCheck } from '../../api/fetcher/users';
+import { userIdState } from '../../recoils/atoms/users';
+import { useRecoilValue } from 'recoil';
+import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
 import NicknamePopup from '../../components/mypage/mypage-pop-up';
+import { useMutation, useQueryClient } from 'react-query';
 
 const Profile = () => {
-  const userId = useRecoilValue(userIdState);
-  const [userNickname, setUserNickname] = useRecoilState(userNicknameState);
-  const { data } = useUser(userId as number);
-  const [nickname, setNickname] = useState<string>(userNickname);
-  const [error, setError] = useState<boolean>(false);
+  const [nickname, setNickname] = useState<string>('');
+  const [error, setError] = useState<boolean>(true);
   const [nicknamePopupOpen, setNicknamePopupOpen] = useState<boolean>(false);
 
-  const handleInfoSubmit = () => {
-    handleNicknameSubmit(nickname);
-    setUserNickname(nickname);
-    setError(() => true);
-    setNicknamePopupOpen(() => true);
+  const userId = useRecoilValue(userIdState);
+  const queryClient = useQueryClient();
+
+  const { data } = useUserQuery(userId as number, {
+    onSuccess: data => {
+      setNickname(data.nickname);
+    },
+  });
+
+  const { mutate: patchUserInfoMutate } = useMutation(patchUserInfo, {
+    onSuccess: () => {
+      setError(() => true);
+      setNicknamePopupOpen(() => true);
+      queryClient.invalidateQueries([
+        'USERS',
+        {
+          id: userId,
+        },
+      ]);
+    },
+  });
+
+  const handleInfoSubmit = async () => {
+    patchUserInfoMutate(nickname);
   };
 
-  useEffect(() => {
-    nicknameCheck(nickname as string).then(res => {
+  const validateUserNickname = (value: string) => {
+    setNickname(value);
+    if (!value) return;
+    nicknameCheck(value).then(res => {
       res.message === '사용중인 닉네임' ? setError(true) : setError(false);
     });
-  }, [nickname]);
+  };
 
   return (
     <Section>
@@ -44,7 +63,7 @@ const Profile = () => {
             id="nickname"
             value={nickname}
             label="별명"
-            handleOnChange={(value: string) => setNickname(() => value)}
+            handleOnChange={validateUserNickname}
             errorMessage={error && '이미 등록된 별명입니다'}
           />
           <ResignButtonContainer>

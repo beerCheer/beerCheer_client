@@ -4,11 +4,10 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginKakao } from '../../api/fetcher/users';
 import { SITE_URL } from '../../constants';
-import { userIdState, userNicknameState } from '../../recoils/atoms/users';
+import { userIdState } from '../../recoils/atoms/users';
 
 const OauthKakao = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const setuserIdState = useSetRecoilState(userIdState);
-  const setuserNicknameState = useSetRecoilState(userNicknameState);
 
   const router = useRouter();
 
@@ -16,7 +15,6 @@ const OauthKakao = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
     async function loginWithKakao() {
       const user = await loginKakao(data);
       setuserIdState(user.id);
-      setuserNicknameState(user.nickname);
     }
     loginWithKakao();
 
