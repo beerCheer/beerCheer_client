@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useUserQuery } from '../../api/hook/users';
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
@@ -9,10 +9,18 @@ import { useRecoilValue } from 'recoil';
 import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
 import NicknamePopup from '../../components/mypage/mypage-pop-up';
 import { useMutation, useQueryClient } from 'react-query';
+import _, { debounce } from 'lodash';
+
+interface errorMesageType {
+  unknown: string;
+  isError: string;
+  notError: string;
+  [prop: string]: string;
+}
 
 const Profile = () => {
   const [nickname, setNickname] = useState<string>('');
-  const [error, setError] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
   const [nicknamePopupOpen, setNicknamePopupOpen] = useState<boolean>(false);
 
   const userId = useRecoilValue(userIdState);
@@ -24,10 +32,18 @@ const Profile = () => {
     },
   });
 
+  const errorMessage: errorMesageType = {
+    unknown: '닉네임을 입력해주세요',
+    isError: '이미 등록된 별명입니다',
+    notError: '',
+  };
+
+  Object.freeze(errorMessage);
+
   const { mutate: patchUserInfoMutate } = useMutation(patchUserInfo, {
     onSuccess: () => {
-      setError(() => true);
-      setNicknamePopupOpen(() => true);
+      setError('notError');
+      setNicknamePopupOpen(true);
       queryClient.invalidateQueries([
         'USERS',
         {
@@ -37,16 +53,31 @@ const Profile = () => {
     },
   });
 
-  const handleInfoSubmit = async () => {
+  const handleInfoSubmit = () => {
     patchUserInfoMutate(nickname);
   };
 
-  const validateUserNickname = (value: string) => {
-    setNickname(value);
+  const validateUserNickname = useMemo(
+    () =>
+      _.debounce((value: string) => {
+        nicknameCheck(value).then(res => {
+          res.message === '사용가능한 닉네임' ? setError('notError') : setError('isError');
+        });
+      }, 200),
+
+    []
+  );
+
+  const handleOnChange = async (value: string) => {
+    await setNickname(value);
+
+    if (value === '') {
+      setError('unknown');
+      return;
+    }
     if (!value) return;
-    nicknameCheck(value).then(res => {
-      res.message === '사용중인 닉네임' ? setError(true) : setError(false);
-    });
+
+    validateUserNickname(value);
   };
 
   return (
@@ -63,8 +94,8 @@ const Profile = () => {
             id="nickname"
             value={nickname}
             label="별명"
-            handleOnChange={validateUserNickname}
-            errorMessage={error && '이미 등록된 별명입니다'}
+            handleOnChange={handleOnChange}
+            errorMessage={errorMessage[error]}
           />
           <ResignButtonContainer>
             <Button
@@ -77,7 +108,7 @@ const Profile = () => {
             </Button>
           </ResignButtonContainer>
 
-          <Button type="submit" primary block size="large" disabled={error} onClick={handleInfoSubmit}>
+          <Button type="submit" primary block size="large" disabled={error !== 'notError'} onClick={handleInfoSubmit}>
             저장하기
           </Button>
         </StyledForm>
