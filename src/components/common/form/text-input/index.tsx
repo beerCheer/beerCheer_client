@@ -1,6 +1,6 @@
 import { Label, Input, ErrorMessage } from './styled';
 
-interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: string;
   value?: string;
   id: string;
@@ -12,7 +12,7 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const TextInput = ({ label, value = '', handleOnChange, id, errorMessage, ...props }: TextInputProps) => {
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!handleOnChange) return undefined;
+    if (!handleOnChange) return;
 
     const newValue = event.target.value;
     handleOnChange(newValue);
