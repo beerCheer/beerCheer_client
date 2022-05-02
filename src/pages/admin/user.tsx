@@ -29,7 +29,7 @@ const Admin = () => {
           {AdminDummy.map(el => {
             return (
               <ContentBox key={el.id}>
-                <Text>{el.name}</Text>
+                <div>{el.name}</div>
                 <Text>{el.signUpdate}</Text>
                 <GarbageIcon />
               </ContentBox>

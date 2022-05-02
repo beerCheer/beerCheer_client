@@ -11,12 +11,16 @@ import {
   ArticleContent,
   ArticleTitle,
   ContentBox,
-  Text,
+  SignUpDateColumn,
+  NicknameColumn,
 } from '../../styles/admin';
 import { AdminDummy } from '../../api/dummy';
+import { useUserListQuery } from '../../api/hook/admin';
+import { dateFormat } from '../../utils/dateFormat';
 
 const Admin = () => {
   const router = useRouter();
+  const { data: usersList } = useUserListQuery({ per_page: 10, page: 1 });
 
   return (
     <AdminContainer>
@@ -30,18 +34,29 @@ const Admin = () => {
           </ArticleTitle>
           <ArticleContent>
             <ContentBox>
-              <Text>닉네임</Text>
-              <Text>가입일자</Text>
+              <NicknameColumn>
+                <div>닉네임</div>
+                <UnderLine />
+                {usersList?.rows.map(data => {
+                  return (
+                    <ContentBox key={data.id}>
+                      <div>{data.nickname}</div>
+                    </ContentBox>
+                  );
+                })}
+              </NicknameColumn>
+              <SignUpDateColumn>
+                <div>가입일자</div>
+                <UnderLine />
+                {usersList?.rows.map(data => {
+                  return (
+                    <ContentBox key={data.id}>
+                      <div>{dateFormat(data.createdAt)}</div>
+                    </ContentBox>
+                  );
+                })}
+              </SignUpDateColumn>
             </ContentBox>
-            <UnderLine />
-            {AdminDummy.map(el => {
-              return (
-                <ContentBox key={el.id}>
-                  <Text>{el.name}</Text>
-                  <Text>{el.signUpdate}</Text>
-                </ContentBox>
-              );
-            })}
           </ArticleContent>
         </Article>
         <Article>
@@ -51,16 +66,16 @@ const Admin = () => {
           </ArticleTitle>
           <ArticleContent>
             <ContentBox>
-              <Text>닉네임</Text>
-              <Text>등록일자</Text>
+              <div>닉네임</div>
+              <div>등록일자</div>
             </ContentBox>
             <UnderLine />
 
             {AdminDummy.map(el => {
               return (
                 <ContentBox key={el.id}>
-                  <Text>{el.name}</Text>
-                  <Text>{el.signUpdate}</Text>
+                  <div>{el.name}</div>
+                  <div>{el.signUpdate}</div>
                 </ContentBox>
               );
             })}

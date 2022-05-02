@@ -10,6 +10,8 @@ const AdminContainer = styled.div`
 
 const UnderLine = styled.div`
   border-top: 1px solid #808080;
+  height: 1px;
+  width: 100%;
 `;
 
 const Title = styled.header`
@@ -49,6 +51,29 @@ const ContentBox = styled.div`
   align-items: center;
 `;
 
-const Text = styled.div``;
+const NicknameColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+`;
 
-export { AdminContainer, Title, UnderLine, Section, Article, ArticleContent, ArticleTitle, ContentBox, Text };
+const SignUpDateColumn = styled(NicknameColumn)``;
+
+const Text = styled.div`
+  text-align: right;
+`;
+
+export {
+  AdminContainer,
+  Title,
+  UnderLine,
+  Section,
+  Article,
+  ArticleContent,
+  ArticleTitle,
+  ContentBox,
+  Text,
+  SignUpDateColumn,
+  NicknameColumn,
+};
