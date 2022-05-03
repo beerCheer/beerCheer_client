@@ -20,7 +20,7 @@ import { dateFormat } from '../../utils/dateFormat';
 
 const Admin = () => {
   const router = useRouter();
-  const { data: usersList } = useUserListQuery({ per_page: 10, page: 1 });
+  const { data: userList } = useUserListQuery({ per_page: 10, page: 1 });
 
   return (
     <AdminContainer>
@@ -37,7 +37,7 @@ const Admin = () => {
               <NicknameColumn>
                 <div>닉네임</div>
                 <UnderLine />
-                {usersList?.rows.map(data => {
+                {userList?.rows.map(data => {
                   return (
                     <ContentBox key={data.id}>
                       <div>{data.nickname}</div>
@@ -48,7 +48,7 @@ const Admin = () => {
               <SignUpDateColumn>
                 <div>가입일자</div>
                 <UnderLine />
-                {usersList?.rows.map(data => {
+                {userList?.rows.map(data => {
                   return (
                     <ContentBox key={data.id}>
                       <div>{dateFormat(data.createdAt)}</div>

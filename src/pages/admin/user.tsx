@@ -7,11 +7,14 @@ import Button from '../../components/common/button';
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import { dateFormat } from '../../utils/dateFormat';
+import { deleteUser } from '../../api/fetcher/admin';
+import { useMutation, useQueryClient } from 'react-query';
 
 const Admin = () => {
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
 
+  const queryClient = useQueryClient();
   const { data } = useUserListQuery({
     per_page: 10,
     page,
@@ -21,6 +24,16 @@ const Admin = () => {
       },
     },
   });
+
+  const { mutate: deleteUserMutation } = useMutation(deleteUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['USERLIST', page]);
+    },
+  });
+
+  const handleUserWithdraw = (id: number) => {
+    deleteUserMutation(id);
+  };
 
   return (
     <Container>
@@ -32,17 +45,15 @@ const Admin = () => {
             <th>가입일자</th>
             <th>유저탈퇴</th>
           </Tr>
-          {data?.rows?.map(data => {
-            return (
-              <tr key={data.id}>
-                <Td>{data.nickname}</Td>
-                <Td>{dateFormat(data.createdAt)}</Td>
-                <Td>
-                  <GarbageIcon />
-                </Td>
-              </tr>
-            );
-          })}
+          {data?.rows?.map(data => (
+            <tr key={data.id}>
+              <Td>{data.nickname}</Td>
+              <Td>{dateFormat(data.createdAt)}</Td>
+              <Td>
+                <GarbageIcon onClick={() => handleUserWithdraw(data.id)} />
+              </Td>
+            </tr>
+          ))}
         </table>
       </Section>
       <PageContent>

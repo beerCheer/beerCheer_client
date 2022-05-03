@@ -11,3 +11,7 @@ export const getUserList = async ({ page, per_page }: IRequestUserList) => {
 
   return data;
 };
+
+export const deleteUser = async (id?: number) => {
+  await API.delete(`/users?id=${id}`);
+};
