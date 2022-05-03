@@ -1,3 +1,5 @@
+import { UseQueryOptions } from 'react-query';
+
 export interface IUser {
   id: number;
   nickname: string;
@@ -12,4 +14,5 @@ export interface IUserList {
 export interface IRequestUserList {
   page?: number;
   per_page?: number;
+  options?: UseQueryOptions<IUserList, any, IUserList, any>;
 }

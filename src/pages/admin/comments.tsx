@@ -1,15 +1,6 @@
 import React from 'react';
 import HomeLayout from '../../components/common/layout/layout';
-import {
-  Container,
-  Title,
-  UnderLine,
-  Section,
-  SectionTitle,
-  SectionContent,
-  Text,
-  ContentBox,
-} from '../../styles/admin/user';
+import { Container, Title } from '../../styles/admin/user';
 import { AdminDummy } from '../../api/dummy';
 import GarbageIcon from '../../components/common/@Icons/garbageIcon';
 
@@ -17,7 +8,7 @@ const Comments = () => {
   return (
     <Container>
       <Title>어드민페이지_댓글관리</Title>
-      <UnderLine />
+      {/* <UnderLine />
       <Section>
         <SectionTitle>
           <Text>닉네임</Text>
@@ -36,7 +27,7 @@ const Comments = () => {
             );
           })}
         </SectionContent>
-      </Section>
+      </Section> */}
     </Container>
   );
 };

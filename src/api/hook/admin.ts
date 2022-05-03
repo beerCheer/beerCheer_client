@@ -7,8 +7,9 @@ export const ADMIN_QUERY_KEY = {
   COMMENTSLIST: 'COMMENTSLIST',
 };
 
-export const useUserListQuery = ({ per_page = 10, page = 1 }: IRequestUserList) => {
+export const useUserListQuery = ({ per_page = 10, page = 1, options }: IRequestUserList) => {
   return useQuery([ADMIN_QUERY_KEY.USERSLIST, page], () => getUserList({ page, per_page }), {
     keepPreviousData: true,
+    ...options,
   });
 };
