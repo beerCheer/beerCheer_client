@@ -40,20 +40,24 @@ const Admin = () => {
       <Title>어드민페이지_유저관리</Title>
       <Section>
         <table>
-          <Tr header>
-            <th>닉네임</th>
-            <th>가입일자</th>
-            <th>유저탈퇴</th>
-          </Tr>
-          {data?.rows?.map(data => (
-            <tr key={data.id}>
-              <Td>{data.nickname}</Td>
-              <Td>{dateFormat(data.createdAt)}</Td>
-              <Td>
-                <GarbageIcon onClick={() => handleUserWithdraw(data.id)} />
-              </Td>
-            </tr>
-          ))}
+          <thead>
+            <Tr header>
+              <th>닉네임</th>
+              <th>가입일자</th>
+              <th>유저탈퇴</th>
+            </Tr>
+          </thead>
+          <tbody>
+            {data?.rows?.map(data => (
+              <tr key={data.id}>
+                <Td>{data.nickname}</Td>
+                <Td>{dateFormat(data.createdAt)}</Td>
+                <Td>
+                  <GarbageIcon onClick={() => handleUserWithdraw(data.id)} />
+                </Td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </Section>
       <PageContent>
