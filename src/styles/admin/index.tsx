@@ -30,7 +30,7 @@ const Article = styled.article`
   flex-direction: column;
   background-color: #f3f3f3;
   padding: 20px;
-  min-height: calc(100vh - 225px);
+  min-height: calc(100vh - 300px);
 `;
 
 const ArticleTitle = styled.h1`
@@ -39,41 +39,4 @@ const ArticleTitle = styled.h1`
   font-size: 18px;
 `;
 
-const ArticleContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px 0px;
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-const NicknameColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-`;
-
-const SignUpDateColumn = styled(NicknameColumn)``;
-
-const Text = styled.div`
-  text-align: right;
-`;
-
-export {
-  AdminContainer,
-  Title,
-  UnderLine,
-  Section,
-  Article,
-  ArticleContent,
-  ArticleTitle,
-  ContentBox,
-  Text,
-  SignUpDateColumn,
-  NicknameColumn,
-};
+export { AdminContainer, Title, UnderLine, Section, Article, ArticleTitle };

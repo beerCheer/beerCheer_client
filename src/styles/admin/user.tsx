@@ -14,7 +14,7 @@ const Title = styled.header`
 const Section = styled.section`
   display: flex;
   background-color: #f3f3f3;
-  min-height: calc(100vh - 225px);
+  /* min-height: calc(100vh - 300px); */
   flex-direction: column;
   padding: 20px;
   gap: 20px 0px;
