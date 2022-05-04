@@ -8,6 +8,7 @@ import {
   IRequestBeer,
   IResponseBeer,
   IRequestSearchBeer,
+  ISearchBeer,
 } from './../types/beers/index';
 
 export const getAllBeers = async ({
@@ -51,7 +52,7 @@ export const getRatesBeer = async () => {
 };
 
 export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
-  const { data } = await API.get<IBeer[]>(`/beers/search`, {
+  const { data } = await API.get<ISearchBeer>(`/beers/search`, {
     params: {
       name,
     },

@@ -97,3 +97,8 @@ export interface IRequestSearchBeer {
   id?: number;
   name: string;
 }
+
+export interface ISearchBeer {
+  totalResults: number;
+  result: IBeer[];
+}
