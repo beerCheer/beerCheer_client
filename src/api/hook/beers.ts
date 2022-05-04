@@ -14,7 +14,7 @@ const QUERY_KEY = {
   BEERS: 'BEERS',
   COMMENTS: 'COMMENTS',
   RATES: 'RATES',
-  PREFERENCE: 'PREFERENCEs',
+  PREFERENCE: 'PREFERENCE',
 };
 
 export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
