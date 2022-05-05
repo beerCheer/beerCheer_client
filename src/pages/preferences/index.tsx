@@ -17,18 +17,20 @@ import {
 import Beer from '../../components/common/beer/beer';
 import { usePreferenceBeers } from '../../api/hook/beers';
 import { IBeer } from '../../api/types/beers';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { savePreferenceBeers } from '../../api/fetcher/beers';
 import { updateIsPreferenceOrRate } from '../../api/fetcher/users';
+import { USER_QUERY_KEY } from '../../api/hook/users';
 
 const Preferences = () => {
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([]);
   const { mutateAsync: isPreferenceTrue } = useMutation(updateIsPreferenceOrRate, {
     onSuccess: () => {
       //확인후 제거예정
       alert('true');
+      queryClient.invalidateQueries(USER_QUERY_KEY.USERS);
     },
   });
   const { mutateAsync: saveBeers, isLoading: resultLoading } = useMutation(savePreferenceBeers, {
