@@ -8,4 +8,5 @@ export interface IComment {
 export interface IComments {
   totalResults: number;
   result: IComment[];
+  message?: string;
 }

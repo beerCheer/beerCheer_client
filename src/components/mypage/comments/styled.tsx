@@ -16,7 +16,6 @@ const NameColumn = styled.div`
 const CommentColumn = styled.div`
   flex: 2;
   padding: 0 4px;
-  text-align: center;
 `;
 const DateColumn = styled.div`
   flex: 0.3;

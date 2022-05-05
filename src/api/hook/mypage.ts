@@ -5,8 +5,6 @@ const MYPAGE_QUERY_KEY = {
   COMMENT: 'COMMENT',
 };
 
-export const useUserComments = (id: number) => {
-  return useQuery([MYPAGE_QUERY_KEY.COMMENT, { id }], () => getUserComments(), {
-    enabled: !!id,
-  });
+export const useUserComments = () => {
+  return useQuery([MYPAGE_QUERY_KEY.COMMENT], () => getUserComments());
 };
