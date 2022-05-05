@@ -1,5 +1,9 @@
-import { useState } from 'react';
+import { flatten } from 'lodash';
+import { useEffect, useMemo, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { createComment } from '../../../api/fetcher/beers';
+import { useBeerComments } from '../../../api/hook/beers';
 import { IComment } from '../../../api/types/beers';
 import { loginPopupState } from '../../../recoils/atoms/users';
 import { loginState } from '../../../recoils/selector/users';
@@ -10,10 +14,40 @@ import Button from '../../common/button';
 import { CommentColumn, Contents, DateColumn, NameColumn, Row } from '../../mypage/comments/styled';
 import { CommentInput, Header, InputWrapper, Title } from './styled';
 
-const DetailComments = ({ datas }: { datas: any }) => {
+interface DetailCommentsProps {
+  beerId: number;
+}
+const DetailComments = ({ beerId }: DetailCommentsProps) => {
+  const {
+    data: commentsData,
+    isFetched,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+  } = useBeerComments({ beerId: Number(beerId) });
+  const comments = useMemo(() => flatten(commentsData?.pages?.map(page => page.result) ?? []), [commentsData]);
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
+
   const [inputOpen, setInputOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const isLogin = useRecoilValue(loginState);
   const setLoginPopupState = useSetRecoilState(loginPopupState);
+
+  const handleSubmit = () => {
+    async function submitComment() {
+      await createComment({ beerId, content: inputValue });
+      await refetch();
+    }
+    submitComment();
+    setInputValue('');
+    setInputOpen(false);
+  };
 
   return (
     <div>
@@ -30,13 +64,22 @@ const DetailComments = ({ datas }: { datas: any }) => {
       </Header>
       {inputOpen && (
         <InputWrapper>
-          <CommentInput type="text" placeholder="한줄평을 입력해주세요" />
-          <Button primary>등록하기</Button>
+          <CommentInput
+            type="text"
+            placeholder="한줄평을 입력해주세요"
+            value={inputValue}
+            onChange={e => {
+              setInputValue(e.target.value);
+            }}
+          />
+          <Button primary onClick={handleSubmit}>
+            등록하기
+          </Button>
         </InputWrapper>
       )}
 
       <Contents>
-        {datas.map((data: IComment) => (
+        {comments.map((data: IComment) => (
           <Row key={data.id}>
             <NameColumn>{data['User.nickname']}</NameColumn>
             <CommentColumn>{data.content}</CommentColumn>
@@ -44,12 +87,13 @@ const DetailComments = ({ datas }: { datas: any }) => {
           </Row>
         ))}
 
-        {datas.length === 0 && (
+        {comments.length === 0 && (
           <EmptyFallback>
             <EmptyIcon width={150} height={150} />
             <p>아직 한줄평이 없어요!</p>
           </EmptyFallback>
         )}
+        {isFetched && <div ref={ref} />}
       </Contents>
     </div>
   );

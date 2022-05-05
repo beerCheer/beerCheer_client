@@ -23,3 +23,7 @@ export const loginKakao = async (requestDataLoginKakao: IRequestLogin) => {
 export const logout = async () => {
   await API.post('/users/logout');
 };
+
+export const withdraw = async () => {
+  await API.delete('/users');
+};
