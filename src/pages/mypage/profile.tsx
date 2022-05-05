@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useUserQuery } from '../../api/hook/users';
+import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
@@ -45,7 +45,7 @@ const Profile = () => {
       setError('notError');
       setNicknamePopupOpen(true);
       queryClient.invalidateQueries([
-        'USERS',
+        USER_QUERY_KEY.USERS,
         {
           id: userId,
         },
