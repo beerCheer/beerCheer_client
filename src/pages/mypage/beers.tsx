@@ -12,7 +12,7 @@ import { userIdState } from '../../recoils/atoms/users';
 const Beers = () => {
   const userId = useRecoilValue(userIdState);
 
-  const { data: favoritesBeersData } = useFavoritesBeers(userId as number);
+  const { data: favoritesBeersData } = useFavoritesBeers();
 
   return (
     <Section>
