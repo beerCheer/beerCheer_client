@@ -4,19 +4,20 @@ import {
   IRequestAllBeers,
   IBeer,
   IRequestBeerComments,
-  IResponseBeerComments,
   IRequestBeer,
   IResponseBeer,
   IRequestSearchBeer,
-  ISearchBeer,
-} from './../types/beers/index';
+   ISearchBeer,
+   IRequestCreateComment,
+  IComment,
+ } from './../types/beers/index';
 
-export const getAllBeers = async ({
+export const getAllBeers = async <T>({
   per_page = LIST_PER_PAGE,
   page = 1,
   isPreferenceOrRateChecked,
 }: IRequestAllBeers) => {
-  const { data } = await API.get<IPagination<IBeer[]>>(`/beers`, {
+  const { data } = await API.get<T>(`/beers`, {
     params: {
       page,
       per_page,
@@ -28,7 +29,7 @@ export const getAllBeers = async ({
 };
 
 export const getBeerComments = async ({ beerId, page = 1, per_page = COMMENTS_PER_PAGE }: IRequestBeerComments) => {
-  const { data } = await API.get<IPagination<IResponseBeerComments>>(`/beers/${beerId}/comments`, {
+  const { data } = await API.get<IPagination<IComment[]>>(`/beers/${beerId}/comments`, {
     params: {
       page,
       per_page,
@@ -58,4 +59,8 @@ export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
     },
   });
   return data;
+};
+
+export const createComment = async ({ beerId, content }: IRequestCreateComment) => {
+  await API.post(`/beers/${beerId}/comments`, { content });
 };

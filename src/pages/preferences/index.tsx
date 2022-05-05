@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { selectedBeersState, isLoadingState, recommendBeerState } from '../../recoils/states';
@@ -15,36 +15,32 @@ import {
   BeerWrapper,
 } from '../../styles/preferences';
 import Beer from '../../components/common/beer/beer';
-import Data from '../../components/main/dummy';
-import { DummyProps } from '../../components/main/dummy';
+import { useAllBeers, usePreferenceBeers } from '../../api/hook/beers';
+import { IBeer } from '../../api/types/beers';
+import { flatten } from 'lodash';
 
 const Preferences = () => {
   const router = useRouter();
-  const [selectedBeers, setSelectedBeers] = useRecoilState(selectedBeersState);
-  const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
-  const setRecommenBeer = useSetRecoilState(recommendBeerState);
+  const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([]);
 
   const getPreferenceBeer = () => {
     //TODO : 선호하는 맥주 리스트 받아오기
-    setIsLoading(true);
-    setRecommenBeer(() => Data.slice(0, 2));
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
 
     router.push('/mypage/recommend');
   };
 
-  const handleSelectedBeer = (id: string) => {
-    const selected: boolean = selectedBeers.includes(id);
+  const { data: beersData, isLoading } = usePreferenceBeers({ isPreferenceOrRateChecked: false });
+  const beerList = beersData ?? [];
+
+  const handleSelectedBeer = (beer: IBeer) => {
+    const selected: boolean = selectedBeers.some(selected => selected.id === beer.id);
 
     if (selected) {
-      const unCheck = selectedBeers.filter(el => el !== id);
+      const unCheck = selectedBeers.filter(selected => beer.id !== selected.id);
       setSelectedBeers(() => unCheck);
     } else {
       if (selectedBeers.length < 3) {
-        setSelectedBeers(prev => [...prev, id]);
+        setSelectedBeers(prev => [...prev, beer]);
       }
     }
   };
@@ -63,14 +59,14 @@ const Preferences = () => {
         <ButtonText onClick={getPreferenceBeer}>선택 완료</ButtonText>
       </CompletedButton>
       <CardContainer>
-        {Data.map((item: DummyProps) => {
+        {beerList.map((item: IBeer) => {
           return (
             <BeerWrapper
               key={item.id}
-              selected={selectedBeers.includes(String(item.id))}
-              onClick={() => handleSelectedBeer(String(item.id))}
+              selected={selectedBeers.some(selected => selected.id === item.id)}
+              onClick={() => handleSelectedBeer(item)}
             >
-              <Beer name={item.name} rate={item.score} imageUrl={item.imageUrl} />
+              <Beer name={item.name} rate={item.avg} imageUrl={item.image_url} />
             </BeerWrapper>
           );
         })}
