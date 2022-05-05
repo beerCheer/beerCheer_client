@@ -14,13 +14,12 @@ import _, { debounce } from 'lodash';
 interface errorMesageType {
   unknown: string;
   isError: string;
-  notError: string;
   [prop: string]: string;
 }
 
 const Profile = () => {
   const [nickname, setNickname] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string | undefined>(' ');
   const [nicknamePopupOpen, setNicknamePopupOpen] = useState<boolean>(false);
 
   const userId = useRecoilValue(userIdState);
@@ -35,10 +34,7 @@ const Profile = () => {
   const errorMessage: errorMesageType = {
     unknown: '닉네임을 입력해주세요',
     isError: '이미 등록된 별명입니다',
-    notError: '',
   };
-
-  Object.freeze(errorMessage);
 
   const { mutate: patchUserInfoMutate } = useMutation(patchUserInfo, {
     onSuccess: () => {
@@ -61,21 +57,19 @@ const Profile = () => {
     () =>
       _.debounce((value: string) => {
         nicknameCheck(value).then(res => {
-          res.message === '사용가능한 닉네임' ? setError('notError') : setError('isError');
+          res.message !== '사용가능한 닉네임' ? setError(errorMessage.isError) : setError(undefined);
         });
-      }, 200),
-
+      }, 50),
     []
   );
 
-  const handleOnChange = async (value: string) => {
-    await setNickname(value);
+  const handleOnChange = (value: string) => {
+    setNickname(value);
 
-    if (value === '') {
-      setError('unknown');
+    if (value.length === 0) {
+      setError(errorMessage.unknown);
       return;
     }
-    if (!value) return;
 
     validateUserNickname(value);
   };
@@ -90,13 +84,7 @@ const Profile = () => {
           }}
         >
           <TextInput id="email" value={data?.email} label="이메일" disabled />
-          <TextInput
-            id="nickname"
-            value={nickname}
-            label="별명"
-            handleOnChange={handleOnChange}
-            errorMessage={errorMessage[error]}
-          />
+          <TextInput id="nickname" value={nickname} label="별명" handleOnChange={handleOnChange} errorMessage={error} />
           <ResignButtonContainer>
             <Button
               size="small"
@@ -108,7 +96,7 @@ const Profile = () => {
             </Button>
           </ResignButtonContainer>
 
-          <Button type="submit" primary block size="large" disabled={error !== 'notError'} onClick={handleInfoSubmit}>
+          <Button type="submit" primary block size="large" disabled={!!error} onClick={handleInfoSubmit}>
             저장하기
           </Button>
         </StyledForm>
