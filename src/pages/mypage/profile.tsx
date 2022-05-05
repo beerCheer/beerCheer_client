@@ -2,14 +2,11 @@ import { useState } from 'react';
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
+import WithdrawPopup from '../../components/mypage/mypage-pop-up/withdraw';
 import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
 
 const Profile = () => {
-  const [user, setUser] = useState({
-    id: '1',
-    email: 'user@email.com',
-    nickname: '기존닉네임',
-  });
+  const [withdrawPopupOpen, setWithdrawPopupOpen] = useState<boolean>(false);
 
   return (
     <Section>
@@ -22,21 +19,10 @@ const Profile = () => {
             alert('닉네임변경');
           }}
         >
-          <TextInput id="email" value={user?.email} label="이메일" disabled />
-          <TextInput
-            id="nickname"
-            value={user?.nickname}
-            label="별명"
-            handleOnChange={() => {}}
-            errorMessage={'이미 등록된 별명입니다'}
-          />
+          <TextInput id="email" label="이메일" disabled />
+          <TextInput id="nickname" label="별명" handleOnChange={() => {}} errorMessage={'이미 등록된 별명입니다'} />
           <ResignButtonContainer>
-            <Button
-              size="small"
-              onClick={() => {
-                alert('회원탈퇴');
-              }}
-            >
+            <Button size="small" onClick={() => setWithdrawPopupOpen(true)}>
               회원탈퇴
             </Button>
           </ResignButtonContainer>
@@ -46,6 +32,7 @@ const Profile = () => {
           </Button>
         </StyledForm>
       </section>
+      <WithdrawPopup onClose={() => setWithdrawPopupOpen(false)} isOpen={withdrawPopupOpen} />
     </Section>
   );
 };
