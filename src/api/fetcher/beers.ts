@@ -9,6 +9,7 @@ import {
   IRequestSearchBeer,
   IRequestCreateComment,
   IComment,
+  IRequestSavePreferences,
 } from './../types/beers/index';
 
 export const getAllBeers = async <T>({
@@ -62,4 +63,8 @@ export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
 
 export const createComment = async ({ beerId, content }: IRequestCreateComment) => {
   await API.post(`/beers/${beerId}/comments`, { content });
+};
+
+export const savePreferenceBeers = async (beer: IRequestSavePreferences[]) => {
+  await API.post(`/preferences`, beer);
 };

@@ -15,22 +15,44 @@ import {
   BeerWrapper,
 } from '../../styles/preferences';
 import Beer from '../../components/common/beer/beer';
-import { useAllBeers, usePreferenceBeers } from '../../api/hook/beers';
+import { usePreferenceBeers } from '../../api/hook/beers';
 import { IBeer } from '../../api/types/beers';
-import { flatten } from 'lodash';
+import { useMutation } from 'react-query';
+import { savePreferenceBeers } from '../../api/fetcher/beers';
+import { updateIsPreferenceOrRate } from '../../api/fetcher/users';
 
 const Preferences = () => {
   const router = useRouter();
+
   const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([]);
+  const { mutateAsync: isPreferenceTrue } = useMutation(updateIsPreferenceOrRate, {
+    onSuccess: () => {
+      //확인후 제거예정
+      alert('true');
+    },
+  });
+  const { mutateAsync: saveBeers, isLoading: resultLoading } = useMutation(savePreferenceBeers, {
+    onSuccess: () => {
+      isPreferenceTrue();
+      router.push('/mypage/recommend');
+    },
+    onError: () => {
+      alert('다시 시도해주세요');
+    },
+  });
 
   const getPreferenceBeer = () => {
-    //TODO : 선호하는 맥주 리스트 받아오기
+    const preferenceBeers = selectedBeers.map(beer => {
+      const malt = beer.ingredients.malt[0];
+      return { beerId: beer.id, malt: malt.name, quantity: malt.amount.value };
+    });
 
-    router.push('/mypage/recommend');
+    saveBeers(preferenceBeers);
   };
 
-  const { data: beersData, isLoading } = usePreferenceBeers({ isPreferenceOrRateChecked: false });
+  const { data: beersData, isLoading: listLoading } = usePreferenceBeers({ isPreferenceOrRateChecked: false });
   const beerList = beersData ?? [];
+  const isLoading = useMemo(() => listLoading || resultLoading, [listLoading, resultLoading]);
 
   const handleSelectedBeer = (beer: IBeer) => {
     const selected: boolean = selectedBeers.some(selected => selected.id === beer.id);

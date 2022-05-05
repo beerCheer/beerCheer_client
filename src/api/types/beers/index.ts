@@ -97,3 +97,9 @@ export interface IRequestCreateComment {
   beerId: number;
   content: string;
 }
+
+export interface IRequestSavePreferences {
+  beerId: number;
+  malt: string;
+  quantity: number;
+}

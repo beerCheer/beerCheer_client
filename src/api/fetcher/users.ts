@@ -18,8 +18,12 @@ export const loginKakao = async (requestDataLoginKakao: IRequestLogin) => {
   const { data } = await API.post<IUser>(`/kakao`, requestDataLoginKakao);
 
   return data;
-}
+};
 
 export const logout = async () => {
   await API.post('/users/logout');
+};
+
+export const updateIsPreferenceOrRate = async () => {
+  await API.patch('/users');
 };
