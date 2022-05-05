@@ -3,8 +3,8 @@ import { getCommentList, getUserList } from '../fetcher/admin';
 import { IRequestCommentList, IRequestUserList } from '../types/admin';
 
 export const ADMIN_QUERY_KEY = {
-  USERS: 'USERS',
-	COMMENTS: 'COMMENTS',
+  USERLIST: 'USERLIST',
+  COMMENTLIST: 'COMMENTLIST',
 };
 
 export const useUserListQuery = ({ per_page = 10, page = 1, options }: IRequestUserList) => {
