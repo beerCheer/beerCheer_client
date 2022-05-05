@@ -6,12 +6,8 @@ import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 import { useFavoritesBeers } from '../../api/hook/mypage';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
 import { IFavoritesBeer } from '../../api/types/mypage';
-import { useRecoilValue } from 'recoil';
-import { userIdState } from '../../recoils/atoms/users';
 
 const Beers = () => {
-  const userId = useRecoilValue(userIdState);
-
   const { data: favoritesBeersData } = useFavoritesBeers();
 
   return (
