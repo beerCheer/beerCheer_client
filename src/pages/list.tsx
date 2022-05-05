@@ -1,24 +1,31 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import flatten from 'lodash/flatten';
 import HomeLayout from '../components/common/layout/layout';
 import Beer from '../components/common/beer/beer';
 import { ListContanier, ListContent, ListTitle, EmptyContent, EmptyListImage } from '../styles/list';
 import { useAllBeers, useSearchBeer } from '../api/hook/beers';
-import { LIST_PER_PAGE } from '../constants';
 import { IBeer } from '../api/types/beers';
 import { useInView } from 'react-intersection-observer';
 import { Loading, LoadingContainer } from '../styles/preferences';
+import { useRecoilValue } from 'recoil';
+import { userIdState } from '../recoils/atoms/users';
 
 const List = () => {
   const router = useRouter();
   const { search } = router.query;
-
+  const userId = useRecoilValue(userIdState);
   const [ref, inView] = useInView();
-  const { data: beersData, fetchNextPage, isFetched, hasNextPage } = useAllBeers({
+  const {
+    data: beersData,
+    fetchNextPage,
+    isFetched,
+    hasNextPage,
+  } = useAllBeers({
     isPreferenceOrRateChecked: true,
+    id: userId,
   });
-  const { data: searchData, isLoading } = useSearchBeer({ name: `${search}` });
+  const { data: searchData, isLoading } = useSearchBeer({ name: `${search}`, id: userId });
 
   const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page.result) ?? []), [beersData]);
   const searchBeerList = useMemo(() => flatten(searchData?.result ?? []), [searchData]);
@@ -52,6 +59,7 @@ const List = () => {
         {beers?.map((item: IBeer) => (
           <React.Fragment key={item.id}>
             <Beer
+              id={item.id}
               onClick={() => router.push(`/${item.id}`)}
               name={item.name}
               rate={item.avg}

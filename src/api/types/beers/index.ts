@@ -14,6 +14,7 @@ export interface IRequestBeerComments {
 }
 
 export interface IRequestAllBeers {
+  id?: number;
   page?: number;
   per_page?: number;
   isPreferenceOrRateChecked: boolean;
@@ -92,7 +93,6 @@ export interface IRequestSearchBeer {
   id?: number;
   name: string;
 }
-
 
 export interface ISearchBeer {
   totalResults: number;

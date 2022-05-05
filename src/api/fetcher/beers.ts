@@ -7,21 +7,23 @@ import {
   IRequestBeer,
   IResponseBeer,
   IRequestSearchBeer,
-   ISearchBeer,
-   IRequestCreateComment,
+  ISearchBeer,
+  IRequestCreateComment,
   IComment,
- } from './../types/beers/index';
+} from './../types/beers/index';
 
 export const getAllBeers = async <T>({
   per_page = LIST_PER_PAGE,
   page = 1,
   isPreferenceOrRateChecked,
+  id,
 }: IRequestAllBeers) => {
   const { data } = await API.get<T>(`/beers`, {
     params: {
       page,
       per_page,
       isPreferenceOrRateChecked,
+      id,
     },
   });
 
@@ -52,10 +54,11 @@ export const getRatesBeer = async () => {
   return data;
 };
 
-export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
+export const getSearchBeer = async ({ name, id }: IRequestSearchBeer) => {
   const { data } = await API.get<ISearchBeer>(`/beers/search`, {
     params: {
       name,
+      id,
     },
   });
   return data;
@@ -63,4 +66,8 @@ export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
 
 export const createComment = async ({ beerId, content }: IRequestCreateComment) => {
   await API.post(`/beers/${beerId}/comments`, { content });
+};
+
+export const likeBeer = async (beerId: number) => {
+  await API.post(`/favorites`, { beerId });
 };
