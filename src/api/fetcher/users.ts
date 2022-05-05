@@ -27,3 +27,7 @@ export const logout = async () => {
 export const updateIsPreferenceOrRate = async () => {
   await API.patch('/users');
 };
+
+export const withdraw = async () => {
+  await API.delete('/users');
+};

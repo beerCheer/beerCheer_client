@@ -28,8 +28,7 @@ const Preferences = () => {
   const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([]);
   const { mutateAsync: isPreferenceTrue } = useMutation(updateIsPreferenceOrRate, {
     onSuccess: () => {
-      //확인후 제거예정
-      alert('true');
+      alert('true'); //확인후 제거예정
       queryClient.invalidateQueries(USER_QUERY_KEY.USERS);
     },
   });

@@ -52,7 +52,6 @@ const LoadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #9e9ec7;
   height: calc(100vh - 300px);
 `;
 
