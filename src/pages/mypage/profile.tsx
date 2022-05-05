@@ -3,6 +3,7 @@ import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
+import WithdrawPopup from '../../components/mypage/mypage-pop-up/withdraw';
 import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
 import { userIdState } from '../../recoils/atoms/users';
 import { useRecoilValue } from 'recoil';
@@ -21,6 +22,8 @@ const Profile = () => {
   const [nickname, setNickname] = useState<string>('');
   const [error, setError] = useState<string | undefined>(' ');
   const [nicknamePopupOpen, setNicknamePopupOpen] = useState<boolean>(false);
+  const [withdrawPopupOpen, setWithdrawPopupOpen] = useState<boolean>(false);
+
 
   const userId = useRecoilValue(userIdState);
   const queryClient = useQueryClient();
@@ -30,6 +33,7 @@ const Profile = () => {
       setNickname(data.nickname);
     },
   });
+
 
   const errorMessage: errorMesageType = {
     unknown: '닉네임을 입력해주세요',
@@ -83,15 +87,11 @@ const Profile = () => {
             e.preventDefault();
           }}
         >
+
           <TextInput id="email" value={data?.email} label="이메일" disabled />
           <TextInput id="nickname" value={nickname} label="별명" handleOnChange={handleOnChange} errorMessage={error} />
           <ResignButtonContainer>
-            <Button
-              size="small"
-              onClick={() => {
-                alert('회원탈퇴');
-              }}
-            >
+            <Button size="small" onClick={() => setWithdrawPopupOpen(true)}>
               회원탈퇴
             </Button>
           </ResignButtonContainer>
@@ -102,6 +102,8 @@ const Profile = () => {
         </StyledForm>
       </section>
       <NicknamePopup onClose={() => setNicknamePopupOpen(false)} isOpen={nicknamePopupOpen} />
+      <WithdrawPopup onClose={() => setWithdrawPopupOpen(false)} isOpen={withdrawPopupOpen} />
+
     </Section>
   );
 };

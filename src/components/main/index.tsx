@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import HomeLayout from '../common/layout/layout';
@@ -8,19 +8,39 @@ import { MainContainer, MainContent, MainTab, Text, TabButton } from './styled';
 
 import { useRatesBeer } from '../../api/hook/beers';
 import { IBeer } from '../../api/types/beers';
+import { useUser } from '../../api/hook/users';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { loginPopupState, userIdState } from '../../recoils/atoms/users';
 
 const Main = () => {
   const router = useRouter();
   const homeTabs = { RATES: 'RATES', PREFERENCE: 'PREFERENCE' };
   Object.freeze(homeTabs);
 
-  const [activeTab, setActiveTab] = React.useState<string>(homeTabs.RATES);
-  const { data: ratesData } = useRatesBeer();
-
-  const tabMenuHandle = (tabName: string): void => {
-    // TODO : 유저 선호맥주 선택 여부 모달 띄워주기
-    setActiveTab(tabName);
+  const [preferencePopupOpen, setPreferencePopupOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>(homeTabs.RATES);
+  const setLoginPopup = useSetRecoilState(loginPopupState);
+  const userId = useRecoilValue(userIdState);
+  const { data: user } = useUser(userId as number);
+  const onClickRecommendList = (tabName: string): void => {
+    if (!userId) {
+      setLoginPopup(true);
+    } else if (user && user.isPreferenceOrRateChecked) {
+      setActiveTab(tabName);
+    } else {
+      setPreferencePopupOpen(true);
+    }
   };
+
+  const handleOnClickTabMenu = (tabName: string) => {
+    if (tabName === homeTabs.PREFERENCE) {
+      onClickRecommendList(tabName);
+    } else {
+      setActiveTab(tabName);
+    }
+  };
+
+  const { data: ratesData } = useRatesBeer();
 
   return (
     <HomeLayout>
@@ -30,7 +50,7 @@ const Main = () => {
             activeTab={activeTab}
             tabName={homeTabs.RATES}
             onClick={() => {
-              tabMenuHandle(homeTabs.RATES);
+              handleOnClickTabMenu(homeTabs.RATES);
             }}
           >
             <Text>인기 맥주 TOP 12</Text>
@@ -40,7 +60,7 @@ const Main = () => {
             activeTab={activeTab}
             tabName={homeTabs.PREFERENCE}
             onClick={() => {
-              tabMenuHandle(homeTabs.PREFERENCE);
+              handleOnClickTabMenu(homeTabs.PREFERENCE);
             }}
           >
             <Text>추천 맥주 리스트</Text>
@@ -60,7 +80,12 @@ const Main = () => {
           })}
         </MainContent>
       </MainContainer>
-      <PreferenesModal />
+      <PreferenesModal
+        isOpen={preferencePopupOpen}
+        onClose={() => {
+          setPreferencePopupOpen(false);
+        }}
+      />
     </HomeLayout>
   );
 };

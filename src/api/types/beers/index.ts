@@ -13,11 +13,6 @@ export interface IRequestBeerComments {
   per_page?: number;
 }
 
-export interface IResponseBeerComments {
-  count: number;
-  rows: IComment[];
-}
-
 export interface IRequestAllBeers {
   page?: number;
   per_page?: number;
@@ -96,4 +91,15 @@ export interface IResponseBeer {
 export interface IRequestSearchBeer {
   id?: number;
   name: string;
+}
+
+
+export interface ISearchBeer {
+  totalResults: number;
+  result: IBeer[];
+}
+
+export interface IRequestCreateComment {
+  beerId: number;
+  content: string;
 }
