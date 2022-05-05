@@ -30,6 +30,7 @@ export const ButtonContainer = styled.button`
   border-radius: 50px;
   font-size: 14px;
   border: none;
+  cursor: pointer;
 `;
 
 export const Icon = styled.div`
