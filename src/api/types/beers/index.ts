@@ -93,6 +93,12 @@ export interface IRequestSearchBeer {
   name: string;
 }
 
+
+export interface ISearchBeer {
+  totalResults: number;
+  result: IBeer[];
+}
+
 export interface IRequestCreateComment {
   beerId: number;
   content: string;

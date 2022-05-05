@@ -8,24 +8,22 @@ import { useAllBeers, useSearchBeer } from '../api/hook/beers';
 import { LIST_PER_PAGE } from '../constants';
 import { IBeer } from '../api/types/beers';
 import { useInView } from 'react-intersection-observer';
+import { Loading, LoadingContainer } from '../styles/preferences';
 
 const List = () => {
   const router = useRouter();
   const { search } = router.query;
 
   const [ref, inView] = useInView();
-  const {
-    data: beersData,
-    fetchNextPage,
-    isFetched,
-    hasNextPage,
-  } = useAllBeers({
+  const { data: beersData, fetchNextPage, isFetched, hasNextPage } = useAllBeers({
     isPreferenceOrRateChecked: true,
   });
-  const { data: searchList } = useSearchBeer({ name: `${search}` });
+  const { data: searchData, isLoading } = useSearchBeer({ name: `${search}` });
 
   const beerList = useMemo(() => flatten(beersData?.pages?.map(page => page.result) ?? []), [beersData]);
-  const beers = useMemo(() => (search ? searchList : beerList), [beerList, searchList, search]);
+  const searchBeerList = useMemo(() => flatten(searchData?.result ?? []), [searchData]);
+
+  const beers = useMemo(() => (search ? searchBeerList : beerList), [beerList, searchBeerList, search]);
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -33,10 +31,17 @@ const List = () => {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
+  if (isLoading) {
+    return (
+      <LoadingContainer>
+        <Loading src="/loading.gif" alt="이미지 로딩" />
+      </LoadingContainer>
+    );
+  }
   return (
     <ListContanier>
       <ListTitle>{search ? `"${search}"에 대한 검색 결과` : '전체 맥주'}</ListTitle>
-      {search && searchList?.length === 0 && (
+      {search && searchBeerList.length === 0 && (
         <EmptyContent>
           <div>검색결과가 없어요</div>
           <EmptyListImage src="/emptyList.svg" alt="검색결과가 없습니다" />

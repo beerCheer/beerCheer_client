@@ -7,9 +7,10 @@ import {
   IRequestBeer,
   IResponseBeer,
   IRequestSearchBeer,
-  IRequestCreateComment,
+   ISearchBeer,
+   IRequestCreateComment,
   IComment,
-} from './../types/beers/index';
+ } from './../types/beers/index';
 
 export const getAllBeers = async <T>({
   per_page = LIST_PER_PAGE,
@@ -52,7 +53,7 @@ export const getRatesBeer = async () => {
 };
 
 export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
-  const { data } = await API.get<IBeer[]>(`/beers/search`, {
+  const { data } = await API.get<ISearchBeer>(`/beers/search`, {
     params: {
       name,
     },
