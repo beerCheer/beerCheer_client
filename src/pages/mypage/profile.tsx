@@ -10,7 +10,7 @@ import { useRecoilValue } from 'recoil';
 import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
 import NicknamePopup from '../../components/mypage/mypage-pop-up';
 import { useMutation, useQueryClient } from 'react-query';
-import _, { debounce } from 'lodash';
+import _ from 'lodash';
 
 interface errorMesageType {
   unknown: string;
