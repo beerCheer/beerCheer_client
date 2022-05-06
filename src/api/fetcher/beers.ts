@@ -66,6 +66,6 @@ export const createComment = async ({ beerId, content }: IRequestCreateComment) 
   await API.post(`/beers/${beerId}/comments`, { content });
 };
 
-export const savePreferenceBeers = async (beer: IRequestSavePreferences[]) => {
-  await API.post(`/preferences`, beer);
+export const savePreferenceBeers = async (beers: IRequestSavePreferences[]) => {
+  await API.post(`/preferences`, { beers });
 };
