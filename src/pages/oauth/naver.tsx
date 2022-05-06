@@ -9,6 +9,7 @@ import { userIdState } from '../../recoils/atoms/users';
 
 const OauthNaver = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const setuserIdState = useSetRecoilState(userIdState);
+
   const router = useRouter();
 
   useEffect(() => {

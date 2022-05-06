@@ -1,20 +1,30 @@
 import React from 'react';
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
-import Data from '../../components/main/dummy';
 import { ListContent } from '../../styles/list';
-import { Section, Title } from '../../styles/mypage/rates';
-import { DummyProps } from '../../components/main/dummy';
+import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
+import { useFavoritesBeers } from '../../api/hook/mypage';
+import EmptyIcon from '../../components/common/@Icons/emptyIcon';
+import { IFavoritesBeer } from '../../api/types/mypage';
 
 const Beers = () => {
+  const { data: favoritesBeersData } = useFavoritesBeers();
+
   return (
     <Section>
       <Title>나의 맥주 창고</Title>
-      <ListContent>
-        {Data.map((item: DummyProps) => {
-          return <Beer key={item.id} name={item.name} rate={item.score} imageUrl={item.imageUrl} />;
-        })}
-      </ListContent>
+      {favoritesBeersData?.message ? (
+        <EmptyFallback>
+          <EmptyIcon width={150} height={150} />
+          <p>아직 보관한 맥주가 없어요!</p>
+        </EmptyFallback>
+      ) : (
+        <ListContent>
+          {favoritesBeersData?.result?.map((beer: IFavoritesBeer) => {
+            return <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} />;
+          })}
+        </ListContent>
+      )}
     </Section>
   );
 };

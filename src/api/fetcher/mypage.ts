@@ -1,5 +1,10 @@
 import { API } from '..';
-import { IComments } from '../types/mypage';
+import { IFavoritesBeers ,IComments } from '../types/mypage';
+
+export const getUserFavoritesBeers = async () => {
+  const { data } = await API.get<IFavoritesBeers>(`/users/mypage/favorites`);
+}
+
 
 export const getUserComments = async () => {
   const { data } = await API.get<IComments>(`/users/mypage/comments`);
