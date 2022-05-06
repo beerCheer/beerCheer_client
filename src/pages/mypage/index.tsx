@@ -13,11 +13,8 @@ import {
   Section,
 } from '../../styles/mypage';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import {
-  userIdState,
-  // userNicknameState  /* 머지 완료시 에러 사라짐 */
-} from '../../recoils/atoms/users';
-import { USER_QUERY_KEY, useUser } from '../../api/hook/users';
+import { userIdState } from '../../recoils/atoms/users';
+import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
 import theme from '../../styles/theme';
 import { useQueryClient } from 'react-query';
 import { logout } from '../../api/fetcher/users';
@@ -26,8 +23,8 @@ const Mypage = () => {
   const queryClient = useQueryClient();
   const userId = useRecoilValue(userIdState);
   const resetUserId = useResetRecoilState(userIdState);
-  // const resetUserNickname = useResetRecoilState(userNicknameState); /* 머지 완료시 에러 사라짐 */
-  const { data } = useUser(userId as number);
+  const { data } = useUserQuery(userId as number);
+
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -35,7 +32,6 @@ const Mypage = () => {
       try {
         await logout();
         resetUserId();
-        // resetUserNickname(); /* 머지 완료시 에러 사라짐 */
         queryClient.removeQueries(USER_QUERY_KEY.USERS);
       } catch (error) {
         alert('로그아웃에 실패했습니다. 다시 시도해 주세요.');
@@ -45,6 +41,7 @@ const Mypage = () => {
 
     logoutUser();
   };
+
   return (
     <Section>
       <ProfileContainer>

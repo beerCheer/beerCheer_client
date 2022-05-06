@@ -8,6 +8,7 @@ import { userIdState } from '../../recoils/atoms/users';
 
 const OauthKakao = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const setuserIdState = useSetRecoilState(userIdState);
+
   const router = useRouter();
 
   useEffect(() => {

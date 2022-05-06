@@ -8,8 +8,8 @@ import { MainContainer, MainContent, MainTab, Text, TabButton } from './styled';
 
 import { useRatesBeer } from '../../api/hook/beers';
 import { IBeer } from '../../api/types/beers';
-import { useUser } from '../../api/hook/users';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useUserQuery } from '../../api/hook/users';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginPopupState, userIdState } from '../../recoils/atoms/users';
 
 const Main = () => {
@@ -21,7 +21,7 @@ const Main = () => {
   const [activeTab, setActiveTab] = useState<string>(homeTabs.RATES);
   const setLoginPopup = useSetRecoilState(loginPopupState);
   const userId = useRecoilValue(userIdState);
-  const { data: user } = useUser(userId as number);
+  const { data: user } = useUserQuery(userId as number);
   const onClickRecommendList = (tabName: string): void => {
     if (!userId) {
       setLoginPopup(true);
