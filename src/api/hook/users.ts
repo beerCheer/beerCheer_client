@@ -5,7 +5,7 @@ export const USER_QUERY_KEY = {
   USERS: 'USERS',
 };
 
-export const useUser = (id: number) => {
+export const useUserQuery = (id: number) => {
   return useQuery([USER_QUERY_KEY.USERS, { id }], () => getUserInfo(id), {
     enabled: !!id,
   });
