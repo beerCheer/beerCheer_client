@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { selectedBeersState, isLoadingState, recommendBeerState } from '../../recoils/states';
+import { selectedBeersState, recommendBeerState } from '../../recoils/atoms/beers';
 
 import HomeLayout from '../../components/common/layout/layout';
 import {

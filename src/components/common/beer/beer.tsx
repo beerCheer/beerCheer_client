@@ -5,11 +5,10 @@ import { useMutation } from 'react-query';
 import { likeBeer } from '../../../api/fetcher/beers';
 
 const beer = '🍺';
-
 interface BeerProps {
   id: number;
   name: string;
-  rate: number;
+  rate?: number;
   imageUrl: string;
   onClick?: () => void;
 }
@@ -32,7 +31,7 @@ const Beer = ({ onClick, name, rate, imageUrl, id }: BeerProps) => {
       </Icon>
       <Description onClick={onClick}>
         <BeerName>{name}</BeerName>
-        <BeerScore>{beer.repeat(rate)}</BeerScore>
+        {!!rate && <BeerScore>{beer.repeat(rate)}</BeerScore>}
       </Description>
     </BeerContainer>
   );
