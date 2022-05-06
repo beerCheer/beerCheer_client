@@ -23,9 +23,10 @@ export interface IFavoritesBeer {
 export interface IFavoritesBeers {
   totalResults: number;
   result: IFavoritesBeer[];
+  message?: string;
 }
 
- export interface IComment {
+export interface IComment {
   beerId: number;
   content: string;
   createdAt: string;

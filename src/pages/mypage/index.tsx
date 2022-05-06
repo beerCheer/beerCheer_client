@@ -24,7 +24,6 @@ const Mypage = () => {
   const userId = useRecoilValue(userIdState);
   const resetUserId = useResetRecoilState(userIdState);
   const { data } = useUserQuery(userId as number);
-
   const router = useRouter();
 
   const handleLogout = async () => {

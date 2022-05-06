@@ -10,6 +10,8 @@ import { IFavoritesBeer } from '../../api/types/mypage';
 const Beers = () => {
   const { data: favoritesBeersData } = useFavoritesBeers();
 
+  console.log(favoritesBeersData);
+
   return (
     <Section>
       <Title>나의 맥주 창고</Title>
