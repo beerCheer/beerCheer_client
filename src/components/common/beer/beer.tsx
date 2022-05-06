@@ -3,6 +3,7 @@ import { BeerThumnail, ImageWrapper } from '../../../styles/detail';
 import { BeerContainer, Icon, BeerName, BeerScore, Description } from './styled';
 import { useMutation } from 'react-query';
 import { likeBeer } from '../../../api/fetcher/beers';
+import theme from '../../../styles/theme';
 
 const beer = '🍺';
 interface BeerProps {
@@ -10,10 +11,11 @@ interface BeerProps {
   name: string;
   rate?: number;
   imageUrl: string;
+  favorite?: boolean;
   onClick?: () => void;
 }
 
-const Beer = ({ onClick, name, rate, imageUrl, id }: BeerProps) => {
+const Beer = ({ onClick, name, rate, imageUrl, id, favorite }: BeerProps) => {
   const { mutateAsync } = useMutation(likeBeer);
 
   return (
@@ -27,7 +29,7 @@ const Beer = ({ onClick, name, rate, imageUrl, id }: BeerProps) => {
           mutateAsync(id);
         }}
       >
-        <HeartIcon width={40} height={35} />
+        <HeartIcon width={40} height={35} fill={favorite ? theme.color.primary : undefined} />
       </Icon>
       <Description onClick={onClick}>
         <BeerName>{name}</BeerName>

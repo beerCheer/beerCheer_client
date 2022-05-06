@@ -15,7 +15,16 @@ const Recommend = () => {
       <Title>추천 맥주</Title>
       <CardContainer recommend>
         {recommendBeers.map((item: IBeer) => {
-          return <Beer id={item.id} key={item.id} name={item.name} rate={item.avg} imageUrl={item.image_url} />;
+          return (
+            <Beer
+              id={item.id}
+              key={item.id}
+              name={item.name}
+              rate={item.avg}
+              imageUrl={item.image_url}
+              favorite={item.favorite}
+            />
+          );
         })}
       </CardContainer>
     </Section>
