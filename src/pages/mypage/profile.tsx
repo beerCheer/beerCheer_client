@@ -24,7 +24,6 @@ const Profile = () => {
   const [nicknamePopupOpen, setNicknamePopupOpen] = useState<boolean>(false);
   const [withdrawPopupOpen, setWithdrawPopupOpen] = useState<boolean>(false);
 
-
   const userId = useRecoilValue(userIdState);
   const queryClient = useQueryClient();
 
@@ -33,7 +32,6 @@ const Profile = () => {
       setNickname(data.nickname);
     },
   });
-
 
   const errorMessage: errorMesageType = {
     unknown: '닉네임을 입력해주세요',
@@ -87,7 +85,6 @@ const Profile = () => {
             e.preventDefault();
           }}
         >
-
           <TextInput id="email" value={data?.email} label="이메일" disabled />
           <TextInput id="nickname" value={nickname} label="별명" handleOnChange={handleOnChange} errorMessage={error} />
           <ResignButtonContainer>
@@ -103,7 +100,6 @@ const Profile = () => {
       </section>
       <NicknamePopup onClose={() => setNicknamePopupOpen(false)} isOpen={nicknamePopupOpen} />
       <WithdrawPopup onClose={() => setWithdrawPopupOpen(false)} isOpen={withdrawPopupOpen} />
-
     </Section>
   );
 };
