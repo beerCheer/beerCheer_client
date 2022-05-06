@@ -64,7 +64,7 @@ const Profile = () => {
           res.message !== '사용가능한 닉네임' ? setError(errorMessage.isError) : setError(undefined);
         });
       }, 50),
-    []
+    [errorMessage.isError]
   );
 
   const handleOnChange = (value: string) => {
