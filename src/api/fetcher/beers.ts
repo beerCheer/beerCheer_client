@@ -71,3 +71,9 @@ export const createComment = async ({ beerId, content }: IRequestCreateComment) 
 export const likeBeer = async (beerId: number) => {
   await API.post(`/favorites`, { beerId });
 };
+
+export const getRecommendBeer = async () => {
+  const { data } = await API.get<IBeer[]>('/recommendations');
+
+  return data;
+};

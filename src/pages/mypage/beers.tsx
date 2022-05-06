@@ -23,7 +23,7 @@ const Beers = () => {
       ) : (
         <ListContent>
           {favoritesBeersData?.result?.map((beer: IFavoritesBeer) => {
-            return <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} />;
+            return <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} id={beer.id} />;
           })}
         </ListContent>
       )}

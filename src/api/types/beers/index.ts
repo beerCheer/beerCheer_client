@@ -1,5 +1,3 @@
-import { IUser } from '../users';
-
 export interface IComment {
   id: number;
   content: string;
@@ -76,7 +74,7 @@ export interface IBeer {
   brewers_tips: string;
   contributed_by: string;
   avg: number;
-  isLiked: boolean;
+  favorite: boolean;
 }
 
 export interface IRequestBeer {

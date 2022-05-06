@@ -1,4 +1,3 @@
-import { flatten } from 'lodash';
 import { IPagination } from './../index';
 import {
   IBeer,
@@ -7,7 +6,14 @@ import {
   IRequestBeerComments,
   IRequestSearchBeer,
 } from './../types/beers/index';
-import { getAllBeers, getBeer, getBeerComments, getRatesBeer, getSearchBeer } from './../fetcher/beers';
+import {
+  getAllBeers,
+  getBeer,
+  getBeerComments,
+  getRatesBeer,
+  getSearchBeer,
+  getRecommendBeer,
+} from './../fetcher/beers';
 import { useQuery, useInfiniteQuery } from 'react-query';
 import { USER_QUERY_KEY } from './users';
 
@@ -16,6 +22,7 @@ const QUERY_KEY = {
   COMMENTS: 'COMMENTS',
   RATES: 'RATES',
   PREFERENCE: 'PREFERENCE',
+  RECOMMNEDATIONS: 'RECOMMNEDATIONS',
 };
 
 export const useAllBeers = ({ per_page, isPreferenceOrRateChecked, id }: IRequestAllBeers) => {
@@ -63,4 +70,8 @@ export const useRatesBeer = () => {
 
 export const useSearchBeer = ({ name, id }: IRequestSearchBeer) => {
   return useQuery([QUERY_KEY.BEERS, { name }, USER_QUERY_KEY.USERS], () => getSearchBeer({ name, id }));
+};
+
+export const useRecommendationsQuery = () => {
+  return useQuery([QUERY_KEY.BEERS, QUERY_KEY.RECOMMNEDATIONS], () => getRecommendBeer());
 };
