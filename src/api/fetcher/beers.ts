@@ -77,3 +77,7 @@ export const getRecommendBeer = async () => {
 
   return data;
 };
+
+export const cancelLike = async (beerId: number) => {
+  await API.delete(`/favorites/${beerId}`);
+};
