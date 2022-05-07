@@ -1,22 +1,18 @@
-import { useRouter } from 'next/router';
 import React from 'react';
-import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
+import { useRouter } from 'next/router';
+
+import { useCommentListQuery, useUserListQuery } from '../../api/hook/admin';
+import { dateFormat } from '../../utils/dateFormat';
+
 import HomeLayout from '../../components/common/layout/layout';
-import {
-  AdminContainer,
-  Title,
-  UnderLine,
-  Section,
-  Article,
-  ArticleContent,
-  ArticleTitle,
-  ContentBox,
-  Text,
-} from '../../styles/admin';
-import { AdminDummy } from '../../api/dummy';
+import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
+import { AdminContainer, Title, UnderLine, Section, Article, ArticleTitle } from '../../styles/admin';
+import { Td, Tr } from '../../styles/admin/user';
 
 const Admin = () => {
   const router = useRouter();
+  const { data: userList } = useUserListQuery({ per_page: 10, page: 1 });
+  const { data: commentList } = useCommentListQuery({ per_page: 10, page: 1 });
 
   return (
     <AdminContainer>
@@ -28,43 +24,46 @@ const Admin = () => {
             유저관리
             <ArrowRightIcon onClick={() => router.push('/admin/user')} />
           </ArticleTitle>
-          <ArticleContent>
-            <ContentBox>
-              <Text>닉네임</Text>
-              <Text>가입일자</Text>
-            </ContentBox>
-            <UnderLine />
-            {AdminDummy.map(el => {
-              return (
-                <ContentBox key={el.id}>
-                  <Text>{el.name}</Text>
-                  <Text>{el.signUpdate}</Text>
-                </ContentBox>
-              );
-            })}
-          </ArticleContent>
+
+          <table>
+            <thead>
+              <Tr header>
+                <th>닉네임</th>
+                <th>가입일자</th>
+              </Tr>
+            </thead>
+            <tbody>
+              {userList?.rows?.map(data => (
+                <tr key={data.id}>
+                  <Td>{data.nickname}</Td>
+                  <Td>{dateFormat(data.createdAt)}</Td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </Article>
         <Article>
           <ArticleTitle>
             댓글관리
             <ArrowRightIcon onClick={() => router.push('/admin/comments')} />
           </ArticleTitle>
-          <ArticleContent>
-            <ContentBox>
-              <Text>닉네임</Text>
-              <Text>등록일자</Text>
-            </ContentBox>
-            <UnderLine />
 
-            {AdminDummy.map(el => {
-              return (
-                <ContentBox key={el.id}>
-                  <Text>{el.name}</Text>
-                  <Text>{el.signUpdate}</Text>
-                </ContentBox>
-              );
-            })}
-          </ArticleContent>
+          <table>
+            <thead>
+              <Tr header>
+                <th>닉네임</th>
+                <th>내용</th>
+              </Tr>
+            </thead>
+            <tbody>
+              {commentList?.rows?.map(data => (
+                <tr key={data.id}>
+                  <Td>{data?.User?.nickname}</Td>
+                  <Td>{data.content}</Td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </Article>
       </Section>
     </AdminContainer>

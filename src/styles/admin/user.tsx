@@ -7,10 +7,6 @@ const Container = styled.div`
   padding: 16px;
 `;
 
-const UnderLine = styled.div`
-  border-top: 1px solid #808080;
-`;
-
 const Title = styled.header`
   font-size: 18px;
 `;
@@ -18,31 +14,27 @@ const Title = styled.header`
 const Section = styled.section`
   display: flex;
   background-color: #f3f3f3;
-  min-height: calc(100vh - 225px);
+  /* min-height: calc(100vh - 300px); */
   flex-direction: column;
   padding: 20px;
   gap: 20px 0px;
 `;
 
-const SectionTitle = styled.h1`
+const PageContent = styled.div`
   display: flex;
-  justify-content: space-between;
-  font-size: 18px;
-`;
-
-const SectionContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px 0px;
-  padding: 0px 10px;
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
-const Text = styled.div``;
+const Td = styled.td`
+  vertical-align: center;
+  text-align: center;
+  padding: 10px;
+`;
 
-export { Container, Title, UnderLine, Section, SectionTitle, SectionContent, Text, ContentBox };
+const Tr = styled.tr<{ header?: boolean }>`
+  border-bottom: ${props => props.header && `1px solid #808080`};
+  height: 24px;
+`;
+
+export { Container, Title, Section, PageContent, Td, Tr };

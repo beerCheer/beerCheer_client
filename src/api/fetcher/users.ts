@@ -28,6 +28,16 @@ export const updateIsPreferenceOrRate = async () => {
   await API.patch('/users');
 };
 
+export const nicknameCheck = async (nickname: string) => {
+  const { data } = await API.post('/users/userInfo', { nickname });
+
+  return data;
+};
+
+export const patchUserInfo = async (nickname: string) => {
+  await API.patch('/users/userInfo', { nickname });
+};
+
 export const withdraw = async () => {
   await API.delete('/users');
 };

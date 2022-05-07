@@ -3,10 +3,9 @@ import { BeerThumnail, ImageWrapper } from '../../../styles/detail';
 import { BeerContainer, Icon, BeerName, BeerScore, Description } from './styled';
 
 const beer = '🍺';
-
 interface BeerProps {
   name: string;
-  rate: number;
+  rate?: number;
   imageUrl: string;
   onClick?: () => void;
 }
@@ -22,7 +21,7 @@ const Beer = ({ onClick, name, rate, imageUrl }: BeerProps) => {
       </Icon>
       <Description>
         <BeerName>{name}</BeerName>
-        <BeerScore>{beer.repeat(rate)}</BeerScore>
+        {!!rate && <BeerScore>{beer.repeat(rate)}</BeerScore>}
       </Description>
     </BeerContainer>
   );

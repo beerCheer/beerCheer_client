@@ -10,6 +10,8 @@ const AdminContainer = styled.div`
 
 const UnderLine = styled.div`
   border-top: 1px solid #808080;
+  height: 1px;
+  width: 100%;
 `;
 
 const Title = styled.header`
@@ -28,7 +30,7 @@ const Article = styled.article`
   flex-direction: column;
   background-color: #f3f3f3;
   padding: 20px;
-  min-height: calc(100vh - 225px);
+  min-height: calc(100vh - 300px);
 `;
 
 const ArticleTitle = styled.h1`
@@ -37,18 +39,4 @@ const ArticleTitle = styled.h1`
   font-size: 18px;
 `;
 
-const ArticleContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px 0px;
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-const Text = styled.div``;
-
-export { AdminContainer, Title, UnderLine, Section, Article, ArticleContent, ArticleTitle, ContentBox, Text };
+export { AdminContainer, Title, UnderLine, Section, Article, ArticleTitle };
