@@ -1,12 +1,26 @@
-import React from 'react';
-import { useUserComments } from '../../api/hook/mypage';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
 import HomeLayout from '../../components/common/layout/layout';
 import Board from '../../components/mypage/comments/board';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 
+import { useUserComments } from '../../api/hook/mypage';
+import { loginState } from '../../recoils/selector/users';
+
 const Comments = () => {
   const { data: commentsData } = useUserComments();
+
+  const router = useRouter();
+  const isLogin = useRecoilValue(loginState);
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.replace('/');
+    }
+  }, []);
 
   return (
     <Section>

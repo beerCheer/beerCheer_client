@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useQueryClient } from 'react-query';
 
-import Button from '../../components/common/button';
+import theme from '../../styles/theme';
 import HomeLayout from '../../components/common/layout/layout';
+import Button from '../../components/common/button';
 import {
   ButtonContainer,
   Email,
@@ -12,12 +15,11 @@ import {
   ProfileImage,
   Section,
 } from '../../styles/mypage';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { userIdState } from '../../recoils/atoms/users';
+
 import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
-import theme from '../../styles/theme';
-import { useQueryClient } from 'react-query';
 import { logout } from '../../api/fetcher/users';
+import { userIdState } from '../../recoils/atoms/users';
+import { loginState } from '../../recoils/selector/users';
 
 const Mypage = () => {
   const queryClient = useQueryClient();
@@ -25,6 +27,7 @@ const Mypage = () => {
   const resetUserId = useResetRecoilState(userIdState);
   const { data } = useUserQuery(userId as number);
   const router = useRouter();
+  const isLogin = useRecoilValue(loginState);
 
   const handleLogout = async () => {
     async function logoutUser() {
@@ -40,6 +43,12 @@ const Mypage = () => {
 
     logoutUser();
   };
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.replace('/');
+    }
+  }, []);
 
   return (
     <Section>

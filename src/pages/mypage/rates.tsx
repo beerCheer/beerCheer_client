@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import EmptyIcon from '../../components/common/@Icons/emptyIcon';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+
 import HomeLayout from '../../components/common/layout/layout';
+import EmptyIcon from '../../components/common/@Icons/emptyIcon';
 import BeerCard from '../../components/mypage/rates/beerCard';
 import { CardContainer, EmptyFallback, Section, Title } from '../../styles/mypage/rates';
+
+import { loginState } from '../../recoils/selector/users';
 
 const dummyData = [
   { name: '맛있는 beer', rate: 4, imageUrl: 'https://picsum.photos/440/500' },
@@ -19,6 +24,16 @@ const dummyData = [
 
 const Rates = () => {
   const [datas, setData] = useState(dummyData);
+
+  const router = useRouter();
+  const isLogin = useRecoilValue(loginState);
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.replace('/');
+    }
+  }, []);
+
   return (
     <Section>
       <Title>내가 평가한 음료</Title>

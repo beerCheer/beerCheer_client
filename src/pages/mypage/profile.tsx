@@ -1,16 +1,20 @@
-import { useMemo, useState } from 'react';
-import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
+import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import _ from 'lodash';
+
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
 import WithdrawPopup from '../../components/mypage/mypage-pop-up/withdraw';
-import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
-import { userIdState } from '../../recoils/atoms/users';
-import { useRecoilValue } from 'recoil';
-import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
 import NicknamePopup from '../../components/mypage/mypage-pop-up';
-import { useMutation, useQueryClient } from 'react-query';
-import _ from 'lodash';
+import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
+
+import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
+import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
+import { userIdState } from '../../recoils/atoms/users';
+import { loginState } from '../../recoils/selector/users';
 
 interface errorMesageType {
   unknown: string;
@@ -26,6 +30,8 @@ const Profile = () => {
 
   const userId = useRecoilValue(userIdState);
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const isLogin = useRecoilValue(loginState);
 
   const { data } = useUserQuery(userId as number, {
     onSuccess: data => {
@@ -75,6 +81,12 @@ const Profile = () => {
 
     validateUserNickname(value);
   };
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.replace('/');
+    }
+  }, []);
 
   return (
     <Section>

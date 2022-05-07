@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
-import { recommendBeerState } from '../../recoils/atoms/beers';
 import HomeLayout from '../../components/common/layout/layout';
 import Beer from '../../components/common/beer/beer';
 import { Title, Section, CardContainer } from '../../styles/preferences';
 import { DummyProps } from '../../components/main/dummy';
 
+import { recommendBeerState } from '../../recoils/atoms/beers';
+import { loginState } from '../../recoils/selector/users';
+
 const Recommend = () => {
   const recommendBeers = useRecoilValue(recommendBeerState);
+
+  const router = useRouter();
+  const isLogin = useRecoilValue(loginState);
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.replace('/');
+    }
+  }, []);
 
   return (
     <Section>

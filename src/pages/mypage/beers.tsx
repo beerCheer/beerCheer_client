@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
 import { ListContent } from '../../styles/list';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
-import { useFavoritesBeers } from '../../api/hook/mypage';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
+
+import { useFavoritesBeers } from '../../api/hook/mypage';
 import { IFavoritesBeer } from '../../api/types/mypage';
+import { loginState } from '../../recoils/selector/users';
 
 const Beers = () => {
   const { data: favoritesBeersData } = useFavoritesBeers();
 
-  console.log(favoritesBeersData);
+  const router = useRouter();
+  const isLogin = useRecoilValue(loginState);
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.replace('/');
+    }
+  }, []);
 
   return (
     <Section>
