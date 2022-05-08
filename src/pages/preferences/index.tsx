@@ -15,9 +15,8 @@ import {
   BeerWrapper,
 } from '../../styles/preferences';
 import Beer from '../../components/common/beer/beer';
-import { useAllBeers, usePreferenceBeers } from '../../api/hook/beers';
+import { usePreferenceBeers } from '../../api/hook/beers';
 import { IBeer } from '../../api/types/beers';
-import { flatten } from 'lodash';
 
 const Preferences = () => {
   const router = useRouter();
