@@ -1,9 +1,9 @@
 export interface IUser {
-  id: number;
-  nickname: string;
   email: string;
+  id: number;
+  isAdmin: number;
   isPreferenceOrRateChecked: boolean;
-  created_at: string;
+  nickname: string;
 }
 
 export interface IRequestLogin {

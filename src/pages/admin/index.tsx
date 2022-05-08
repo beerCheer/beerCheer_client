@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { useCommentListQuery, useUserListQuery } from '../../api/hook/admin';
@@ -11,8 +11,13 @@ import { Td, Tr } from '../../styles/admin/user';
 
 const Admin = () => {
   const router = useRouter();
-  const { data: userList } = useUserListQuery({ per_page: 10, page: 1 });
-  const { data: commentList } = useCommentListQuery({ per_page: 10, page: 1 });
+
+  const { data: userList, isError: userError } = useUserListQuery({ per_page: 10, page: 1 });
+  const { data: commentList, isError: commentError } = useCommentListQuery({ per_page: 10, page: 1 });
+
+  if (userError || commentError) {
+    router.replace('/');
+  }
 
   return (
     <AdminContainer>
