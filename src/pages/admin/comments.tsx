@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
+import { useRecoilValue } from 'recoil';
 
 import { useCommentListQuery } from '../../api/hook/admin';
 import { deleteComment } from '../../api/fetcher/admin';
+import { userIdState } from '../../recoils/atoms/users';
+import { useUserQuery } from '../../api/hook/users';
 
 import HomeLayout from '../../components/common/layout/layout';
 import { Container, Title, Section, Tr, Td, PageContent } from '../../styles/admin/user';
 import Button from '../../components/common/button';
-
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import GarbageIcon from '../../components/common/@Icons/garbageIcon';
@@ -15,6 +18,17 @@ import GarbageIcon from '../../components/common/@Icons/garbageIcon';
 const Comments = () => {
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
+  const router = useRouter();
+  const userId = useRecoilValue(userIdState);
+
+  useUserQuery(userId as number, {
+    onSuccess: data => {
+      if (!data.isAdmin) {
+        router.replace('/');
+        return;
+      }
+    },
+  });
 
   const queryClient = useQueryClient();
   const { data: commentList } = useCommentListQuery({
@@ -32,6 +46,10 @@ const Comments = () => {
       queryClient.invalidateQueries(['COMMENTSLIST', page]);
     },
   });
+
+  useEffect(() => {
+    if (!userId) router.replace('/');
+  }, []);
 
   return (
     <Container>
