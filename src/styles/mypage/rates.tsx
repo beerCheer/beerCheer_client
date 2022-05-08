@@ -17,6 +17,10 @@ const Title = styled.h2`
   font-weight: ${props => props.theme['font-bold']};
   text-align: center;
   margin-bottom: 64px;
+
+  ${props => props.theme.mq.phone} {
+    font-size: 18px;
+  }
 `;
 
 const CardContainer = styled.section`
