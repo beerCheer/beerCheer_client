@@ -35,9 +35,8 @@ const RateContainer = styled.div`
 const Name = styled.p`
   font-weight: ${props => props.theme['font-bold']};
   text-overflow: ellipsis;
-  padding-right: 8px;
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 `;
 
 const Description = styled.div`
@@ -47,6 +46,7 @@ const Description = styled.div`
   flex-wrap: wrap;
   padding: 4px 0;
   width: 100%;
+  display: inline-block;
 `;
 
 const Article = styled.article`
