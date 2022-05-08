@@ -6,6 +6,7 @@ import HomeLayout from '../../components/common/layout/layout';
 import Beer from '../../components/common/beer/beer';
 import { Title, Section, CardContainer } from '../../styles/preferences';
 import { DummyProps } from '../../components/main/dummy';
+import LoginRoute from '../../components/common/routes/login';
 
 const Recommend = () => {
   const recommendBeers = useRecoilValue(recommendBeerState);
@@ -24,5 +25,9 @@ const Recommend = () => {
 
 export default Recommend;
 Recommend.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <LoginRoute>{page}</LoginRoute>
+    </HomeLayout>
+  );
 };
