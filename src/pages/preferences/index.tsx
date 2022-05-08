@@ -1,7 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { selectedBeersState, recommendBeerState } from '../../recoils/atoms/beers';
 
 import HomeLayout from '../../components/common/layout/layout';
 import {
@@ -28,7 +26,6 @@ const Preferences = () => {
   const [selectedBeers, setSelectedBeers] = useState<IBeer[]>([]);
   const { mutateAsync: isPreferenceTrue } = useMutation(updateIsPreferenceOrRate, {
     onSuccess: () => {
-      alert('true'); //확인후 제거예정
       queryClient.invalidateQueries(USER_QUERY_KEY.USERS);
     },
   });
