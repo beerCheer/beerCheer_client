@@ -5,6 +5,11 @@ const Section = styled.section`
   margin: auto;
   width: 100%;
   padding-top: 64px;
+
+  ${props => props.theme.mq.phone} {
+    width: 80%;
+    margin: auto;
+  }
 `;
 
 const StyledForm = styled.form`
