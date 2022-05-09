@@ -35,26 +35,38 @@ const Detail = () => {
   const beer = beerData?.beer;
   const avg = beerData?.avg;
   const rate = beerData?.rate ?? null;
-  const handleRating = (newValue: number) => {
+  const handleRating = async (newValue: number) => {
     if (rate) {
-      updateRateMuation({
-        beerId: Number(beerId),
-        rateData: {
-          rate: newValue,
+      updateRateMuation(
+        {
+          beerId: Number(beerId),
+          rateData: {
+            rate: newValue,
+          },
         },
-      });
+        {
+          onSuccess: () => {
+            refetch();
+          },
+        }
+      );
     } else {
-      createRateMutaion({
-        beerId: Number(beerId),
-        rateData: {
-          rate: newValue,
-          malt: beer?.ingredients.malt[0].name,
-          quantity: beer?.ingredients.malt[0].amount.value,
+      createRateMutaion(
+        {
+          beerId: Number(beerId),
+          rateData: {
+            rate: newValue,
+            malt: beer?.ingredients.malt[0].name,
+            quantity: beer?.ingredients.malt[0].amount.value,
+          },
         },
-      });
+        {
+          onSuccess: () => {
+            refetch();
+          },
+        }
+      );
     }
-
-    refetch();
   };
   if (!beer) return null;
 
