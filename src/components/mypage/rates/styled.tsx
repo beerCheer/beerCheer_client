@@ -46,7 +46,6 @@ const Description = styled.div`
   flex-wrap: wrap;
   padding: 4px 0;
   width: 100%;
-  display: inline-block;
 `;
 
 const Article = styled.article`
