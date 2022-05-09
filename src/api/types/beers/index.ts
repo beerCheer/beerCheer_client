@@ -114,3 +114,8 @@ export interface IReqestCreateRate {
   beerId: number;
   rateData: ICreateRateData;
 }
+export interface IRequestSavePreferences {
+  beerId: number;
+  malt: string;
+  quantity: number;
+}
