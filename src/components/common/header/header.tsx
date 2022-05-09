@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useMediaQuery } from 'react-responsive';
 
 import { loginState } from '../../../recoils/selector/users';
 import { loginPopupState } from '../../../recoils/atoms/users';
+import { useIsTablet } from '../../../hooks/useIsTablet';
 
-import { HeaderContainer, HeaderContent, Text, SigninButton, HiddenSearchBar } from './styeld';
+import { HeaderContainer, HeaderContent, Text, SigninButton, HiddenSearchBar, Icon } from './styeld';
 import SearchBar from '../searchbar/searchBar';
 import Button from '../button';
 import LoginPopUp from '../../login/login-pop-up';
 import LoginIcon from '../@Icons/loginIcon';
 import LogoIcon from '../@Icons/logoIcon';
-import OneBeerIcon from '../@Icons/onebeerIcon';
-import SearchIcon from '../@Icons/searchIcon';
+import TwoBeerIcon from '../@Icons/twobeerIcon';
 
 const Header = () => {
   const { pathname, push } = useRouter();
   const [scroll, setScroll] = React.useState(true);
   const [loginPopupOpen, setLoginPopupOpen] = useRecoilState(loginPopupState);
   const isLogin = useRecoilValue(loginState);
+  const isTablet = useIsTablet();
 
-  const isMobile: boolean = useMediaQuery({ query: '(max-width: 768px)' });
+  console.log(isTablet);
 
   useEffect(() => {
     const onScroll = () => {
@@ -40,26 +40,25 @@ const Header = () => {
   return (
     <HeaderContainer main={pathname === '/' && scroll ? true : false}>
       <HeaderContent>
-        {isMobile ? (
-          <>
-            <OneBeerIcon width={60} height={50} onClick={() => push('/')} />
-            <Text onClick={() => push('/list')}>list</Text>
-            {pathname === '/' ? <HiddenSearchBar /> : <SearchIcon width={24} height={24} fill={'#cdcdcd'} />}
-          </>
-        ) : (
-          <>
+        <Icon>
+          {isTablet ? (
+            <TwoBeerIcon width={60} height={50} onClick={() => push('/')} />
+          ) : (
             <LogoIcon width={120} height={55} onClick={() => push('/')} />
-            <Text onClick={() => push('/list')}>전체 맥주</Text>
-            {pathname === '/' ? <HiddenSearchBar /> : <SearchBar />}
-          </>
-        )}
+          )}
+        </Icon>
+        <Text isTablet={isTablet} onClick={() => push('/list')}>
+          전체 맥주
+        </Text>
+        {pathname === '/' ? <HiddenSearchBar /> : <SearchBar />}
+
         {isLogin ? (
           <Button
             onClick={() => {
               push('/mypage');
             }}
           >
-            <LoginIcon width={52} height={52} />
+            <LoginIcon width={46} height={46} />
           </Button>
         ) : (
           <SigninButton
@@ -68,7 +67,7 @@ const Header = () => {
               setLoginPopupOpen(true);
             }}
           >
-            <LoginIcon width={52} height={52} />
+            로그인/회원가입
           </SigninButton>
         )}
       </HeaderContent>

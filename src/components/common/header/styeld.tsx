@@ -4,7 +4,6 @@ import Button from '../button';
 interface HeaderContainerProps {
   main?: boolean;
 }
-const mainColor = '#FF9900';
 
 export const HeaderContainer = styled.header<HeaderContainerProps>`
   height: 75px;
@@ -21,16 +20,15 @@ export const HeaderContainer = styled.header<HeaderContainerProps>`
 
 export const HeaderContent = styled.div`
   display: flex;
-  max-width: 1320px;
-  padding: 0px 60px;
+  max-width: 1200px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   height: 75px;
 `;
 
-export const Text = styled.div`
-  font-size: 18px;
+export const Text = styled.div<{ isTablet: boolean }>`
+  font-size: ${props => (props.isTablet ? props.theme['font-sm'] : props.theme['font-lg'])};
   color: ${props => props.theme.color.secondary};
   cursor: pointer;
 `;
@@ -43,4 +41,8 @@ export const HiddenSearchBar = styled.div`
   height: 45px;
   width: 40%;
   visibility: hidden;
+`;
+
+export const Icon = styled.div`
+  cursor: pointer;
 `;
