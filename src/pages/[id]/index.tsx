@@ -28,7 +28,7 @@ const Detail = () => {
   const router = useRouter();
   const { id: beerId } = router.query;
   const id = useRecoilValue(userIdState);
-  const { data: beerData } = useBeer({ beerId: Number(beerId), id });
+  const { data: beerData, refetch } = useBeer({ beerId: Number(beerId), id });
   const { mutateAsync: createRateMutaion } = useMutation(createRate);
   const { mutateAsync: updateRateMuation } = useMutation(updateRate);
   const beer = beerData?.beer;
@@ -36,21 +36,35 @@ const Detail = () => {
   const rate = beer?.rate ?? null;
   const handleRating = (newValue: number) => {
     if (rate) {
-      updateRateMuation({
-        beerId: Number(beerId),
-        rateData: {
-          rate: newValue,
+      updateRateMuation(
+        {
+          beerId: Number(beerId),
+          rateData: {
+            rate: newValue,
+          },
         },
-      });
+        {
+          onSuccess: () => {
+            refetch();
+          },
+        }
+      );
     } else {
-      createRateMutaion({
-        beerId: Number(beerId),
-        rateData: {
-          rate: newValue,
-          malt: beer?.ingredients.malt[0].name,
-          quantity: beer?.ingredients.malt[0].amount.value,
+      createRateMutaion(
+        {
+          beerId: Number(beerId),
+          rateData: {
+            rate: newValue,
+            malt: beer?.ingredients.malt[0].name,
+            quantity: beer?.ingredients.malt[0].amount.value,
+          },
         },
-      });
+        {
+          onSuccess: () => {
+            refetch();
+          },
+        }
+      );
     }
   };
   if (!beer) return null;

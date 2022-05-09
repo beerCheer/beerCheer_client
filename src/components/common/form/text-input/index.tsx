@@ -5,7 +5,7 @@ interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
   value?: string;
   id: string;
   handleOnChange?: (newValue: string) => void;
-  errorMessage?: string;
+  errorMessage?: string | boolean;
   disabled?: boolean;
   placeholder?: string;
 }
