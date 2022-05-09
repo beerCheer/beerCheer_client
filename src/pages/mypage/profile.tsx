@@ -40,7 +40,7 @@ const Profile = () => {
 
   const { mutate: patchUserInfoMutate } = useMutation(patchUserInfo, {
     onSuccess: () => {
-      setError(' ');
+      setError(undefined);
       setNicknamePopupOpen(true);
       queryClient.invalidateQueries([
         USER_QUERY_KEY.USERS,
