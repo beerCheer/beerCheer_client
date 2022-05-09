@@ -101,3 +101,14 @@ export interface IRequestCreateComment {
   beerId: number;
   content: string;
 }
+
+export interface ICreateRateData {
+  malt?: string;
+  quantity?: number;
+  rate: number;
+}
+
+export interface IReqestCreateRate {
+  beerId: number;
+  rateData: ICreateRateData;
+}
