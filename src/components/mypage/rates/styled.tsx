@@ -34,9 +34,6 @@ const RateContainer = styled.div`
 
 const Name = styled.p`
   font-weight: ${props => props.theme['font-bold']};
-  /* text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap; */
 `;
 
 const Description = styled.div`
