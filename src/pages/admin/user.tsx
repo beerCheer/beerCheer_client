@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
 
 import { useUserListQuery } from '../../api/hook/admin';
-import { userIdState } from '../../recoils/atoms/users';
-import { useUserQuery } from '../../api/hook/users';
+
 import { dateFormat } from '../../utils/dateFormat';
 import { deleteUser } from '../../api/fetcher/admin';
 
@@ -15,20 +12,11 @@ import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import HomeLayout from '../../components/common/layout/layout';
 import { Container, Title, Section, Tr, PageContent, Td } from '../../styles/admin/user';
 import GarbageIcon from '../../components/common/@Icons/garbageIcon';
+import AdminRoute from '../../components/common/routes/admin';
 
 const Admin = () => {
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
-  const router = useRouter();
-  const userId = useRecoilValue(userIdState);
-
-  useUserQuery(userId as number, {
-    onSuccess: data => {
-      if (!data.isAdmin) {
-        router.replace('/');
-      }
-    },
-  });
 
   const queryClient = useQueryClient();
   const { data } = useUserListQuery({
@@ -49,10 +37,6 @@ const Admin = () => {
   const handleUserWithdraw = (id: number) => {
     deleteUserMutation(id);
   };
-
-  useEffect(() => {
-    if (!userId) router.replace('/');
-  }, []);
 
   return (
     <Container>
@@ -95,5 +79,9 @@ const Admin = () => {
 export default Admin;
 
 Admin.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <AdminRoute>{page} </AdminRoute>
+    </HomeLayout>
+  );
 };
