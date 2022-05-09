@@ -3,22 +3,32 @@ import { useRouter } from 'next/router';
 
 import { useCommentListQuery, useUserListQuery } from '../../api/hook/admin';
 import { dateFormat } from '../../utils/dateFormat';
+import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
 
 import HomeLayout from '../../components/common/layout/layout';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import { AdminContainer, Title, UnderLine, Section, Article, ArticleTitle } from '../../styles/admin';
 import { Td, Tr } from '../../styles/admin/user';
-import AdminRoute from '../../components/common/routes/admin';
 
 const Admin = () => {
   const router = useRouter();
+  const isAdmin = useIsValidAdmin();
 
-  const { data: userList, isError: userError } = useUserListQuery({ per_page: 10, page: 1 });
-  const { data: commentList, isError: commentError } = useCommentListQuery({ per_page: 10, page: 1 });
+  const { data: userList } = useUserListQuery({
+    per_page: 10,
+    page: 1,
+    options: {
+      enabled: isAdmin,
+    },
+  });
 
-  if (userError || commentError) {
-    router.replace('/');
-  }
+  const { data: commentList } = useCommentListQuery({
+    per_page: 10,
+    page: 1,
+    options: {
+      enabled: isAdmin,
+    },
+  });
 
   return (
     <AdminContainer>
@@ -79,9 +89,5 @@ const Admin = () => {
 export default Admin;
 
 Admin.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <AdminRoute>{page} </AdminRoute>
-    </HomeLayout>
-  );
+  return <HomeLayout>{page}</HomeLayout>;
 };
