@@ -1,10 +1,9 @@
-import { flatten } from 'lodash';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
-import { useBeer, useBeerComments } from '../../api/hook/beers';
+import React from 'react';
+import { useBeer } from '../../api/hook/beers';
 import HomeLayout from '../../components/common/layout/layout';
 import DetailComments from '../../components/detail/comments';
-import { useInView } from 'react-intersection-observer';
+
 import {
   BeerContainer,
   BeerInfoContainer,
@@ -33,8 +32,8 @@ const Detail = () => {
   const { mutateAsync: createRateMutaion } = useMutation(createRate);
   const { mutateAsync: updateRateMuation } = useMutation(updateRate);
   const beer = beerData?.beer;
-  const avg = beerData?.avg;
-  const rate = beerData?.rate ?? null;
+  const avg = beer?.avg;
+  const rate = beer?.rate ?? null;
   const handleRating = (newValue: number) => {
     if (rate) {
       updateRateMuation({
