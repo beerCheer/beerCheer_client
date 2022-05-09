@@ -11,6 +11,7 @@ import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
 import NicknamePopup from '../../components/mypage/mypage-pop-up';
 import { useMutation, useQueryClient } from 'react-query';
 import _ from 'lodash';
+import LoginRoute from '../../components/common/routes/login';
 
 interface errorMesageType {
   unknown: string;
@@ -40,7 +41,7 @@ const Profile = () => {
 
   const { mutate: patchUserInfoMutate } = useMutation(patchUserInfo, {
     onSuccess: () => {
-      setError('notError');
+      setError(undefined);
       setNicknamePopupOpen(true);
       queryClient.invalidateQueries([
         USER_QUERY_KEY.USERS,
@@ -107,5 +108,9 @@ const Profile = () => {
 export default Profile;
 
 Profile.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <LoginRoute>{page}</LoginRoute>
+    </HomeLayout>
+  );
 };

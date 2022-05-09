@@ -8,8 +8,8 @@ export const loginPopupState = atom({
   default: false,
 });
 
-export const userIdState = atom<number | null>({
+export const userIdState = atom<number | undefined>({
   key: 'userIdState',
-  default: null,
+  default: undefined,
   effects_UNSTABLE: [persistAtom],
 });

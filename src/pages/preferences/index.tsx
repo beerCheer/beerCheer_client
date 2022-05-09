@@ -15,9 +15,8 @@ import {
   BeerWrapper,
 } from '../../styles/preferences';
 import Beer from '../../components/common/beer/beer';
-import { useAllBeers, usePreferenceBeers } from '../../api/hook/beers';
+import { usePreferenceBeers } from '../../api/hook/beers';
 import { IBeer } from '../../api/types/beers';
-import { flatten } from 'lodash';
 
 const Preferences = () => {
   const router = useRouter();
@@ -66,7 +65,7 @@ const Preferences = () => {
               selected={selectedBeers.some(selected => selected.id === item.id)}
               onClick={() => handleSelectedBeer(item)}
             >
-              <Beer name={item.name} rate={item.avg} imageUrl={item.image_url} />
+              <Beer name={item.name} rate={item.avg} imageUrl={item.image_url} id={item.id} />
             </BeerWrapper>
           );
         })}

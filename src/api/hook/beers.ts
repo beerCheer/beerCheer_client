@@ -1,4 +1,3 @@
-import { flatten } from 'lodash';
 import { IPagination } from './../index';
 import {
   IBeer,
@@ -7,20 +6,29 @@ import {
   IRequestBeerComments,
   IRequestSearchBeer,
 } from './../types/beers/index';
-import { getAllBeers, getBeer, getBeerComments, getRatesBeer, getSearchBeer } from './../fetcher/beers';
+import {
+  getAllBeers,
+  getBeer,
+  getBeerComments,
+  getRatesBeer,
+  getSearchBeer,
+  getRecommendBeer,
+} from './../fetcher/beers';
 import { useQuery, useInfiniteQuery } from 'react-query';
+import { USER_QUERY_KEY } from './users';
 
-const QUERY_KEY = {
+export const BEER_QUERY_KEY = {
   BEERS: 'BEERS',
   COMMENTS: 'COMMENTS',
   RATES: 'RATES',
   PREFERENCE: 'PREFERENCE',
+  RECOMMNEDATIONS: 'RECOMMNEDATIONS',
 };
 
-export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAllBeers) => {
+export const useAllBeers = ({ per_page, isPreferenceOrRateChecked, id }: IRequestAllBeers) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, { per_page, isPreferenceOrRateChecked }],
-    ({ pageParam }) => getAllBeers<IPagination<IBeer[]>>({ page: pageParam, per_page, isPreferenceOrRateChecked }),
+    [BEER_QUERY_KEY.BEERS, { per_page, isPreferenceOrRateChecked }, USER_QUERY_KEY.USERS],
+    ({ pageParam }) => getAllBeers<IPagination<IBeer[]>>({ page: pageParam, per_page, isPreferenceOrRateChecked, id }),
     {
       getNextPageParam: lastPage => {
         const nextPage = lastPage.page + 1;
@@ -31,14 +39,14 @@ export const useAllBeers = ({ per_page, isPreferenceOrRateChecked }: IRequestAll
 };
 
 export const usePreferenceBeers = ({ isPreferenceOrRateChecked }: IRequestAllBeers) => {
-  return useQuery([QUERY_KEY.BEERS, { isPreferenceOrRateChecked }, QUERY_KEY.COMMENTS], () =>
+  return useQuery([BEER_QUERY_KEY.BEERS, { isPreferenceOrRateChecked }, BEER_QUERY_KEY.COMMENTS], () =>
     getAllBeers<IBeer[]>({ isPreferenceOrRateChecked })
   );
 };
 
 export const useBeerComments = ({ beerId, per_page }: IRequestBeerComments) => {
   return useInfiniteQuery(
-    [QUERY_KEY.BEERS, QUERY_KEY.COMMENTS, { beerId, per_page }],
+    [BEER_QUERY_KEY.BEERS, BEER_QUERY_KEY.COMMENTS, { beerId, per_page }],
     ({ pageParam }) => getBeerComments({ beerId, page: pageParam, per_page }),
     {
       getNextPageParam: lastPage => {
@@ -51,15 +59,19 @@ export const useBeerComments = ({ beerId, per_page }: IRequestBeerComments) => {
 };
 
 export const useBeer = ({ id, beerId }: IRequestBeer) => {
-  return useQuery([QUERY_KEY.BEERS, { id, beerId }], () => getBeer({ id, beerId }), {
+  return useQuery([BEER_QUERY_KEY.BEERS, { beerId }, USER_QUERY_KEY.USERS], () => getBeer({ id, beerId }), {
     enabled: !!beerId,
   });
 };
 
 export const useRatesBeer = () => {
-  return useQuery([QUERY_KEY.BEERS, QUERY_KEY.RATES], () => getRatesBeer());
+  return useQuery([BEER_QUERY_KEY.BEERS, BEER_QUERY_KEY.RATES], () => getRatesBeer());
 };
 
-export const useSearchBeer = ({ name }: IRequestSearchBeer) => {
-  return useQuery([QUERY_KEY.BEERS, { name }], () => getSearchBeer({ name }));
+export const useSearchBeer = ({ name, id }: IRequestSearchBeer) => {
+  return useQuery([BEER_QUERY_KEY.BEERS, { name }, USER_QUERY_KEY.USERS], () => getSearchBeer({ name, id }));
+};
+
+export const useRecommendationsQuery = () => {
+  return useQuery([BEER_QUERY_KEY.BEERS, BEER_QUERY_KEY.RECOMMNEDATIONS], () => getRecommendBeer());
 };

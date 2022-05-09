@@ -1,14 +1,18 @@
 import React from 'react';
-import HomeLayout from '../../components/common/layout/layout';
-import { Container, Title, Section, Tr, PageContent, Td } from '../../styles/admin/user';
-import GarbageIcon from '../../components/common/@Icons/garbageIcon';
+import { useMutation, useQueryClient } from 'react-query';
+
 import { useUserListQuery } from '../../api/hook/admin';
+
+import { dateFormat } from '../../utils/dateFormat';
+import { deleteUser } from '../../api/fetcher/admin';
+
 import Button from '../../components/common/button';
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
-import { dateFormat } from '../../utils/dateFormat';
-import { deleteUser } from '../../api/fetcher/admin';
-import { useMutation, useQueryClient } from 'react-query';
+import HomeLayout from '../../components/common/layout/layout';
+import { Container, Title, Section, Tr, PageContent, Td } from '../../styles/admin/user';
+import GarbageIcon from '../../components/common/@Icons/garbageIcon';
+import AdminRoute from '../../components/common/routes/admin';
 
 const Admin = () => {
   const [page, setPage] = React.useState<number>(1);
@@ -24,7 +28,6 @@ const Admin = () => {
       },
     },
   });
-
   const { mutate: deleteUserMutation } = useMutation(deleteUser, {
     onSuccess: () => {
       queryClient.invalidateQueries(['USERLIST', page]);
@@ -76,5 +79,9 @@ const Admin = () => {
 export default Admin;
 
 Admin.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <AdminRoute>{page} </AdminRoute>
+    </HomeLayout>
+  );
 };
