@@ -73,6 +73,8 @@ export interface IBeer {
   food_pairing: string[] | string;
   brewers_tips: string;
   contributed_by: string;
+  avg: number;
+  favorite: boolean;
 }
 
 export interface IRequestBeer {
