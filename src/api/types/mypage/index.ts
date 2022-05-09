@@ -1,3 +1,5 @@
+import { IBeer } from '../beers';
+
 export interface IFavoritesBeer {
   id: number;
   name: string;
@@ -36,5 +38,11 @@ export interface IComment {
 export interface IComments {
   totalResults: number;
   result: IComment[];
+  message?: string;
+}
+
+export interface IRates {
+  totalResults: number;
+  result: IBeer[];
   message?: string;
 }

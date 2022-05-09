@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-import { HeaderContainer, HeaderContent, Text, SigninButton, HiddenSearchBar } from './styeld';
-import LogoIcon from '../@Icons/logoIcon';
-import LoginIcon from '../@Icons/loginIcon';
-import SearchBar from '../searchbar/searchBar';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { loginPopupState } from '../../../recoils/atoms/users';
-import LoginPopUp from '../../login/login-pop-up';
-import Button from '../button';
+
 import { loginState } from '../../../recoils/selector/users';
+import { loginPopupState } from '../../../recoils/atoms/users';
+import { useIsTablet } from '../../../hooks/useIsTablet';
+
+import { HeaderContainer, HeaderContent, Text, SigninButton, HiddenSearchBar, Icon } from './styeld';
+import SearchBar from '../searchbar/searchBar';
+import Button from '../button';
+import LoginPopUp from '../../login/login-pop-up';
+import LoginIcon from '../@Icons/loginIcon';
+import LogoIcon from '../@Icons/logoIcon';
+import TwoBeerIcon from '../@Icons/twobeerIcon';
 
 const Header = () => {
   const { pathname, push } = useRouter();
   const [scroll, setScroll] = React.useState(true);
   const [loginPopupOpen, setLoginPopupOpen] = useRecoilState(loginPopupState);
   const isLogin = useRecoilValue(loginState);
+  const isTablet = useIsTablet();
 
   useEffect(() => {
     const onScroll = () => {
@@ -34,16 +38,25 @@ const Header = () => {
   return (
     <HeaderContainer main={pathname === '/' && scroll ? true : false}>
       <HeaderContent>
-        <LogoIcon width={120} height={55} onClick={() => push('/')} />
-        <Text onClick={() => push('/list')}>전체맥주</Text>
+        <Icon>
+          {isTablet ? (
+            <TwoBeerIcon width={60} height={50} onClick={() => push('/')} />
+          ) : (
+            <LogoIcon width={120} height={55} onClick={() => push('/')} />
+          )}
+        </Icon>
+        <Text isTablet={isTablet} onClick={() => push('/list')}>
+          전체 맥주
+        </Text>
         {pathname === '/' ? <HiddenSearchBar /> : <SearchBar />}
+
         {isLogin ? (
           <Button
             onClick={() => {
               push('/mypage');
             }}
           >
-            <LoginIcon width={52} height={52} />
+            <LoginIcon width={46} height={46} />
           </Button>
         ) : (
           <SigninButton
@@ -52,7 +65,7 @@ const Header = () => {
               setLoginPopupOpen(true);
             }}
           >
-            로그인 / 회원가입
+            로그인/회원가입
           </SigninButton>
         )}
       </HeaderContent>

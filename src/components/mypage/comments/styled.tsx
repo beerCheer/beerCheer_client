@@ -6,6 +6,11 @@ const BoardHeader = styled.div`
   padding-bottom: 8px;
   border-bottom: 1px solid black;
   text-align: center;
+
+  ${props => props.theme.mq.phone} {
+    font-size: 14px;
+    white-space: nowrap;
+  }
 `;
 
 const NameColumn = styled.div`
@@ -30,6 +35,10 @@ const Row = styled.div`
 
 const Contents = styled.div`
   padding: 8px 0;
+
+  ${props => props.theme.mq.phone} {
+    font-size: 14px;
+  }
 `;
 
 export { Contents, Row, DateColumn, CommentColumn, NameColumn, BoardHeader };

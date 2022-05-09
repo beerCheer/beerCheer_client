@@ -35,6 +35,8 @@ const ProfileContainer = styled.div`
 
 const ButtonContainer = styled.section`
   padding: 24px 0;
+  display: flex;
+  flex-direction: column;
 
   & > * {
     margin-bottom: 16px;
@@ -42,6 +44,11 @@ const ButtonContainer = styled.section`
 
   & > *:last-child {
     margin-bottom: 0;
+  }
+
+  ${props => props.theme.mq.phone} {
+    width: 80%;
+    margin: auto;
   }
 `;
 

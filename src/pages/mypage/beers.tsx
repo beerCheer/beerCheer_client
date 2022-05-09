@@ -1,11 +1,13 @@
 import React from 'react';
+
+import { useFavoritesBeers } from '../../api/hook/mypage';
+import { IFavoritesBeer } from '../../api/types/mypage';
+
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
-import { ListContent } from '../../styles/list';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
-import { useFavoritesBeers } from '../../api/hook/mypage';
+import { ListContent } from '../../styles/list';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
-import { IFavoritesBeer } from '../../api/types/mypage';
 import LoginRoute from '../../components/common/routes/login';
 
 const Beers = () => {

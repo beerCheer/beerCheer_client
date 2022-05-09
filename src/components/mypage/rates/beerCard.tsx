@@ -4,7 +4,7 @@ import { Article, Description, ImageWrapper, Name, Rate, RateContainer, RateLabe
 interface BeerCardProps {
   name: string;
   rate: number;
-  id: string;
+  id: number;
   imageUrl: string;
 }
 const BeerCard = ({ name, imageUrl, rate, id }: BeerCardProps) => {
