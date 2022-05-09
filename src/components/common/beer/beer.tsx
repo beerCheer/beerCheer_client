@@ -5,6 +5,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { cancelLike, likeBeer } from '../../../api/fetcher/beers';
 import theme from '../../../styles/theme';
 import { BEER_QUERY_KEY } from '../../../api/hook/beers';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '../../../recoils/selector/users';
 
 const beer = '🍺';
 interface BeerProps {
@@ -13,14 +15,18 @@ interface BeerProps {
   rate?: number;
   imageUrl: string;
   favorite?: boolean;
+  heart?: boolean;
   onClick?: () => void;
 }
 
-const Beer = ({ onClick, name, rate, imageUrl, id, favorite }: BeerProps) => {
+const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart }: BeerProps) => {
+  const isLogin = useRecoilValue(loginState);
   const { mutateAsync: likeBeerMutate } = useMutation(likeBeer);
   const { mutateAsync: cancelLikeMuatate } = useMutation(cancelLike);
   const queryClient = useQueryClient();
   const handleOnClickLike = (id: number) => {
+    if (!isLogin) return;
+
     if (favorite) {
       cancelLikeMuatate(id);
     } else {
@@ -35,9 +41,11 @@ const Beer = ({ onClick, name, rate, imageUrl, id, favorite }: BeerProps) => {
       <ImageWrapper onClick={onClick}>
         <BeerThumnail src={imageUrl} />
       </ImageWrapper>
-      <Icon onClick={() => handleOnClickLike(id)}>
-        <HeartIcon width={40} height={35} fill={favorite ? theme.color.primary : undefined} />
-      </Icon>
+      {heart && (
+        <Icon onClick={() => handleOnClickLike(id)}>
+          <HeartIcon width={40} height={35} fill={favorite ? theme.color.primary : undefined} />
+        </Icon>
+      )}
       <Description onClick={onClick}>
         <BeerName>{name}</BeerName>
         {!!rate && <BeerScore>{beer.repeat(rate)}</BeerScore>}

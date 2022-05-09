@@ -59,6 +59,7 @@ const List = () => {
         {beers?.map((item: IBeer) => (
           <React.Fragment key={item.id}>
             <Beer
+              heart={true}
               favorite={item.favorite}
               id={item.id}
               onClick={() => router.push(`/${item.id}`)}
