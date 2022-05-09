@@ -13,7 +13,7 @@ const Thumnail = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 const RateLabel = styled.span`
@@ -34,9 +34,9 @@ const RateContainer = styled.div`
 
 const Name = styled.p`
   font-weight: ${props => props.theme['font-bold']};
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis;
   overflow: hidden;
-  /* white-space: nowrap; */
+  white-space: nowrap; */
 `;
 
 const Description = styled.div`

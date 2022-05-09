@@ -21,8 +21,6 @@ const Header = () => {
   const isLogin = useRecoilValue(loginState);
   const isTablet = useIsTablet();
 
-  console.log(isTablet);
-
   useEffect(() => {
     const onScroll = () => {
       let y = window.scrollY;
