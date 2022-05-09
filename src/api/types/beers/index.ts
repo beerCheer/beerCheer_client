@@ -84,7 +84,9 @@ export interface IRequestBeer {
 
 export interface IResponseBeer {
   beer: IBeer;
-  rate: string;
+  avg: number;
+  rate: number | null;
+  favorite: boolean;
 }
 
 export interface IRequestSearchBeer {
@@ -102,6 +104,16 @@ export interface IRequestCreateComment {
   content: string;
 }
 
+export interface ICreateRateData {
+  malt?: string;
+  quantity?: number;
+  rate: number;
+}
+
+export interface IReqestCreateRate {
+  beerId: number;
+  rateData: ICreateRateData;
+}
 export interface IRequestSavePreferences {
   beerId: number;
   malt: string;

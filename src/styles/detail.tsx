@@ -69,6 +69,12 @@ const DescriptionTitle = styled.h3`
   font-size: ${props => props.theme['font-2xl']};
 `;
 
+const RateTitle = styled.h4`
+  font-weight: ${props => props.theme['font-bold']};
+  font-size: ${props => props.theme['font-xl']};
+  margin-bottom: 8px;
+`;
+
 export {
   DescriptionTitle,
   BeerName,
@@ -80,4 +86,5 @@ export {
   Section,
   ImageWrapper,
   BeerRate,
+  RateTitle,
 };

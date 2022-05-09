@@ -10,6 +10,7 @@ import {
   ISearchBeer,
   IRequestCreateComment,
   IComment,
+  IReqestCreateRate,
   IRequestSavePreferences,
 } from './../types/beers/index';
 
@@ -85,4 +86,12 @@ export const getRecommendBeer = async () => {
 
 export const cancelLike = async (beerId: number) => {
   await API.delete(`/favorites/${beerId}`);
+};
+
+export const createRate = async ({ beerId, rateData }: IReqestCreateRate) => {
+  await API.post(`/beers/${beerId}/rates`, rateData);
+};
+
+export const updateRate = async ({ beerId, rateData }: IReqestCreateRate) => {
+  await API.patch(`/beers/${beerId}/rates`, rateData);
 };
