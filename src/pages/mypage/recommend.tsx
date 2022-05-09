@@ -5,6 +5,7 @@ import Beer from '../../components/common/beer/beer';
 import { Title, Section, CardContainer } from '../../styles/preferences';
 import { useRecommendationsQuery } from '../../api/hook/beers';
 import { IBeer } from '../../api/types/beers';
+import LoginRoute from '../../components/common/routes/login';
 
 const Recommend = () => {
   const { data } = useRecommendationsQuery();
@@ -33,5 +34,9 @@ const Recommend = () => {
 
 export default Recommend;
 Recommend.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <LoginRoute>{page}</LoginRoute>
+    </HomeLayout>
+  );
 };

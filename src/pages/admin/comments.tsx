@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useMutation, useQueryClient } from 'react-query';
 
 import { useCommentListQuery } from '../../api/hook/admin';
@@ -7,10 +8,10 @@ import { deleteComment } from '../../api/fetcher/admin';
 import HomeLayout from '../../components/common/layout/layout';
 import { Container, Title, Section, Tr, Td, PageContent } from '../../styles/admin/user';
 import Button from '../../components/common/button';
-
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import GarbageIcon from '../../components/common/@Icons/garbageIcon';
+import AdminRoute from '../../components/common/routes/admin';
 
 const Comments = () => {
   const [page, setPage] = React.useState<number>(1);
@@ -75,5 +76,9 @@ const Comments = () => {
 export default Comments;
 
 Comments.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <AdminRoute>{page} </AdminRoute>
+    </HomeLayout>
+  );
 };
