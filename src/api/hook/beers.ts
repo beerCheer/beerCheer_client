@@ -72,6 +72,6 @@ export const useSearchBeer = ({ name, id }: IRequestSearchBeer) => {
   return useQuery([BEER_QUERY_KEY.BEERS, { name }, USER_QUERY_KEY.USERS], () => getSearchBeer({ name, id }));
 };
 
-export const useRecommendationsQuery = () => {
-  return useQuery([BEER_QUERY_KEY.BEERS, BEER_QUERY_KEY.RECOMMNEDATIONS], () => getRecommendBeer());
+export const useRecommendationsQuery = (options = {}) => {
+  return useQuery([BEER_QUERY_KEY.BEERS, BEER_QUERY_KEY.RECOMMNEDATIONS], () => getRecommendBeer(), options);
 };
