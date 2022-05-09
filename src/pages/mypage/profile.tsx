@@ -21,7 +21,7 @@ interface errorMesageType {
 
 const Profile = () => {
   const [nickname, setNickname] = useState<string>('');
-  const [error, setError] = useState<string | undefined>(' ');
+  const [error, setError] = useState<string | boolean>(true);
   const [nicknamePopupOpen, setNicknamePopupOpen] = useState<boolean>(false);
   const [withdrawPopupOpen, setWithdrawPopupOpen] = useState<boolean>(false);
 
@@ -41,7 +41,7 @@ const Profile = () => {
 
   const { mutate: patchUserInfoMutate } = useMutation(patchUserInfo, {
     onSuccess: () => {
-      setError(undefined);
+      setError(true);
       setNicknamePopupOpen(true);
       queryClient.invalidateQueries([
         USER_QUERY_KEY.USERS,
@@ -60,7 +60,7 @@ const Profile = () => {
     () =>
       _.debounce((value: string) => {
         nicknameCheck(value).then(res => {
-          res.message !== '사용가능한 닉네임' ? setError(errorMessage.isError) : setError(undefined);
+          res.message !== '사용가능한 닉네임' ? setError(errorMessage.isError) : setError(false);
         });
       }, 50),
     [errorMessage.isError]
