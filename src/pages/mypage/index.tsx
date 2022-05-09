@@ -18,6 +18,7 @@ import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
 import theme from '../../styles/theme';
 import { useQueryClient } from 'react-query';
 import { logout } from '../../api/fetcher/users';
+import LoginRoute from '../../components/common/routes/login';
 
 const Mypage = () => {
   const queryClient = useQueryClient();
@@ -115,5 +116,9 @@ const Mypage = () => {
 
 export default Mypage;
 Mypage.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <LoginRoute>{page}</LoginRoute>
+    </HomeLayout>
+  );
 };

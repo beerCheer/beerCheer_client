@@ -86,7 +86,7 @@ const Preferences = () => {
               selected={selectedBeers.some(selected => selected.id === item.id)}
               onClick={() => handleSelectedBeer(item)}
             >
-              <Beer name={item.name} rate={item.avg} imageUrl={item.image_url} />
+              <Beer name={item.name} rate={item.avg} imageUrl={item.image_url} id={item.id} />
             </BeerWrapper>
           );
         })}
@@ -96,6 +96,7 @@ const Preferences = () => {
 };
 
 export default Preferences;
+
 Preferences.getLayout = function getLayout(page: React.ReactElement) {
   return <HomeLayout>{page}</HomeLayout>;
 };

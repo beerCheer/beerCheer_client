@@ -70,6 +70,7 @@ const Main = () => {
           {ratesData?.map((item: IBeer) => {
             return (
               <Beer
+                id={item.id}
                 onClick={() => router.push(`/${item.id}`)}
                 key={item.id}
                 name={item?.name}

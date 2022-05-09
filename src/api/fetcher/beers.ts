@@ -17,12 +17,14 @@ export const getAllBeers = async <T>({
   per_page = LIST_PER_PAGE,
   page = 1,
   isPreferenceOrRateChecked,
+  id,
 }: IRequestAllBeers) => {
   const { data } = await API.get<T>(`/beers`, {
     params: {
       page,
       per_page,
       isPreferenceOrRateChecked,
+      id,
     },
   });
 
@@ -53,10 +55,11 @@ export const getRatesBeer = async () => {
   return data;
 };
 
-export const getSearchBeer = async ({ name }: IRequestSearchBeer) => {
+export const getSearchBeer = async ({ name, id }: IRequestSearchBeer) => {
   const { data } = await API.get<ISearchBeer>(`/beers/search`, {
     params: {
       name,
+      id,
     },
   });
   return data;
@@ -68,4 +71,18 @@ export const createComment = async ({ beerId, content }: IRequestCreateComment) 
 
 export const savePreferenceBeers = async (beers: IRequestSavePreferences[]) => {
   await API.post(`/preferences`, { beers });
+};
+
+export const likeBeer = async (beerId: number) => {
+  await API.post(`/favorites`, { beerId });
+};
+
+export const getRecommendBeer = async () => {
+  const { data } = await API.get<IBeer[]>('/recommendations');
+
+  return data;
+};
+
+export const cancelLike = async (beerId: number) => {
+  await API.delete(`/favorites/${beerId}`);
 };

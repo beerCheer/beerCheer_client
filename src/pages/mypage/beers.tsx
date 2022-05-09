@@ -6,11 +6,10 @@ import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 import { useFavoritesBeers } from '../../api/hook/mypage';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
 import { IFavoritesBeer } from '../../api/types/mypage';
+import LoginRoute from '../../components/common/routes/login';
 
 const Beers = () => {
   const { data: favoritesBeersData } = useFavoritesBeers();
-
-  console.log(favoritesBeersData);
 
   return (
     <Section>
@@ -23,7 +22,7 @@ const Beers = () => {
       ) : (
         <ListContent>
           {favoritesBeersData?.result?.map((beer: IFavoritesBeer) => {
-            return <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} />;
+            return <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} id={beer.id} />;
           })}
         </ListContent>
       )}
@@ -34,5 +33,9 @@ const Beers = () => {
 export default Beers;
 
 Beers.getLayout = function getLayout(page: React.ReactElement) {
-  return <HomeLayout>{page}</HomeLayout>;
+  return (
+    <HomeLayout>
+      <LoginRoute>{page}</LoginRoute>
+    </HomeLayout>
+  );
 };
