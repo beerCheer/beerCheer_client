@@ -29,7 +29,7 @@ const Detail = () => {
   const router = useRouter();
   const { id: beerId } = router.query;
   const id = useRecoilValue(userIdState);
-  const { data: beerData } = useBeer({ beerId: Number(beerId), id });
+  const { data: beerData, refetch } = useBeer({ beerId: Number(beerId), id });
   const { mutateAsync: createRateMutaion } = useMutation(createRate);
   const { mutateAsync: updateRateMuation } = useMutation(updateRate);
   const beer = beerData?.beer;
@@ -53,6 +53,8 @@ const Detail = () => {
         },
       });
     }
+
+    refetch();
   };
   if (!beer) return null;
 
