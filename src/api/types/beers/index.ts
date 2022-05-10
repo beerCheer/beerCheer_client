@@ -1,3 +1,5 @@
+import { UseQueryOptions } from 'react-query';
+import { IRequestCommentList } from './../admin/index';
 export interface IComment {
   id: number;
   content: string;
@@ -74,6 +76,7 @@ export interface IBeer {
   brewers_tips: string;
   contributed_by: string;
   avg: number;
+  rate: number | null;
   favorite: boolean;
 }
 
@@ -84,9 +87,6 @@ export interface IRequestBeer {
 
 export interface IResponseBeer {
   beer: IBeer;
-  avg: number;
-  rate: number | null;
-  favorite: boolean;
 }
 
 export interface IRequestSearchBeer {
