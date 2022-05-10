@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginKakao } from '../../api/fetcher/users';
-import { SITE_URL } from '../../constants';
+import { KAKAO_REDIRECT_URL } from '../../constants';
 import { userIdState } from '../../recoils/atoms/users';
 
 const OauthKakao = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
   const data = {
     code: code as string,
-    redirectUri: `${SITE_URL}/oauth/kakao`,
+    redirectUri: `${KAKAO_REDIRECT_URL}`,
   };
 
   return {

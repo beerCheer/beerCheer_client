@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { loginNaver } from '../../api/fetcher/users';
-import { SITE_URL } from '../../constants';
+import { NAVER_REDIRECT_URL } from '../../constants';
 import { userIdState } from '../../recoils/atoms/users';
 
 const OauthNaver = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   } = ctx;
   const data = {
     code: code as string,
-    redirectUri: `${SITE_URL}/oauth/naver`,
+    redirectUri: `${NAVER_REDIRECT_URL}`,
     state: state as string,
   };
 
