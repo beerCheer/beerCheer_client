@@ -70,7 +70,7 @@ const Mypage = () => {
           color={theme.color['bg-color']}
           size="large"
           onClick={() => {
-            router.push('/mypage/beers');
+            router.push('/mypage/favorites');
           }}
         >
           나의 맥주 창고

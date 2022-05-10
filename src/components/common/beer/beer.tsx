@@ -33,7 +33,7 @@ const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart }: BeerProps)
       likeBeerMutate(id);
     }
 
-    queryClient.refetchQueries(BEER_QUERY_KEY.BEERS);
+    queryClient.invalidateQueries(BEER_QUERY_KEY.BEERS);
   };
 
   return (

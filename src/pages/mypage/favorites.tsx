@@ -7,6 +7,7 @@ import HomeLayout from '../../components/common/layout/layout';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 import { ListContent } from '../../styles/list';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
+import { IBeer } from '../../api/types/beers';
 
 const Beers = () => {
   const { data: favoritesBeersData } = useFavoritesBeers();
@@ -21,8 +22,17 @@ const Beers = () => {
         </EmptyFallback>
       ) : (
         <ListContent>
-          {favoritesBeersData?.result?.map((beer: IFavoritesBeer) => {
-            return <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} id={beer.id} />;
+          {favoritesBeersData?.result?.map((beer: IBeer) => {
+            return (
+              <Beer
+                key={beer.id}
+                heart={true}
+                name={beer.name}
+                imageUrl={beer.image_url}
+                id={beer.id}
+                favorite={beer.favorite}
+              />
+            );
           })}
         </ListContent>
       )}
