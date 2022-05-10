@@ -28,12 +28,18 @@ const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart }: BeerProps)
     if (!isLogin) return;
 
     if (favorite) {
-      cancelLikeMuatate(id);
+      cancelLikeMuatate(id, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(BEER_QUERY_KEY.BEERS);
+        },
+      });
     } else {
-      likeBeerMutate(id);
+      likeBeerMutate(id, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(BEER_QUERY_KEY.BEERS);
+        },
+      });
     }
-
-    queryClient.invalidateQueries(BEER_QUERY_KEY.BEERS);
   };
 
   return (
