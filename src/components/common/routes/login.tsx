@@ -1,8 +1,11 @@
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../recoils/selector/users';
-import { RouteProps } from './admin';
+
+interface RouteProps {
+  children: React.ReactNode;
+}
 
 const LoginRoute = ({ children }: RouteProps) => {
   const router = useRouter();
@@ -13,6 +16,7 @@ const LoginRoute = ({ children }: RouteProps) => {
       router.replace('/');
     }
   }, []);
+
   return <>{children}</>;
 };
 

@@ -2,9 +2,9 @@ import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { useUserListQuery } from '../../api/hook/admin';
-
 import { dateFormat } from '../../utils/dateFormat';
 import { deleteUser } from '../../api/fetcher/admin';
+import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
 
 import Button from '../../components/common/button';
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
@@ -12,11 +12,11 @@ import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import HomeLayout from '../../components/common/layout/layout';
 import { Container, Title, Section, Tr, PageContent, Td } from '../../styles/admin/user';
 import GarbageIcon from '../../components/common/@Icons/garbageIcon';
-import AdminRoute from '../../components/common/routes/admin';
 
-const Admin = () => {
+const Users = () => {
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
+  const isAdmin = useIsValidAdmin();
 
   const queryClient = useQueryClient();
   const { data } = useUserListQuery({
@@ -26,8 +26,10 @@ const Admin = () => {
       onSuccess: data => {
         setTotalPage(Math.ceil(data.count / 10));
       },
+      enabled: isAdmin,
     },
   });
+
   const { mutate: deleteUserMutation } = useMutation(deleteUser, {
     onSuccess: () => {
       queryClient.invalidateQueries(['USERLIST', page]);
@@ -76,12 +78,8 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Users;
 
-Admin.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <AdminRoute>{page} </AdminRoute>
-    </HomeLayout>
-  );
+Users.getLayout = function getLayout(page: React.ReactElement) {
+  return <HomeLayout>{page}</HomeLayout>;
 };
