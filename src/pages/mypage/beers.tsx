@@ -2,13 +2,11 @@ import React from 'react';
 
 import { useFavoritesBeers } from '../../api/hook/mypage';
 import { IFavoritesBeer } from '../../api/types/mypage';
-
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 import { ListContent } from '../../styles/list';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
-import LoginRoute from '../../components/common/routes/login';
 
 const Beers = () => {
   const { data: favoritesBeersData } = useFavoritesBeers();
@@ -35,9 +33,5 @@ const Beers = () => {
 export default Beers;
 
 Beers.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <LoginRoute>{page}</LoginRoute>
-    </HomeLayout>
-  );
+  return <HomeLayout>{page}</HomeLayout>;
 };
