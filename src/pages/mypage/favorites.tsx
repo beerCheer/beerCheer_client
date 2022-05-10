@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useFavoritesBeers } from '../../api/hook/mypage';
-import { IFavoritesBeer } from '../../api/types/mypage';
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
@@ -24,14 +23,7 @@ const Beers = () => {
         <ListContent>
           {favoritesBeersData?.result?.map((beer: IBeer) => {
             return (
-              <Beer
-                key={beer.id}
-                heart={true}
-                name={beer.name}
-                imageUrl={beer.image_url}
-                id={beer.id}
-                favorite={beer.favorite}
-              />
+              <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} id={beer.id} favorite={beer.favorite} />
             );
           })}
         </ListContent>

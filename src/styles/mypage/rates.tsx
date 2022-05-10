@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 const EmptyFallback = styled.div`
+  margin: auto;
   text-align: center;
   font-weight: ${props => props.theme['font-semibold']};
 `;

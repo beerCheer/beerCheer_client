@@ -19,7 +19,7 @@ interface BeerProps {
   onClick?: () => void;
 }
 
-const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart }: BeerProps) => {
+const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart = true }: BeerProps) => {
   const isLogin = useRecoilValue(loginState);
   const { mutateAsync: likeBeerMutate } = useMutation(likeBeer);
   const { mutateAsync: cancelLikeMuatate } = useMutation(cancelLike);
