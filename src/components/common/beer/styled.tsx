@@ -64,3 +64,7 @@ export const BeerThumnail = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+export const ImageContainer = styled.div`
+  position: relative;
+`;
