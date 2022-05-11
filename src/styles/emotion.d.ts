@@ -3,11 +3,18 @@ import '@emotion/react';
 declare module '@emotion/react' {
   export interface Theme {
     color: {
-      /**#FF9900-오렌지*/ primary: string;
-      /**#294D81-네이비*/ secondary: string;
-      /**#F0E5CF-상아색*/ tertiary: string;
+      /**#FFC600-골드*/ primary: string;
+      'primary-dark': string;
+      'primary-light': string;
+      /**#294D81-청색*/ secondary: string;
+      'secondary-dark': string;
+      'secondary-light': string;
+      /**#ff007b-푸시카*/ tertiary: string;
+      'tertiary-light': string;
       /**#C8C6C6-옅은회색*/ option: string;
       /**#F8F7F5-바탕색*/ 'bg-color': string;
+      text: string;
+      'text-sub': string;
     };
     mq: {
       /**max-width: 768px*/ tablet: string;
