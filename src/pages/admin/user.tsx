@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetServerSideProps } from 'next';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { useUserListQuery } from '../../api/hook/admin';
@@ -82,4 +83,34 @@ export default Users;
 
 Users.getLayout = function getLayout(page: React.ReactElement) {
   return <HomeLayout>{page}</HomeLayout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const { req } = ctx;
+
+  const token = req.cookies['accessToken'];
+
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  } else {
+    //TODO : server 주소 변경
+    const isAdmin = await fetch(`http://localhost:3001/adminCheck?query=${token}`).then(res => res.json());
+    if (!isAdmin) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/',
+        },
+      };
+    }
+  }
+
+  return {
+    props: {},
+  };
 };
