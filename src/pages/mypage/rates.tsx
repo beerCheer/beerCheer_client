@@ -1,13 +1,15 @@
+import { useRouter } from 'next/router';
 import { useUserRates } from '../../api/hook/mypage';
 import { IBeer } from '../../api/types/beers';
 
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
+import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
 import LoginRoute from '../../components/common/routes/login';
-import BeerCard from '../../components/mypage/rates/beerCard';
 import { CardContainer, EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 
 const Rates = () => {
+  const router = useRouter();
   const { data: ratesBeerData } = useUserRates();
 
   return (
@@ -21,7 +23,14 @@ const Rates = () => {
       ) : (
         <CardContainer>
           {ratesBeerData?.result?.map((data: IBeer) => (
-            <BeerCard key={data.id} id={data.id} name={data.name} rate={data.avg} imageUrl={data.image_url} />
+            <Beer
+              key={data.id}
+              id={data.id}
+              name={data.name}
+              rate={data.avg}
+              imageUrl={data.image_url}
+              onClick={() => router.push(`/${data.id}`)}
+            />
           ))}
         </CardContainer>
       )}
