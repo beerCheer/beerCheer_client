@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.8.1",
     "axios": "^0.26.1",
     "date-fns": "^2.28.0",
+    "intercept-stdout": "^0.1.2",
     "lodash": "^4.17.21",
     "next": "12.1.5",
     "react": "17.0.2",
