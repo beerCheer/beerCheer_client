@@ -18,7 +18,6 @@ import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
 import theme from '../../styles/theme';
 import { useQueryClient } from 'react-query';
 import { logout } from '../../api/fetcher/users';
-import LoginRoute from '../../components/common/routes/login';
 
 const Mypage = () => {
   const queryClient = useQueryClient();
@@ -71,7 +70,7 @@ const Mypage = () => {
           color={theme.color['bg-color']}
           size="large"
           onClick={() => {
-            router.push('/mypage/beers');
+            router.push('/mypage/favorites');
           }}
         >
           나의 맥주 창고
@@ -116,9 +115,5 @@ const Mypage = () => {
 
 export default Mypage;
 Mypage.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <LoginRoute>{page}</LoginRoute>
-    </HomeLayout>
-  );
+  return <HomeLayout>{page}</HomeLayout>;
 };

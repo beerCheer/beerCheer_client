@@ -64,8 +64,8 @@ export const useBeer = ({ id, beerId }: IRequestBeer) => {
   });
 };
 
-export const useRatesBeer = () => {
-  return useQuery([BEER_QUERY_KEY.BEERS, BEER_QUERY_KEY.RATES], () => getRatesBeer());
+export const useRatesBeer = (id?: number) => {
+  return useQuery([BEER_QUERY_KEY.BEERS, BEER_QUERY_KEY.RATES, { id }], () => getRatesBeer(id));
 };
 
 export const useSearchBeer = ({ name, id }: IRequestSearchBeer) => {

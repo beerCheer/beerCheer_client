@@ -5,7 +5,6 @@ import { IBeer } from '../../api/types/beers';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
-import LoginRoute from '../../components/common/routes/login';
 import { CardContainer, EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 
 const Rates = () => {
@@ -41,9 +40,5 @@ const Rates = () => {
 export default Rates;
 
 Rates.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <LoginRoute>{page}</LoginRoute>
-    </HomeLayout>
-  );
+  return <HomeLayout>{page}</HomeLayout>;
 };

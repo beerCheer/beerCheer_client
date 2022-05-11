@@ -11,7 +11,6 @@ import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
 import NicknamePopup from '../../components/mypage/mypage-pop-up';
 import { useMutation, useQueryClient } from 'react-query';
 import _ from 'lodash';
-import LoginRoute from '../../components/common/routes/login';
 
 interface errorMesageType {
   unknown: string;
@@ -108,9 +107,5 @@ const Profile = () => {
 export default Profile;
 
 Profile.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <LoginRoute>{page}</LoginRoute>
-    </HomeLayout>
-  );
+  return <HomeLayout>{page}</HomeLayout>;
 };

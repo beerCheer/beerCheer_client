@@ -27,7 +27,7 @@ interface BeerProps {
   onClick?: () => void;
 }
 
-const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart }: BeerProps) => {
+const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart = true }: BeerProps) => {
   const isLogin = useRecoilValue(loginState);
   const { mutateAsync: likeBeerMutate } = useMutation(likeBeer);
   const { mutateAsync: cancelLikeMuatate } = useMutation(cancelLike);
@@ -36,12 +36,18 @@ const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart }: BeerProps)
     if (!isLogin) return;
 
     if (favorite) {
-      cancelLikeMuatate(id);
+      cancelLikeMuatate(id, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(BEER_QUERY_KEY.BEERS);
+        },
+      });
     } else {
-      likeBeerMutate(id);
+      likeBeerMutate(id, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(BEER_QUERY_KEY.BEERS);
+        },
+      });
     }
-
-    queryClient.refetchQueries(BEER_QUERY_KEY.BEERS);
   };
 
   return (
