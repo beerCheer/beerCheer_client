@@ -1,17 +1,14 @@
 import styled from '@emotion/styled';
 
 export const BeerContainer = styled.li`
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
-  position: relative;
   cursor: pointer;
 `;
 
 export const BeerImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 150px;
+  width: 150px;
 `;
 
 export const Icon = styled.button`
@@ -37,5 +34,33 @@ export const BeerName = styled.span`
 `;
 
 export const BeerScore = styled.span`
-  flex-shrink: 0;
+  display: block;
+  color: white;
+  bottom: 5%;
+  left: 5%;
+  position: absolute;
+  width: fit-content;
+  border-radius: 8px;
+  background-color: ${props => props.theme.color.primary};
+  padding: 8px;
+`;
+
+export const ImageWrapper = styled.figure`
+  width: 250px;
+  height: 250px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 1px solid ${props => props.theme.color.option}50;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  position: relative;
+`;
+
+export const BeerThumnail = styled.img`
+  margin: auto;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 `;
