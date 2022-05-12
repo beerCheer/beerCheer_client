@@ -3,19 +3,19 @@ import { dateFormat } from '../../utils/dateFormat';
 import { Td, Tr } from './styeld';
 
 interface ContentTableProps {
-  firstHead: string;
-  lastHead: string;
+  firstHeader: string;
+  lastHeader: string;
   userList?: IUserList;
   commentList?: ICommnetList;
 }
 
-const ContentTable = ({ firstHead, lastHead, userList, commentList }: ContentTableProps) => {
+const ContentTable = ({ firstHeader, lastHeader, userList, commentList }: ContentTableProps) => {
   return (
     <table>
       <thead>
         <Tr header>
-          <th>{firstHead}</th>
-          <th>{lastHead}</th>
+          <th>{firstHeader}</th>
+          <th>{lastHeader}</th>
         </Tr>
       </thead>
       <tbody>

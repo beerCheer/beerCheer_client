@@ -40,7 +40,7 @@ const Admin = () => {
             유저관리
             <ArrowRightIcon onClick={() => router.push('/admin/user')} />
           </ArticleTitle>
-          {!!userList && <ContentTable userList={userList} firstHead="닉네임" lastHead="가입일자" />}
+          {!!userList && <ContentTable userList={userList} firstHeader="닉네임" lastHeader="가입일자" />}
         </Article>
 
         <Article>
@@ -49,7 +49,7 @@ const Admin = () => {
             <ArrowRightIcon onClick={() => router.push('/admin/comments')} />
           </ArticleTitle>
 
-          {!!commentList && <ContentTable commentList={commentList} firstHead="닉네임" lastHead="내용" />}
+          {!!commentList && <ContentTable commentList={commentList} firstHeader="닉네임" lastHeader="내용" />}
         </Article>
       </Section>
     </AdminContainer>
