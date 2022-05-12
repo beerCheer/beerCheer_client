@@ -1,8 +1,10 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
+import axios from 'axios';
 
 import { useCommentListQuery } from '../../api/hook/admin';
 import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
+import { API_END_POINT } from '../../constants';
 
 import HomeLayout from '../../components/common/layout/layout';
 import Button from '../../components/common/button';
@@ -66,8 +68,12 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       },
     };
   } else {
-    //TODO : server 주소 변경
-    const isAdmin = await fetch(`http://localhost:3001/adminCheck?query=${token}`).then(res => res.json());
+    const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+      params: {
+        query: token,
+      },
+    });
+
     if (!isAdmin) {
       return {
         redirect: {

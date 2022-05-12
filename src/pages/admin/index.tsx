@@ -1,9 +1,11 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 import { useCommentListQuery, useUserListQuery } from '../../api/hook/admin';
 import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
+import { API_END_POINT } from '../../constants';
 
 import HomeLayout from '../../components/common/layout/layout';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
@@ -64,7 +66,6 @@ Admin.getLayout = function getLayout(page: React.ReactElement) {
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const { req } = ctx;
-
   const token = req.cookies['accessToken'];
 
   if (!token) {
@@ -75,8 +76,12 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       },
     };
   } else {
-    //TODO : server 주소 변경
-    const isAdmin = await fetch(`http://localhost:3001/adminCheck?query=${token}`).then(res => res.json());
+    const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+      params: {
+        query: token,
+      },
+    });
+
     if (!isAdmin) {
       return {
         redirect: {
