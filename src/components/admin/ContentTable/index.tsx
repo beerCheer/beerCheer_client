@@ -1,5 +1,5 @@
-import { ICommnet, ICommnetList, IUser, IUserList } from '../../api/types/admin';
-import { dateFormat } from '../../utils/dateFormat';
+import { ICommnet, ICommnetList, IUser, IUserList } from '../../../api/types/admin';
+import { dateFormat } from '../../../utils/dateFormat';
 import { Td, Tr } from './styeld';
 
 interface ContentTableProps {
