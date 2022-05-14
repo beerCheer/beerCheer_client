@@ -31,6 +31,9 @@ const Article = styled.article`
   background-color: #f3f3f3;
   padding: 20px;
   min-height: calc(100vh - 300px);
+  background: #e6e2d6;
+  box-shadow: 9px 9px 18px #c4c0b6, -9px -9px 18px #fffff6;
+  border-radius: 39px;
 `;
 
 const ArticleTitle = styled.h1`

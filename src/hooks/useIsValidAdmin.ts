@@ -7,8 +7,6 @@ import { userIdState } from '../recoils/atoms/users';
 import { loginState } from '../recoils/selector/users';
 
 export function useIsValidAdmin() {
-  const router = useRouter();
-
   const [isAdmin, setIsAdmin] = useState(false);
 
   const userId = useRecoilValue(userIdState);
@@ -16,17 +14,11 @@ export function useIsValidAdmin() {
 
   useUserQuery(userId as number, {
     onSuccess: data => {
-      if (!data.isAdmin) {
-        router.replace('/');
-      } else if (!!isLogin && !!data.isAdmin) {
+      if (!!isLogin && !!data.isAdmin) {
         setIsAdmin(true);
       }
     },
   });
-
-  useEffect(() => {
-    if (!isLogin) router.replace('/');
-  }, []);
 
   return isAdmin;
 }
