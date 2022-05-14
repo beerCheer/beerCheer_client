@@ -14,10 +14,9 @@ export const Content = styled.section<HomecContentProps>`
 `;
 
 export const Background = styled.div`
-  background-image: url('mainback.jpeg');
-  opacity: 0.8;
+  background-image: url('bg.jpg');
   width: 100%;
-  height: 550px;
+  height: 500px;
   background-size: 100% 100%;
   position: relative;
 `;

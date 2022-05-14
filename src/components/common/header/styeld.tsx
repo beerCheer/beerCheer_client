@@ -1,11 +1,7 @@
 import styled from '@emotion/styled';
 import Button from '../button';
 
-interface HeaderContainerProps {
-  main?: boolean;
-}
-
-export const HeaderContainer = styled.header<HeaderContainerProps>`
+export const HeaderContainer = styled.header<{ main?: boolean }>`
   height: 75px;
   display: flex;
   justify-content: center;
@@ -27,10 +23,16 @@ export const HeaderContent = styled.div`
   height: 75px;
 `;
 
-export const Text = styled.div<{ isTablet: boolean }>`
-  font-size: ${props => (props.isTablet ? props.theme['font-sm'] : props.theme['font-lg'])};
-  color: ${props => props.theme.color.secondary};
+export const Text = styled.div`
   cursor: pointer;
+  white-space: nowrap;
+  color: ${props => props.theme.color.secondary};
+  font-size: ${props => props.theme['font-lg']};
+  font-weight: ${props => props.theme['font-semibold']};
+
+  ${props => props.theme.mq.tablet} {
+    font-size: ${props => props.theme['font-sm']};
+  }
 `;
 
 export const SigninButton = styled(Button)`
@@ -44,5 +46,17 @@ export const HiddenSearchBar = styled.div`
 `;
 
 export const Icon = styled.div`
+  padding: 0px 10px;
   cursor: pointer;
+`;
+
+export const Span = styled.span<{ main?: boolean }>`
+  white-space: nowrap;
+  font-size: ${props => props.theme['font-lg']};
+  font-weight: ${props => props.theme['font-medium']};
+  color: ${props => (props.main ? '#FFFDE7' : '#363636')};
+
+  ${props => props.theme.mq.tablet} {
+    font-size: ${props => props.theme['font-sm']};
+  }
 `;

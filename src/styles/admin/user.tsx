@@ -26,15 +26,4 @@ const PageContent = styled.div`
   align-items: center;
 `;
 
-const Td = styled.td`
-  vertical-align: center;
-  text-align: center;
-  padding: 10px;
-`;
-
-const Tr = styled.tr<{ header?: boolean }>`
-  border-bottom: ${props => props.header && `1px solid #808080`};
-  height: 24px;
-`;
-
-export { Container, Title, Section, PageContent, Td, Tr };
+export { Container, Title, Section, PageContent };

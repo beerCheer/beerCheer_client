@@ -7,6 +7,7 @@ import type { NextPage } from 'next';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import Head from 'next/head';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -28,7 +29,11 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <ReactQueryDevtools />
       <ThemeProvider theme={theme}>
         <RecoilRoot>
-          <Global styles={global} /> {getLayout(<Component {...pageProps} />)}
+          <Global styles={global} />
+          <Head>
+            <title>비어비워</title>
+          </Head>
+          {getLayout(<Component {...pageProps} />)}
         </RecoilRoot>
       </ThemeProvider>
     </QueryClientProvider>
