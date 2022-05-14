@@ -12,7 +12,6 @@ import {
   BeerRate,
   BeerThumnail,
   DescriptionTitle,
-  ImageConatiner,
   ImageWrapper,
   RateTitle,
   Section,
@@ -72,11 +71,10 @@ const Detail = () => {
   return (
     <Section>
       <BeerContainer>
-        <ImageConatiner>
-          <ImageWrapper>
-            <BeerThumnail src={beer.image_url} alt="" />
-          </ImageWrapper>
-        </ImageConatiner>
+        <ImageWrapper>
+          <BeerThumnail src={beer.image_url} alt="" />
+        </ImageWrapper>
+
         <BeerInfoContainer>
           <BeerInfoHeader>
             <BeerName>{beer.name}</BeerName>
