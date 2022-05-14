@@ -11,7 +11,7 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${props => props.theme.color.option}50;
 `;
 
 const InputWrapper = styled.section`
@@ -31,4 +31,8 @@ const CommentInput = styled.input`
   }
 `;
 
-export { CommentInput, InputWrapper, Header, Title };
+const CommentContainer = styled.section`
+  padding: 0 24px;
+`;
+
+export { CommentInput, InputWrapper, Header, Title, CommentContainer };
