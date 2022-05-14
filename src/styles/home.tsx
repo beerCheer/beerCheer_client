@@ -10,19 +10,13 @@ export const MainContainer = styled.div`
   width: 100%;
 `;
 
-export const MainContent = styled.div`
-  display: grid;
-  grid-gap: 70px 34px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  z-index: -1;
-
-  ${props => props.theme.mq.tablet} {
-    grid-template-columns: 1fr 1fr;
-  }
-  ${props => props.theme.mq.phone} {
-    grid-template-columns: 1fr;
-  }
+export const MainContent = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
 `;
+
 export const MainTab = styled.nav`
   display: flex;
   padding: 30px 0px;

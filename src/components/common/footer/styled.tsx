@@ -5,7 +5,7 @@ export const FooterContainer = styled.footer`
   justify-content: center;
   width: 100vw;
   height: 225px;
-  background-color: #294d81;
+  background-color: ${props => props.theme.color['secondary-dark']};
 `;
 
 export const FooterContent = styled.div`
