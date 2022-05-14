@@ -3,15 +3,7 @@ import { useRouter } from 'next/router';
 
 import Button from '../../components/common/button';
 import HomeLayout from '../../components/common/layout/layout';
-import {
-  ButtonContainer,
-  Email,
-  Nickname,
-  ProfileContainer,
-  ProfileDescription,
-  ProfileImage,
-  Section,
-} from '../../styles/mypage';
+import { MenuContainer, Email, Nickname, ButtonContainer, ProfileDescription, Section } from '../../styles/mypage';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userIdState } from '../../recoils/atoms/users';
 import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
@@ -43,14 +35,14 @@ const Mypage = () => {
 
   return (
     <Section>
-      <ProfileContainer>
-        <ProfileImage src="https://picsum.photos/200" alt="" />
-        <ProfileDescription>
-          <Nickname>{data?.nickname}</Nickname>
-          <Email>{data?.email}</Email>
+      <ProfileDescription>
+        <Nickname>{data?.nickname}</Nickname>
+        <Email>{data?.email}</Email>
+        <ButtonContainer>
           <Button
             primary
             size="small"
+            block
             color={theme.color.tertiary}
             onClick={() => {
               router.push('/mypage/profile');
@@ -58,12 +50,13 @@ const Mypage = () => {
           >
             프로필 수정
           </Button>
-          <Button primary size="small" color={theme.color.tertiary} onClick={handleLogout}>
+          <Button primary size="small" block color={theme.color['tertiary-light']} onClick={handleLogout}>
             로그아웃
           </Button>
-        </ProfileDescription>
-      </ProfileContainer>
-      <ButtonContainer>
+        </ButtonContainer>
+      </ProfileDescription>
+
+      <MenuContainer>
         <Button
           primary
           block
@@ -108,7 +101,7 @@ const Mypage = () => {
         >
           나를 위한 추천 맥주
         </Button>
-      </ButtonContainer>
+      </MenuContainer>
     </Section>
   );
 };
