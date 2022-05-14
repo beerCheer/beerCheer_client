@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
 export const BeerContainer = styled.li`
-  width: 100%;
-  height: 100%;
+  max-width: 270px;
   cursor: pointer;
+  flex: 1;
 `;
 
 export const BeerImage = styled.img`
@@ -46,8 +46,8 @@ export const BeerScore = styled.span`
 `;
 
 export const ImageWrapper = styled.figure`
-  width: 250px;
-  height: 250px;
+  width: 270px;
+  height: 270px;
   padding: 16px 24px;
   border-radius: 16px;
   border: 1px solid ${props => props.theme.color.option}50;

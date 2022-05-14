@@ -45,6 +45,7 @@ const Recommend = () => {
                 rate={item.avg}
                 imageUrl={item.image_url}
                 favorite={item.favorite}
+                onClick={() => router.push(`/${item.id}`)}
               />
             );
           })}
