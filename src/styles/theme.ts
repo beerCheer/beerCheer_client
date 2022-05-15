@@ -25,18 +25,32 @@ const font = {
 };
 
 const color = {
-  primary: '#FF9900',
-  secondary: '#294D81',
-  tertiary: '#F0E5CF',
-  option: '#C8C6C6',
+  primary: '#FFC600',
+  'primary-light': '#fdf4da',
+  'primary-dark': '#b39e00',
+  secondary: '#009fff',
+  'secondary-light': '#e3f0fe',
+  'secondary-dark': '#006fb3',
+  tertiary: '#ff007b',
+  'tertiary-light': '#fce1eb',
+  option: '#bfc5d2',
   'bg-color': '#F8F7F5',
+  text: '#2e384d',
+  'text-sub': '#8798a',
 };
 
 const theme: Theme = {
   color: {
     primary: color.primary,
+    'primary-light': color['primary-light'],
+    'primary-dark': color['primary-dark'],
     secondary: color.secondary,
+    'secondary-dark': color['secondary-dark'],
+    'secondary-light': color['secondary-light'],
     tertiary: color.tertiary,
+    'tertiary-light': color['tertiary-light'],
+    text: color.text,
+    'text-sub': color['text-sub'],
     option: color.option,
     'bg-color': color['bg-color'],
   },

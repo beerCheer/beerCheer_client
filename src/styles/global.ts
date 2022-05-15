@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import theme from './theme';
 
 const global = css`
   @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200;300;500;600;700&display=swap');
@@ -7,6 +8,17 @@ const global = css`
    v2.0 | 20110126
    License: none (public domain)
 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div {
+    color: ${theme.color.text};
+  }
 
   html,
   body,
@@ -114,7 +126,8 @@ const global = css`
     line-height: 1;
   }
   ol,
-  ul {
+  ul,
+  li {
     list-style: none;
   }
   blockquote,

@@ -24,18 +24,11 @@ const Title = styled.header`
   }
 `;
 
-const CardContainer = styled.article<{ recommend?: boolean }>`
-  display: grid;
-  grid-gap: 24px;
-  width: 100%;
-
-  grid-template-columns: ${props => (props.recommend ? `332px 332px ` : `1fr 1fr 1fr`)};
-  justify-content: space-around;
-  padding: 0px 24px;
-
-  ${props => props.theme.mq.tablet} {
-    grid-template-columns: 1fr 1fr;
-  }
+const CardContainer = styled.ul<{ recommend?: boolean }>`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
 `;
 
 const CompletedButton = styled(Button)`

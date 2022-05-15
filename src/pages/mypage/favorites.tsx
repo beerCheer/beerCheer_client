@@ -7,8 +7,10 @@ import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 import { ListContent } from '../../styles/list';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
 import { IBeer } from '../../api/types/beers';
+import { useRouter } from 'next/router';
 
 const Beers = () => {
+  const router = useRouter();
   const { data: favoritesBeersData } = useFavoritesBeers();
 
   return (
@@ -23,7 +25,14 @@ const Beers = () => {
         <ListContent>
           {favoritesBeersData?.result?.map((beer: IBeer) => {
             return (
-              <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} id={beer.id} favorite={beer.favorite} />
+              <Beer
+                key={beer.id}
+                name={beer.name}
+                imageUrl={beer.image_url}
+                id={beer.id}
+                favorite={beer.favorite}
+                onClick={() => router.push(`/${beer.id}`)}
+              />
             );
           })}
         </ListContent>

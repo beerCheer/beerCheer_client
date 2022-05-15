@@ -7,15 +7,12 @@ const Section = styled.section`
   padding-top: 64px;
 `;
 
-const ProfileImage = styled.img`
-  width: 120px;
-  height: 120px;
-  border-radius: 100px;
-  margin: 0 32px;
-`;
-
 const ProfileDescription = styled.div`
   width: 100%;
+  ${props => props.theme.mq.phone} {
+    width: 80%;
+    margin: auto;
+  }
 `;
 const Nickname = styled.p`
   font-weight: ${props => props.theme['font-bold']};
@@ -28,12 +25,7 @@ const Email = styled.p`
   margin-bottom: 16px;
 `;
 
-const ProfileContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ButtonContainer = styled.section`
+const MenuContainer = styled.section`
   padding: 24px 0;
   display: flex;
   flex-direction: column;
@@ -52,4 +44,17 @@ const ButtonContainer = styled.section`
   }
 `;
 
-export { ButtonContainer, ProfileContainer, Email, Nickname, ProfileDescription, ProfileImage, Section };
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & > * {
+    margin-right: 16px;
+  }
+
+  & > *:last-child {
+    margin-right: 0;
+  }
+`;
+
+export { MenuContainer, Email, Nickname, ProfileDescription, Section, ButtonContainer };

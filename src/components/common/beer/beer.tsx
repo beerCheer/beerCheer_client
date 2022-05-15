@@ -1,6 +1,14 @@
 import HeartIcon from '../@Icons/heartIcon';
-import { BeerThumnail, ImageWrapper } from '../../../styles/detail';
-import { BeerContainer, Icon, BeerName, BeerScore, Description } from './styled';
+import {
+  BeerContainer,
+  Icon,
+  BeerName,
+  BeerScore,
+  Description,
+  BeerThumnail,
+  ImageWrapper,
+  ImageContainer,
+} from './styled';
 import { useMutation, useQueryClient } from 'react-query';
 import { cancelLike, likeBeer } from '../../../api/fetcher/beers';
 import theme from '../../../styles/theme';
@@ -44,17 +52,19 @@ const Beer = ({ onClick, name, rate, imageUrl, id, favorite, heart = true }: Bee
 
   return (
     <BeerContainer>
-      <ImageWrapper onClick={onClick}>
-        <BeerThumnail src={imageUrl} />
-      </ImageWrapper>
-      {heart && (
-        <Icon onClick={() => handleOnClickLike(id)}>
-          <HeartIcon width={40} height={35} fill={favorite ? theme.color.primary : undefined} />
-        </Icon>
-      )}
+      <ImageContainer>
+        <ImageWrapper onClick={onClick}>
+          <BeerThumnail src={imageUrl} />
+          {!!rate && <BeerScore>🍺 {rate}</BeerScore>}
+        </ImageWrapper>
+        {heart && (
+          <Icon onClick={() => handleOnClickLike(id)}>
+            <HeartIcon width={40} height={35} fill={favorite ? `${theme.color.tertiary}90` : undefined} />
+          </Icon>
+        )}
+      </ImageContainer>
       <Description onClick={onClick}>
         <BeerName>{name}</BeerName>
-        {!!rate && <BeerScore>{beer.repeat(rate)}</BeerScore>}
       </Description>
     </BeerContainer>
   );
