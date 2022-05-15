@@ -6,11 +6,6 @@ export const BeerContainer = styled.li`
   flex: 1;
 `;
 
-export const BeerImage = styled.img`
-  width: 150px;
-  width: 150px;
-`;
-
 export const Icon = styled.button`
   position: absolute;
   top: 5px;
