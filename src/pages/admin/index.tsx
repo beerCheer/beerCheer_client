@@ -1,10 +1,9 @@
 import React from 'react';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import { useCommentListQuery, useUserListQuery } from '../../api/hook/admin';
-import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
 import { API_END_POINT } from '../../constants';
 
 import HomeLayout from '../../components/common/layout/layout';
@@ -12,15 +11,14 @@ import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import { AdminContainer, Title, UnderLine, Section, Article, ArticleTitle } from '../../styles/admin';
 import ContentTable from '../../components/admin/ContentTable';
 
-const Admin = () => {
+const Admin = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const isAdmin = useIsValidAdmin();
 
   const { data: userList } = useUserListQuery({
     per_page: 10,
     page: 1,
     options: {
-      enabled: isAdmin,
+      enabled: !!isAdmin,
     },
   });
 
@@ -28,7 +26,7 @@ const Admin = () => {
     per_page: 10,
     page: 1,
     options: {
-      enabled: isAdmin,
+      enabled: !!isAdmin,
     },
   });
 
@@ -66,7 +64,9 @@ Admin.getLayout = function getLayout(page: React.ReactElement) {
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const { req } = ctx;
+
   const token = req.cookies['accessToken'];
+  let isAdmin;
 
   if (!token) {
     return {
@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       },
     };
   } else {
-    const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+    isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
       params: {
         query: token,
       },
@@ -93,6 +93,8 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   }
 
   return {
-    props: {},
+    props: {
+      data: isAdmin.data,
+    },
   };
 };

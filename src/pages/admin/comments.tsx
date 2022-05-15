@@ -1,9 +1,8 @@
 import React from 'react';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import axios from 'axios';
 
 import { useCommentListQuery } from '../../api/hook/admin';
-import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
 import { API_END_POINT } from '../../constants';
 
 import HomeLayout from '../../components/common/layout/layout';
@@ -13,10 +12,9 @@ import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import { Container, Title, Section, PageContent } from '../../styles/admin/user';
 import DataListTable from '../../components/admin/DataListTable';
 
-const Comments = () => {
+const Comments = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
-  const isAdmin = useIsValidAdmin();
 
   const { data: commentList } = useCommentListQuery({
     per_page: 10,
@@ -25,7 +23,7 @@ const Comments = () => {
       onSuccess: data => {
         setTotalPage(Math.ceil(data.count / 10));
       },
-      enabled: isAdmin,
+      enabled: !!isAdmin,
     },
   });
 
@@ -59,6 +57,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   const { req } = ctx;
 
   const token = req.cookies['accessToken'];
+  let isAdmin;
 
   if (!token) {
     return {
@@ -68,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       },
     };
   } else {
-    const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+    isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
       params: {
         query: token,
       },
@@ -85,6 +84,8 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   }
 
   return {
-    props: {},
+    props: {
+      data: isAdmin.data,
+    },
   };
 };
