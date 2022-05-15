@@ -26,7 +26,7 @@ export default function Document() {
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="/manifest" href="/manifest.json" />
       </Head>
       <body>
         <Main />
