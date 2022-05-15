@@ -1,18 +1,22 @@
 import React from 'react';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 
 import { useUserListQuery } from '../../api/hook/admin';
 import { API_END_POINT } from '../../constants';
+import { deleteUser } from '../../api/fetcher/admin';
 
 import HomeLayout from '../../components/common/layout/layout';
 import Button from '../../components/common/button';
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
-import { Container, Title, Section, PageContent } from '../../styles/admin/user';
-import DataListTable from '../../components/admin/DataListTable';
+import { Container, Title, Section, PageContent } from '../../styles/admin/detail';
+import DataTable from '../../components/admin/data-table';
 
 const Users = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const queryClient = useQueryClient();
+
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
 
@@ -27,11 +31,27 @@ const Users = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSi
     },
   });
 
+  const { mutate: deleteUserMutation } = useMutation(deleteUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['USERLIST', page]);
+    },
+  });
+
+  const handleUserWithdraw = (id: number) => {
+    deleteUserMutation(id);
+  };
+
   return (
     <Container>
       <Title>어드민페이지_유저관리</Title>
       <Section>
-        <DataListTable userList={userList} th_1="닉네임" th_2="가입일자" th_3="유저탈퇴" page={page} />
+        <DataTable
+          data={userList}
+          tableHead={['닉네임', '가입일자', '유저탈퇴']}
+          onClick={handleUserWithdraw}
+          user
+          icon
+        />
       </Section>
       <PageContent>
         <Button onClick={() => setPage(old => Math.max(old - 1, 1))}>

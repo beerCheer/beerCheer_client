@@ -9,7 +9,7 @@ import { API_END_POINT } from '../../constants';
 import HomeLayout from '../../components/common/layout/layout';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
 import { AdminContainer, Title, UnderLine, Section, Article, ArticleTitle } from '../../styles/admin';
-import ContentTable from '../../components/admin/ContentTable';
+import DataTable from '../../components/admin/data-table';
 
 const Admin = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
@@ -40,7 +40,8 @@ const Admin = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSi
             유저관리
             <ArrowRightIcon onClick={() => router.push('/admin/user')} />
           </ArticleTitle>
-          {!!userList && <ContentTable userList={userList} firstHeader="닉네임" lastHeader="가입일자" />}
+
+          <DataTable data={userList} tableHead={['닉네임', '가입일자']} user />
         </Article>
 
         <Article>
@@ -49,7 +50,7 @@ const Admin = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSi
             <ArrowRightIcon onClick={() => router.push('/admin/comments')} />
           </ArticleTitle>
 
-          {!!commentList && <ContentTable commentList={commentList} firstHeader="닉네임" lastHeader="내용" />}
+          <DataTable data={commentList} tableHead={['닉네임', '내용']} comment />
         </Article>
       </Section>
     </AdminContainer>
