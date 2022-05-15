@@ -40,7 +40,12 @@ const Header = () => {
       <HeaderContent>
         <Icon>
           {isTablet ? (
-            <TwoBeerIcon width={60} height={50} onClick={() => push('/')} fill={scroll ? '#FFFDE7' : '#363636'} />
+            <TwoBeerIcon
+              width={60}
+              height={50}
+              onClick={() => push('/')}
+              fill={pathname === '/' && scroll ? '#FFFDE7' : '#363636'}
+            />
           ) : (
             <LogoIcon width={120} height={55} onClick={() => push('/')} />
           )}
