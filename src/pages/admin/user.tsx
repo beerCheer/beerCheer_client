@@ -1,32 +1,33 @@
 import React from 'react';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useMutation, useQueryClient } from 'react-query';
+import axios from 'axios';
 
 import { useUserListQuery } from '../../api/hook/admin';
-import { dateFormat } from '../../utils/dateFormat';
+import { API_END_POINT } from '../../constants';
 import { deleteUser } from '../../api/fetcher/admin';
-import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
 
+import HomeLayout from '../../components/common/layout/layout';
 import Button from '../../components/common/button';
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
-import HomeLayout from '../../components/common/layout/layout';
-import { Container, Title, Section, Tr, PageContent, Td } from '../../styles/admin/user';
-import GarbageIcon from '../../components/common/@Icons/garbageIcon';
+import { Container, Title, Section, PageContent } from '../../styles/admin/detail';
+import DataTable from '../../components/admin/data-table';
 
-const Users = () => {
+const Users = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const queryClient = useQueryClient();
+
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
-  const isAdmin = useIsValidAdmin();
 
-  const queryClient = useQueryClient();
-  const { data } = useUserListQuery({
+  const { data: userList } = useUserListQuery({
     per_page: 10,
     page,
     options: {
       onSuccess: data => {
         setTotalPage(Math.ceil(data.count / 10));
       },
-      enabled: isAdmin,
+      enabled: !!isAdmin,
     },
   });
 
@@ -44,26 +45,13 @@ const Users = () => {
     <Container>
       <Title>어드민페이지_유저관리</Title>
       <Section>
-        <table>
-          <thead>
-            <Tr header>
-              <th>닉네임</th>
-              <th>가입일자</th>
-              <th>유저탈퇴</th>
-            </Tr>
-          </thead>
-          <tbody>
-            {data?.rows?.map(data => (
-              <tr key={data.id}>
-                <Td>{data.nickname}</Td>
-                <Td>{dateFormat(data.createdAt)}</Td>
-                <Td>
-                  <GarbageIcon onClick={() => handleUserWithdraw(data.id)} />
-                </Td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <DataTable
+          data={userList}
+          tableHead={['닉네임', '가입일자', '유저탈퇴']}
+          onClick={handleUserWithdraw}
+          user
+          icon
+        />
       </Section>
       <PageContent>
         <Button onClick={() => setPage(old => Math.max(old - 1, 1))}>
@@ -82,4 +70,39 @@ export default Users;
 
 Users.getLayout = function getLayout(page: React.ReactElement) {
   return <HomeLayout>{page}</HomeLayout>;
+};
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const { req } = ctx;
+
+  const token = req.cookies['accessToken'];
+
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
+  const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+    params: {
+      query: token,
+    },
+  });
+
+  if (!isAdmin) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
+  return {
+    props: {
+      data: isAdmin.data,
+    },
+  };
 };

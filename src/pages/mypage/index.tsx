@@ -1,24 +1,16 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useQueryClient } from 'react-query';
+
+import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
+import { logout } from '../../api/fetcher/users';
+import { userIdState } from '../../recoils/atoms/users';
 
 import Button from '../../components/common/button';
 import HomeLayout from '../../components/common/layout/layout';
-import {
-  ButtonContainer,
-  Email,
-  Nickname,
-  ProfileContainer,
-  ProfileDescription,
-  ProfileImage,
-  Section,
-} from '../../styles/mypage';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { userIdState } from '../../recoils/atoms/users';
-import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
+import { MenuContainer, Email, Nickname, ButtonContainer, ProfileDescription, Section } from '../../styles/mypage';
 import theme from '../../styles/theme';
-import { useQueryClient } from 'react-query';
-import { logout } from '../../api/fetcher/users';
-import LoginRoute from '../../components/common/routes/login';
 
 const Mypage = () => {
   const queryClient = useQueryClient();
@@ -44,14 +36,14 @@ const Mypage = () => {
 
   return (
     <Section>
-      <ProfileContainer>
-        <ProfileImage src="https://picsum.photos/200" alt="" />
-        <ProfileDescription>
-          <Nickname>{data?.nickname}</Nickname>
-          <Email>{data?.email}</Email>
+      <ProfileDescription>
+        <Nickname>{data?.nickname}</Nickname>
+        <Email>{data?.email}</Email>
+        <ButtonContainer>
           <Button
             primary
             size="small"
+            block
             color={theme.color.tertiary}
             onClick={() => {
               router.push('/mypage/profile');
@@ -59,19 +51,20 @@ const Mypage = () => {
           >
             프로필 수정
           </Button>
-          <Button primary size="small" color={theme.color.tertiary} onClick={handleLogout}>
+          <Button primary size="small" block color={theme.color['tertiary-light']} onClick={handleLogout}>
             로그아웃
           </Button>
-        </ProfileDescription>
-      </ProfileContainer>
-      <ButtonContainer>
+        </ButtonContainer>
+      </ProfileDescription>
+
+      <MenuContainer>
         <Button
           primary
           block
           color={theme.color['bg-color']}
           size="large"
           onClick={() => {
-            router.push('/mypage/beers');
+            router.push('/mypage/favorites');
           }}
         >
           나의 맥주 창고
@@ -109,16 +102,12 @@ const Mypage = () => {
         >
           나를 위한 추천 맥주
         </Button>
-      </ButtonContainer>
+      </MenuContainer>
     </Section>
   );
 };
 
 export default Mypage;
 Mypage.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <LoginRoute>{page}</LoginRoute>
-    </HomeLayout>
-  );
+  return <HomeLayout>{page}</HomeLayout>;
 };

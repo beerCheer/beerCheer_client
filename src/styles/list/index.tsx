@@ -11,19 +11,10 @@ export const ListContanier = styled.div`
 `;
 
 export const ListContent = styled.ul`
-  display: grid;
-  margin: auto;
-  font-size: ${props => props.theme['font-lg']};
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 32px;
-
-  ${props => props.theme.mq.tablet} {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  ${props => props.theme.mq.phone} {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
 `;
 
 export const ListTitle = styled.h1`

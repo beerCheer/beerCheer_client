@@ -1,20 +1,21 @@
+import { IBeer } from './../types/beers/index';
 import { API } from '..';
-import { IFavoritesBeers, IComments, IRates } from '../types/mypage';
+import { IComment, IMyData } from '../types/mypage';
 
 export const getUserFavoritesBeers = async () => {
-  const { data } = await API.get<IFavoritesBeers>(`/users/mypage/favorites`);
+  const { data } = await API.get<IMyData<IBeer[]>>(`/users/mypage/favorites`);
 
   return data;
 };
 
 export const getUserComments = async () => {
-  const { data } = await API.get<IComments>(`/users/mypage/comments`);
+  const { data } = await API.get<IMyData<IComment[]>>(`/users/mypage/comments`);
 
   return data;
 };
 
 export const getUserRates = async () => {
-  const { data } = await API.get<IRates>(`/users/mypage/beers`);
+  const { data } = await API.get<IMyData<IBeer[]>>(`/users/mypage/beers`);
 
   return data;
 };

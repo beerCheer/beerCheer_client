@@ -12,20 +12,27 @@ const Section = styled.section`
 
 const BeerContainer = styled.section`
   display: flex;
-  ${props => props.theme.mq.phone} {
+  padding: 0 24px;
+  ${props => props.theme.mq.tablet} {
     flex-direction: column;
   }
 `;
 
 const ImageWrapper = styled.figure`
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%;
+  width: 320px;
+  height: 320px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 1px solid ${props => props.theme.color.option}50;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   position: relative;
-`;
 
-const ImageConatiner = styled.div`
-  width: 100%;
+  ${props => props.theme.mq.tablet} {
+    width: 100%;
+  }
 `;
 
 const BeerRate = styled.span`
@@ -36,12 +43,10 @@ const BeerRate = styled.span`
 `;
 
 const BeerThumnail = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
+  margin: auto;
+  object-fit: contain;
   width: 100%;
   height: 100%;
-  object-fit: contain;
 `;
 
 const BeerInfoHeader = styled.header`
@@ -49,10 +54,11 @@ const BeerInfoHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${props => props.theme.color.option}50;
 `;
 
 const BeerInfoContainer = styled.div`
+  flex: 1;
   padding: 16px;
   & > * {
     margin-bottom: 16px;
@@ -81,7 +87,6 @@ export {
   BeerInfoContainer,
   BeerInfoHeader,
   BeerThumnail,
-  ImageConatiner,
   BeerContainer,
   Section,
   ImageWrapper,

@@ -6,7 +6,7 @@ import { loginState } from '../../../recoils/selector/users';
 import { loginPopupState } from '../../../recoils/atoms/users';
 import { useIsTablet } from '../../../hooks/useIsTablet';
 
-import { HeaderContainer, HeaderContent, Text, SigninButton, HiddenSearchBar, Icon } from './styeld';
+import { HeaderContainer, HeaderContent, Text, SigninButton, HiddenSearchBar, Icon, Span } from './styeld';
 import SearchBar from '../searchbar/searchBar';
 import Button from '../button';
 import LoginPopUp from '../../login/login-pop-up';
@@ -40,14 +40,17 @@ const Header = () => {
       <HeaderContent>
         <Icon>
           {isTablet ? (
-            <TwoBeerIcon width={60} height={50} onClick={() => push('/')} />
+            <TwoBeerIcon
+              width={60}
+              height={50}
+              onClick={() => push('/')}
+              fill={pathname === '/' && scroll ? '#FFFDE7' : '#363636'}
+            />
           ) : (
             <LogoIcon width={120} height={55} onClick={() => push('/')} />
           )}
         </Icon>
-        <Text isTablet={isTablet} onClick={() => push('/list')}>
-          전체 맥주
-        </Text>
+        <Text onClick={() => push('/list')}>전체 맥주</Text>
         {pathname === '/' ? <HiddenSearchBar /> : <SearchBar />}
 
         {isLogin ? (
@@ -65,7 +68,7 @@ const Header = () => {
               setLoginPopupOpen(true);
             }}
           >
-            로그인/회원가입
+            <Span main={pathname === '/' && scroll ? true : false}> 로그인 / 회원가입</Span>
           </SigninButton>
         )}
       </HeaderContent>

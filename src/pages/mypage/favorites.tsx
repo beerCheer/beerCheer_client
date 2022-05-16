@@ -1,16 +1,17 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
+import { IBeer } from '../../api/types/beers';
 import { useFavoritesBeers } from '../../api/hook/mypage';
-import { IFavoritesBeer } from '../../api/types/mypage';
 
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 import { ListContent } from '../../styles/list';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
-import LoginRoute from '../../components/common/routes/login';
 
 const Beers = () => {
+  const router = useRouter();
   const { data: favoritesBeersData } = useFavoritesBeers();
 
   return (
@@ -23,8 +24,17 @@ const Beers = () => {
         </EmptyFallback>
       ) : (
         <ListContent>
-          {favoritesBeersData?.result?.map((beer: IFavoritesBeer) => {
-            return <Beer key={beer.id} name={beer.name} imageUrl={beer.image_url} id={beer.id} />;
+          {favoritesBeersData?.result?.map((beer: IBeer) => {
+            return (
+              <Beer
+                key={beer.id}
+                name={beer.name}
+                imageUrl={beer.image_url}
+                id={beer.id}
+                favorite={beer.favorite}
+                onClick={() => router.push(`/${beer.id}`)}
+              />
+            );
           })}
         </ListContent>
       )}
@@ -35,9 +45,5 @@ const Beers = () => {
 export default Beers;
 
 Beers.getLayout = function getLayout(page: React.ReactElement) {
-  return (
-    <HomeLayout>
-      <LoginRoute>{page}</LoginRoute>
-    </HomeLayout>
-  );
+  return <HomeLayout>{page}</HomeLayout>;
 };

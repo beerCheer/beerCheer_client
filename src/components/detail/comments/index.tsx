@@ -12,7 +12,7 @@ import { dateFormat } from '../../../utils/dateFormat';
 import EmptyIcon from '../../common/@Icons/emptyIcon';
 import Button from '../../common/button';
 import { CommentColumn, Contents, DateColumn, NameColumn, Row } from '../../mypage/comments/styled';
-import { CommentInput, Header, InputWrapper, Title } from './styled';
+import { CommentContainer, CommentInput, Header, InputWrapper, Title } from './styled';
 
 interface DetailCommentsProps {
   beerId: number;
@@ -50,7 +50,7 @@ const DetailComments = ({ beerId }: DetailCommentsProps) => {
   };
 
   return (
-    <div>
+    <CommentContainer>
       <Header>
         <Title>한줄평</Title>
         <Button
@@ -95,7 +95,7 @@ const DetailComments = ({ beerId }: DetailCommentsProps) => {
         )}
         {isFetched && <div ref={ref} />}
       </Contents>
-    </div>
+    </CommentContainer>
   );
 };
 

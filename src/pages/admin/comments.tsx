@@ -1,23 +1,25 @@
 import React from 'react';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useMutation, useQueryClient } from 'react-query';
+import axios from 'axios';
 
 import { useCommentListQuery } from '../../api/hook/admin';
+import { API_END_POINT } from '../../constants';
 import { deleteComment } from '../../api/fetcher/admin';
-import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
 
 import HomeLayout from '../../components/common/layout/layout';
-import { Container, Title, Section, Tr, Td, PageContent } from '../../styles/admin/user';
 import Button from '../../components/common/button';
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
-import GarbageIcon from '../../components/common/@Icons/garbageIcon';
+import { Container, Title, Section, PageContent } from '../../styles/admin/detail';
+import DataTable from '../../components/admin/data-table';
 
-const Comments = () => {
+const Comments = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const queryClient = useQueryClient();
+
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
-  const isAdmin = useIsValidAdmin();
 
-  const queryClient = useQueryClient();
   const { data: commentList } = useCommentListQuery({
     per_page: 10,
     page,
@@ -25,7 +27,7 @@ const Comments = () => {
       onSuccess: data => {
         setTotalPage(Math.ceil(data.count / 10));
       },
-      enabled: isAdmin,
+      enabled: !!isAdmin,
     },
   });
 
@@ -35,30 +37,21 @@ const Comments = () => {
     },
   });
 
+  const handleCommnetDelete = (id: number) => {
+    deleteCommentMutation(id);
+  };
+
   return (
     <Container>
       <Title>어드민페이지_댓글관리</Title>
       <Section>
-        <table>
-          <thead>
-            <Tr header>
-              <th>닉네임</th>
-              <th>내용</th>
-              <th>댓글삭제</th>
-            </Tr>
-          </thead>
-          <tbody>
-            {commentList?.rows?.map(data => (
-              <tr key={data.id}>
-                <Td>{data?.User?.nickname}</Td>
-                <Td>{data.content}</Td>
-                <Td>
-                  <GarbageIcon onClick={() => deleteCommentMutation(data.id)} />
-                </Td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <DataTable
+          data={commentList}
+          tableHead={['닉네임', '내용', '댓글삭제']}
+          onClick={handleCommnetDelete}
+          comment
+          icon
+        />
       </Section>
 
       <PageContent>
@@ -78,4 +71,40 @@ export default Comments;
 
 Comments.getLayout = function getLayout(page: React.ReactElement) {
   return <HomeLayout>{page}</HomeLayout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const { req } = ctx;
+
+  const token = req.cookies['accessToken'];
+
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
+  const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+    params: {
+      query: token,
+    },
+  });
+
+  if (!isAdmin) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
+  return {
+    props: {
+      data: isAdmin.data,
+    },
+  };
 };

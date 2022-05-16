@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 const EmptyFallback = styled.div`
+  margin: auto;
   text-align: center;
   font-weight: ${props => props.theme['font-semibold']};
 `;
@@ -23,20 +24,11 @@ const Title = styled.h2`
   }
 `;
 
-const CardContainer = styled.section`
-  display: grid;
-  grid-gap: 16px;
-  padding: 0px 20px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-
-  ${props => props.theme.mq.tablet} {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 24px;
-  }
-
-  ${props => props.theme.mq.phone} {
-    grid-template-columns: 1fr 1fr;
-  }
+const CardContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
 `;
 
 export { EmptyFallback, Section, Title, CardContainer };
