@@ -1,16 +1,18 @@
 import { useMemo, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { useMutation, useQueryClient } from 'react-query';
+import _ from 'lodash';
+
 import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
+import { userIdState } from '../../recoils/atoms/users';
+import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
+
 import Button from '../../components/common/button';
 import TextInput from '../../components/common/form/text-input';
 import HomeLayout from '../../components/common/layout/layout';
 import WithdrawPopup from '../../components/mypage/mypage-pop-up/withdraw';
 import { ResignButtonContainer, Section, StyledForm, Title } from '../../styles/mypage/profile';
-import { userIdState } from '../../recoils/atoms/users';
-import { useRecoilValue } from 'recoil';
-import { patchUserInfo, nicknameCheck } from '../../api/fetcher/users';
 import NicknamePopup from '../../components/mypage/mypage-pop-up';
-import { useMutation, useQueryClient } from 'react-query';
-import _ from 'lodash';
 
 interface errorMesageType {
   unknown: string;
