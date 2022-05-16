@@ -77,7 +77,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   const { req } = ctx;
 
   const token = req.cookies['accessToken'];
-  let isAdmin;
 
   if (!token) {
     return {
@@ -86,21 +85,21 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
         destination: '/',
       },
     };
-  } else {
-    isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
-      params: {
-        query: token,
-      },
-    });
+  }
 
-    if (!isAdmin) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: '/',
-        },
-      };
-    }
+  const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+    params: {
+      query: token,
+    },
+  });
+
+  if (!isAdmin) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
   }
 
   return {
