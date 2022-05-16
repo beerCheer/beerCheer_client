@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo } from 'react';
+import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
+
+import { useRecommendationsQuery } from '../../api/hook/beers';
+import { IBeer } from '../../api/types/beers';
+import { userIdState } from '../../recoils/atoms/users';
+import { useUserQuery } from '../../api/hook/users';
 
 import HomeLayout from '../../components/common/layout/layout';
 import Beer from '../../components/common/beer/beer';
 import { Title, Section, CardContainer } from '../../styles/preferences';
-import { useRecommendationsQuery } from '../../api/hook/beers';
-import { IBeer } from '../../api/types/beers';
-import { useRecoilValue } from 'recoil';
-import { userIdState } from '../../recoils/atoms/users';
-import { useUserQuery } from '../../api/hook/users';
-import { useRouter } from 'next/router';
 import { EmptyFallback } from '../../styles/mypage/rates';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
 

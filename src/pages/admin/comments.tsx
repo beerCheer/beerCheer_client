@@ -1,22 +1,24 @@
 import React from 'react';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 
 import { useCommentListQuery } from '../../api/hook/admin';
-import { useIsValidAdmin } from '../../hooks/useIsValidAdmin';
 import { API_END_POINT } from '../../constants';
+import { deleteComment } from '../../api/fetcher/admin';
 
 import HomeLayout from '../../components/common/layout/layout';
 import Button from '../../components/common/button';
 import ArrowLeftIcon from '../../components/common/@Icons/arrowLeftIcon';
 import ArrowRightIcon from '../../components/common/@Icons/arrowRightIcon';
-import { Container, Title, Section, PageContent } from '../../styles/admin/user';
-import DataListTable from '../../components/admin/DataListTable';
+import { Container, Title, Section, PageContent } from '../../styles/admin/detail';
+import DataTable from '../../components/admin/data-table';
 
-const Comments = () => {
+const Comments = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const queryClient = useQueryClient();
+
   const [page, setPage] = React.useState<number>(1);
   const [totalPage, setTotalPage] = React.useState<number>(0);
-  const isAdmin = useIsValidAdmin();
 
   const { data: commentList } = useCommentListQuery({
     per_page: 10,
@@ -25,15 +27,31 @@ const Comments = () => {
       onSuccess: data => {
         setTotalPage(Math.ceil(data.count / 10));
       },
-      enabled: isAdmin,
+      enabled: !!isAdmin,
     },
   });
+
+  const { mutate: deleteCommentMutation } = useMutation(deleteComment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['COMMENTSLIST', page]);
+    },
+  });
+
+  const handleCommnetDelete = (id: number) => {
+    deleteCommentMutation(id);
+  };
 
   return (
     <Container>
       <Title>어드민페이지_댓글관리</Title>
       <Section>
-        <DataListTable commentList={commentList} th_1="닉네임" th_2="내용" th_3="댓글삭제" page={page} />
+        <DataTable
+          data={commentList}
+          tableHead={['닉네임', '내용', '댓글삭제']}
+          onClick={handleCommnetDelete}
+          comment
+          icon
+        />
       </Section>
 
       <PageContent>
@@ -67,24 +85,26 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
         destination: '/',
       },
     };
-  } else {
-    const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
-      params: {
-        query: token,
-      },
-    });
+  }
 
-    if (!isAdmin) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: '/',
-        },
-      };
-    }
+  const isAdmin = await axios.get(`${API_END_POINT}/adminCheck`, {
+    params: {
+      query: token,
+    },
+  });
+
+  if (!isAdmin) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
   }
 
   return {
-    props: {},
+    props: {
+      data: isAdmin.data,
+    },
   };
 };

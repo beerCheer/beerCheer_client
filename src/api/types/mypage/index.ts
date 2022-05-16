@@ -1,5 +1,3 @@
-import { IBeer } from '../beers';
-
 export interface IComment {
   beerId: number;
   content: string;

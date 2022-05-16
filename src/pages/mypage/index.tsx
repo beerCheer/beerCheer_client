@@ -1,15 +1,16 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useQueryClient } from 'react-query';
+
+import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
+import { logout } from '../../api/fetcher/users';
+import { userIdState } from '../../recoils/atoms/users';
 
 import Button from '../../components/common/button';
 import HomeLayout from '../../components/common/layout/layout';
 import { MenuContainer, Email, Nickname, ButtonContainer, ProfileDescription, Section } from '../../styles/mypage';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { userIdState } from '../../recoils/atoms/users';
-import { USER_QUERY_KEY, useUserQuery } from '../../api/hook/users';
 import theme from '../../styles/theme';
-import { useQueryClient } from 'react-query';
-import { logout } from '../../api/fetcher/users';
 
 const Mypage = () => {
   const queryClient = useQueryClient();

@@ -1,13 +1,14 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
+import { IBeer } from '../../api/types/beers';
 import { useFavoritesBeers } from '../../api/hook/mypage';
+
 import Beer from '../../components/common/beer/beer';
 import HomeLayout from '../../components/common/layout/layout';
 import { EmptyFallback, Section, Title } from '../../styles/mypage/rates';
 import { ListContent } from '../../styles/list';
 import EmptyIcon from '../../components/common/@Icons/emptyIcon';
-import { IBeer } from '../../api/types/beers';
-import { useRouter } from 'next/router';
 
 const Beers = () => {
   const router = useRouter();
