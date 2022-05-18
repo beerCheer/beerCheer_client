@@ -33,7 +33,7 @@ const Comments = ({ data: isAdmin }: InferGetServerSidePropsType<typeof getServe
 
   const { mutate: deleteCommentMutation } = useMutation(deleteComment, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['COMMENTSLIST', page]);
+      queryClient.invalidateQueries(['COMMENTLIST', page]);
     },
   });
 
