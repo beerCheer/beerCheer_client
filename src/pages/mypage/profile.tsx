@@ -63,7 +63,7 @@ const Profile = () => {
         nicknameCheck(value).then(res => {
           res.message !== '사용가능한 닉네임' ? setError(errorMessage.isError) : setError(false);
         });
-      }, 50),
+      }, 200),
     [errorMessage.isError]
   );
 
